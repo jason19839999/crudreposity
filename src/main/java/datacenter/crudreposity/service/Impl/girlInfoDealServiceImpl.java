@@ -5,9 +5,11 @@ import datacenter.crudreposity.config.DbContextHolder;
 import datacenter.crudreposity.dao.mysql.girlRepository;
 import datacenter.crudreposity.entity.Girlnfo;
 import datacenter.crudreposity.service.girlInfoDealService;
+import org.hibernate.annotations.Synchronize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +27,8 @@ public class girlInfoDealServiceImpl implements girlInfoDealService {
 
     //配置读写分离
     @ConnectionJustify(dbType = DbContextHolder.DbType.MASTER)
+    //事务控制
+    @Transactional
     public List<Girlnfo> getAllGirls(){
         List<Girlnfo> lst = objgirlRepository.getAllGirls();
         return lst;
