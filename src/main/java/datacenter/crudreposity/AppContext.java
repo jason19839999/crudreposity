@@ -1,6 +1,7 @@
 package datacenter.crudreposity;
 
 import datacenter.crudreposity.config.MysqlConnectionSettings;
+import datacenter.crudreposity.config.RedisConnectionSettings;
 import datacenter.crudreposity.service.Impl.girlInfoDealServiceImpl;
 import datacenter.crudreposity.service.girlInfoDealService;
 import org.springframework.context.annotation.Bean;
