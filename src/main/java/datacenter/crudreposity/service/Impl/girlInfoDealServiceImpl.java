@@ -20,7 +20,7 @@ import java.util.List;
  * @修改人和其它信息
  */
 
-@Service
+//@Service  //添加了AppContext.java类，就不用@Service了，由于里面已经正如Bean了
 public class girlInfoDealServiceImpl implements girlInfoDealService {
     @Autowired
     private girlRepository objgirlRepository;
