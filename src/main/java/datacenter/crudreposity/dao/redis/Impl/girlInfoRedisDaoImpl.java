@@ -2,7 +2,7 @@ package datacenter.crudreposity.dao.redis.Impl;
 
 import datacenter.crudreposity.dao.redis.girlInfoRedisDao;
 import datacenter.crudreposity.entity.Girlnfo;
-
+/**
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
-
+**/
 /**
  * @描述
  * @创建人 shicong.zhang
@@ -21,12 +21,12 @@ import org.springframework.stereotype.Repository;
  * @修改人和其它信息
  */
 public class girlInfoRedisDaoImpl implements girlInfoRedisDao {
-    @Autowired
-    private RedisTemplate<Serializable, Serializable> redisTemplate;
+    //@Autowired
+    //private RedisTemplate<Serializable, Serializable> redisTemplate;
 
     @Override
     public void save(final Girlnfo obj) {
-        redisTemplate.execute(new RedisCallback<Object>() {
+       /** redisTemplate.execute(new RedisCallback<Object>() {
             @Override
             public Object doInRedis(RedisConnection redisConnection)
                     throws DataAccessException {
@@ -41,11 +41,12 @@ public class girlInfoRedisDaoImpl implements girlInfoRedisDao {
                 return null;
             }
         });
+        **/
     }
 
     @Override
     public Girlnfo read(final String id) {
-        return redisTemplate.execute(new RedisCallback<Girlnfo>() {
+       /** return redisTemplate.execute(new RedisCallback<Girlnfo>() {
             @Override
             public Girlnfo doInRedis(RedisConnection redisConnection)
                     throws DataAccessException {
@@ -64,7 +65,8 @@ public class girlInfoRedisDaoImpl implements girlInfoRedisDao {
                 }
                 return null;
             }
-        });
+        });  **/
+       return  null;
     }
 
 }
