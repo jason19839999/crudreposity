@@ -1,15 +1,17 @@
 package datacenter.crudreposity;
 
 import datacenter.crudreposity.dao.mysql.girlRepository;
-import datacenter.crudreposity.entity.Girlnfo;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.scheduling.annotation.EnableAsync;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @SpringBootApplication
+@EnableAsync
+//@MapperScan("datacenter.crudreposity.service")
 public class DemoApplication {
 
     @Autowired

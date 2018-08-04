@@ -2,7 +2,9 @@ package datacenter.crudreposity.action;
 
 import datacenter.crudreposity.dao.mysql.girlRepository;
 import datacenter.crudreposity.entity.Girlnfo;
+import datacenter.crudreposity.service.girlInfoDealService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,12 +21,13 @@ import java.util.List;
  */
 @RestController
 public class girlController {
+
     @Autowired
-    private girlRepository objgirlRepository;
+    private girlInfoDealService objgirlInfoDealService;
 
     @RequestMapping(value = "/getGirlInfo", method = RequestMethod.GET)
     public List<Girlnfo> getNewsList(){
-        List<Girlnfo> lst = objgirlRepository.getAllGirls();
+        List<Girlnfo> lst = objgirlInfoDealService.getAllGirls();
 
         lst = new ArrayList<>();
 
