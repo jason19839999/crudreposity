@@ -1,5 +1,6 @@
 package datacenter.crudreposity.action;
 
+import datacenter.crudreposity.dao.redis.girlInfoRedisDao;
 import datacenter.crudreposity.entity.Girlnfo;
 import datacenter.crudreposity.entity.girlInfoListResponse;
 import datacenter.crudreposity.service.girlInfoDealService;
@@ -25,6 +26,9 @@ public class girlController {
     @Autowired
     private girlInfoDealService objgirlInfoDealService;
 
+    @Autowired
+    private girlInfoRedisDao objgirlInfoRedisDao;
+
     @RequestMapping(value = "/getGirlInfo", method = RequestMethod.GET)
     public ResponseEntity<girlInfoListResponse> getNewsList() {
         List<Girlnfo> lst = objgirlInfoDealService.getAllGirls();
@@ -34,5 +38,14 @@ public class girlController {
         obj.setResponse_data(lst);
 
         return new ResponseEntity<girlInfoListResponse>(obj, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/getRedis", method = RequestMethod.GET)
+    public String getRedis() {
+
+        objgirlInfoRedisDao.save();
+        String result = objgirlInfoRedisDao.read("");
+
+        return result;
     }
 }

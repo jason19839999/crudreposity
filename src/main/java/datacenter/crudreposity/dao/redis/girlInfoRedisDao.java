@@ -1,6 +1,7 @@
 package datacenter.crudreposity.dao.redis;
 
 import datacenter.crudreposity.entity.Girlnfo;
+import org.springframework.stereotype.Service;
 
 /**
  * @描述
@@ -8,8 +9,9 @@ import datacenter.crudreposity.entity.Girlnfo;
  * @创建时间 $date$
  * @修改人和其它信息
  */
+@Service
 public interface girlInfoRedisDao {
-    void save(Girlnfo obj);
-    Girlnfo read(String id);
+    void save();
+    String read(String id);
 
 }

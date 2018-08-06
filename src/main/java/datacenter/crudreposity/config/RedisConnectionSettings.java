@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
  * @创建时间 $date$
  * @修改人和其它信息
  */
-//@Component
-//@ConfigurationProperties(prefix = "redis")
+@Component
+@ConfigurationProperties(prefix = "redis")
 public class RedisConnectionSettings {
     private String ip;
     private int port;
