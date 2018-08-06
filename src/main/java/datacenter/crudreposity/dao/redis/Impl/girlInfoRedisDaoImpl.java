@@ -34,8 +34,10 @@ public class girlInfoRedisDaoImpl implements girlInfoRedisDao {
             @Override
             public Object doInRedis(RedisConnection redisConnection)
                     throws DataAccessException {
-              redisConnection.set(redisTemplate.getStringSerializer().serialize("name"), ObjectTranscoder.serialize("test2018"),
-                      Expiration.seconds(300000), RedisStringCommands.SetOption.UPSERT);
+              redisConnection.set(redisTemplate.getStringSerializer().serialize("name"),
+                      ObjectTranscoder.serialize("test2018-08-06 OK? "),
+                      Expiration.seconds(300000),
+                      RedisStringCommands.SetOption.UPSERT);
                 return null;
             }
         });
