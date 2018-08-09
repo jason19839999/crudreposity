@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -56,6 +58,19 @@ public class girlController {
         List<Double> listDouble = objgirlInfoRedisDao.readSetStrListWithScores("set_age");
 
         List<RedisScoreValue> lst = objgirlInfoRedisDao.readRedisScoreValue("set_age");
+        Collections.sort(lst, new Comparator<RedisScoreValue>() {
+            @Override
+            public int compare(RedisScoreValue o1, RedisScoreValue o2) {
+                // 按照新闻时间进行降序排列
+                if (o1.getScore() > o2.getScore()) {
+                    return -1;
+                }
+                if (o1.getScore() == o2.getScore()) {
+                    return 0;
+                }
+                return 1;
+            }
+        });
         return result;
     }
 }
