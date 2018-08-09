@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.dao.DataAccessException;
@@ -109,6 +110,7 @@ public class girlInfoRedisDaoImpl implements girlInfoRedisDao {
     }
 
     @Override
+    //sorted-set 查询
     public List<String> readSetStrList(final String uid) {
         return redisTemplate.execute(new RedisCallback<List<String>>() {
             @Override
@@ -132,6 +134,7 @@ public class girlInfoRedisDaoImpl implements girlInfoRedisDao {
     }
 
     @Override
+    //sorted-set 查询
     public List<Double> readSetStrListWithScores(final String uid) {
         return redisTemplate.execute(new RedisCallback<List<Double>>() {
             @Override
@@ -154,6 +157,7 @@ public class girlInfoRedisDaoImpl implements girlInfoRedisDao {
     }
 
     @Override
+    //sorted-set 查询
     public List<RedisScoreValue> readRedisScoreValue(final String uid) {
         return redisTemplate.execute(new RedisCallback< List<RedisScoreValue>>() {
             @Override
@@ -177,6 +181,54 @@ public class girlInfoRedisDaoImpl implements girlInfoRedisDao {
                         obj = new RedisScoreValue();
                     }
                     return list;
+                }
+                return null;
+            }
+        });
+    }
+
+    @Override
+    //哈希类型保存
+    public void saveHash(String key,String subkey,String subvalue) {
+        redisTemplate.execute(new RedisCallback<Object>() {
+            @Override
+            public Object doInRedis(RedisConnection redisConnection)
+                    throws DataAccessException {
+                //设置访问哪个redis实例，默认选择配置的
+                redisConnection.select(12);
+                /**redisConnection.set(redisTemplate.getStringSerializer().serialize(key),
+                 ObjectTranscoder.serialize("test2018-08-06 OK? 大学教授来了 @#@￥@#￥#%"),
+                 Expiration.seconds(300000),
+                 RedisStringCommands.SetOption.UPSERT); **/
+
+                //redisConnection.set(redisTemplate.getStringSerializer().serialize(key), ObjectTranscoder.serialize("test2018-08-06 OK? Yes Or No @#@￥@#￥#%"));
+                //redisConnection.zAdd(redisTemplate.getStringSerializer().serialize(key),999,redisTemplate.getStringSerializer().serialize("长春"));
+                redisConnection.hSet(redisTemplate.getStringSerializer().serialize(key),
+                        redisTemplate.getStringSerializer().serialize(subkey),
+                        redisTemplate.getStringSerializer().serialize(subvalue));
+                return null;
+            }
+        });
+
+    }
+
+    @Override
+    public RedisScoreValue readHash (final String uid) {
+
+        return redisTemplate.execute(new RedisCallback<RedisScoreValue>() {
+            @Override
+            public  RedisScoreValue doInRedis(RedisConnection redisConnection)
+                    throws DataAccessException {
+                //设置访问哪个redis实例，默认选择配置的
+                redisConnection.select(12);
+                byte[] key = redisTemplate.getStringSerializer().serialize(uid);
+                if (redisConnection.exists(key)) {
+                    Map<byte[], byte[]> originNids = redisConnection.hGetAll(key);
+                    RedisScoreValue obj = new RedisScoreValue();
+                    for(Map.Entry<byte[],byte[]> m: originNids.entrySet()){
+                        //m.getKey()
+                    }
+                    return obj;
                 }
                 return null;
             }

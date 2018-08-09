@@ -20,4 +20,6 @@ public interface girlInfoRedisDao {
     List<String> readSetStrList(final String uid);
     List<Double> readSetStrListWithScores(final String uid);
     List<RedisScoreValue> readRedisScoreValue(final String uid);
+    void saveHash(String key,String subkey,String subvalue);
+    RedisScoreValue readHash (final String uid);
 }
