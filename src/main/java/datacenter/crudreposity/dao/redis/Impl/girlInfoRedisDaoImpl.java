@@ -213,21 +213,22 @@ public class girlInfoRedisDaoImpl implements girlInfoRedisDao {
     }
 
     @Override
-    public RedisScoreValue readHash (final String uid) {
-
+    //读取哈希
+    public RedisScoreValue readHash (final String strKey) {
         return redisTemplate.execute(new RedisCallback<RedisScoreValue>() {
             @Override
             public  RedisScoreValue doInRedis(RedisConnection redisConnection)
                     throws DataAccessException {
                 //设置访问哪个redis实例，默认选择配置的
                 redisConnection.select(12);
-                byte[] key = redisTemplate.getStringSerializer().serialize(uid);
+                byte[] key = redisTemplate.getStringSerializer().serialize(strKey);
                 if (redisConnection.exists(key)) {
-                    Map<byte[], byte[]> originNids = redisConnection.hGetAll(key);
                     RedisScoreValue obj = new RedisScoreValue();
-                    for(Map.Entry<byte[],byte[]> m: originNids.entrySet()){
-                        //m.getKey()
-                    }
+                    obj.setValue(redisTemplate.getStringSerializer().deserialize(redisConnection.hGet(redisTemplate.getStringSerializer().serialize("set_hash"),
+                            redisTemplate.getStringSerializer().serialize("name"))));
+                    obj.setScore(Integer.parseInt(redisTemplate.getStringSerializer().deserialize(redisConnection.hGet(redisTemplate.getStringSerializer().serialize("set_hash"),
+                            redisTemplate.getStringSerializer().serialize("age")))));
+
                     return obj;
                 }
                 return null;
