@@ -163,7 +163,11 @@ public class girlInfoRedisDaoImpl implements girlInfoRedisDao {
                 redisConnection.select(12);
                 byte[] key = redisTemplate.getStringSerializer().serialize(uid);
                 if (redisConnection.exists(key)) {
-                    Set<RedisZSetCommands.Tuple> originNids = redisConnection.zRangeWithScores(key, 0, -1);
+                    //正序展示
+                    //Set<RedisZSetCommands.Tuple> originNids = redisConnection.zRangeWithScores(key, 0, -1);
+                    //倒序展示
+                    Set<RedisZSetCommands.Tuple> originNids = redisConnection.zRevRangeByScoreWithScores(key, 0, 10000);
+
                     List<RedisScoreValue> list = new ArrayList<RedisScoreValue>();
                     RedisScoreValue obj = new RedisScoreValue();
                     for (RedisZSetCommands.Tuple o : originNids) {
