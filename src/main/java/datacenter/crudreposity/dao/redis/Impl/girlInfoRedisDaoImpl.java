@@ -40,13 +40,15 @@ public class girlInfoRedisDaoImpl implements girlInfoRedisDao {
             @Override
             public Object doInRedis(RedisConnection redisConnection)
                     throws DataAccessException {
+                //设置访问哪个redis实例，默认选择配置的
+                redisConnection.select(12);
               /**redisConnection.set(redisTemplate.getStringSerializer().serialize(key),
                       ObjectTranscoder.serialize("test2018-08-06 OK? 大学教授来了 @#@￥@#￥#%"),
                       Expiration.seconds(300000),
                       RedisStringCommands.SetOption.UPSERT); **/
 
                 //redisConnection.set(redisTemplate.getStringSerializer().serialize(key), ObjectTranscoder.serialize("test2018-08-06 OK? Yes Or No @#@￥@#￥#%"));
-                redisConnection.zAdd(redisTemplate.getStringSerializer().serialize(key),1200,redisTemplate.getStringSerializer().serialize("长春"));
+                redisConnection.zAdd(redisTemplate.getStringSerializer().serialize(key),999,redisTemplate.getStringSerializer().serialize("长春"));
 
                 return null;
             }
@@ -60,6 +62,8 @@ public class girlInfoRedisDaoImpl implements girlInfoRedisDao {
             @Override
             public String doInRedis(RedisConnection redisConnection)
                     throws DataAccessException {
+                //设置访问哪个redis实例，默认选择配置的
+                redisConnection.select(12);
                 byte[] in = redisConnection.get(redisTemplate.getStringSerializer().serialize(key));
                 return ObjectTranscoder.deserialize(in).toString();
             }
@@ -87,6 +91,8 @@ public class girlInfoRedisDaoImpl implements girlInfoRedisDao {
             @Override
             public List<Integer> doInRedis(RedisConnection redisConnection)
                     throws DataAccessException {
+                //设置访问哪个redis实例，默认选择配置的
+                redisConnection.select(12);
                 byte[] key = redisTemplate.getStringSerializer().serialize(uid);
                 if (redisConnection.exists(key)) {
                     Set<byte[]> originNids = redisConnection.zRange(key, 0, -1);
@@ -108,6 +114,8 @@ public class girlInfoRedisDaoImpl implements girlInfoRedisDao {
             @Override
             public List<String> doInRedis(RedisConnection redisConnection)
                     throws DataAccessException {
+                //设置访问哪个redis实例，默认选择配置的
+                redisConnection.select(12);
                 byte[] key = redisTemplate.getStringSerializer().serialize(uid);
                 if (redisConnection.exists(key)) {
                     Set<byte[]> originNids = redisConnection.zRange(key, 0, -1);
@@ -129,6 +137,8 @@ public class girlInfoRedisDaoImpl implements girlInfoRedisDao {
             @Override
             public List<Double> doInRedis(RedisConnection redisConnection)
                     throws DataAccessException {
+                //设置访问哪个redis实例，默认选择配置的
+                redisConnection.select(12);
                 byte[] key = redisTemplate.getStringSerializer().serialize(uid);
                 if (redisConnection.exists(key)) {
                     Set<RedisZSetCommands.Tuple> originNids = redisConnection.zRangeWithScores(key, 0, -1);
@@ -149,6 +159,8 @@ public class girlInfoRedisDaoImpl implements girlInfoRedisDao {
             @Override
             public  List<RedisScoreValue> doInRedis(RedisConnection redisConnection)
                     throws DataAccessException {
+                //设置访问哪个redis实例，默认选择配置的
+                redisConnection.select(12);
                 byte[] key = redisTemplate.getStringSerializer().serialize(uid);
                 if (redisConnection.exists(key)) {
                     Set<RedisZSetCommands.Tuple> originNids = redisConnection.zRangeWithScores(key, 0, -1);
