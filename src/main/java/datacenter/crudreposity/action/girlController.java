@@ -2,6 +2,7 @@ package datacenter.crudreposity.action;
 
 import datacenter.crudreposity.dao.redis.girlInfoRedisDao;
 import datacenter.crudreposity.entity.Girlnfo;
+import datacenter.crudreposity.entity.RedisScoreValue;
 import datacenter.crudreposity.entity.girlInfoListResponse;
 import datacenter.crudreposity.service.girlInfoDealService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,9 +44,18 @@ public class girlController {
     @RequestMapping(value = "/getRedis", method = RequestMethod.GET)
     public String getRedis() {
 
-        objgirlInfoRedisDao.save();
-        String result = objgirlInfoRedisDao.read("");
+        objgirlInfoRedisDao.save("name");
+        String result = objgirlInfoRedisDao.read("name");
+        //zadd set_age 100 10 100 9 100 8   100为SCORES，必须为整数 10/9/8 可以为数组或者字符串
+        //List<Integer> listInt = objgirlInfoRedisDao.readSetIntList("set_age");
 
+        //zadd set_age 100 榆树 100 北京 100 河北   100为SCORES，必须为整数 10/9/8 可以为数组或者字符串
+        //List<String> listStr = objgirlInfoRedisDao.readSetStrList("set_age");
+
+        //获取带有scores的set集合，想用value可以，想用scores也可以
+        List<Double> listDouble = objgirlInfoRedisDao.readSetStrListWithScores("set_age");
+
+        List<RedisScoreValue> lst = objgirlInfoRedisDao.readRedisScoreValue("set_age");
         return result;
     }
 }

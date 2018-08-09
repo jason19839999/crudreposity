@@ -1,7 +1,10 @@
 package datacenter.crudreposity.dao.redis;
 
 import datacenter.crudreposity.entity.Girlnfo;
+import datacenter.crudreposity.entity.RedisScoreValue;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @描述
@@ -11,7 +14,10 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public interface girlInfoRedisDao {
-    void save();
-    String read(String id);
-
+    void save(String key);
+    String read(String key);
+    List<Integer> readSetIntList(final String uid);
+    List<String> readSetStrList(final String uid);
+    List<Double> readSetStrListWithScores(final String uid);
+    List<RedisScoreValue> readRedisScoreValue(final String uid);
 }

@@ -4,6 +4,7 @@ import datacenter.crudreposity.config.ConnectionJustify;
 import datacenter.crudreposity.config.DbContextHolder;
 import datacenter.crudreposity.dao.mysql.girlRepository;
 import datacenter.crudreposity.entity.Girlnfo;
+import datacenter.crudreposity.entity.RedisScoreValue;
 import datacenter.crudreposity.service.girlInfoDealService;
 import org.hibernate.annotations.Synchronize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,3 +35,5 @@ public class girlInfoDealServiceImpl implements girlInfoDealService {
         return lst;
     }
 }
+
+
