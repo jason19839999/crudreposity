@@ -45,8 +45,8 @@ public class girlInfoRedisDaoImpl implements girlInfoRedisDao {
                       Expiration.seconds(300000),
                       RedisStringCommands.SetOption.UPSERT); **/
 
-                redisConnection.set(redisTemplate.getStringSerializer().serialize(key), ObjectTranscoder.serialize("test2018-08-06 OK? Yes Or No @#@￥@#￥#%"));
-                //redisConnection.zAdd()
+                //redisConnection.set(redisTemplate.getStringSerializer().serialize(key), ObjectTranscoder.serialize("test2018-08-06 OK? Yes Or No @#@￥@#￥#%"));
+                redisConnection.zAdd(redisTemplate.getStringSerializer().serialize(key),1200,redisTemplate.getStringSerializer().serialize("长春"));
 
                 return null;
             }
@@ -67,6 +67,20 @@ public class girlInfoRedisDaoImpl implements girlInfoRedisDao {
 
     }
 
+    //ZADD 命令在key后面分数/成员（score/member）对前面支持一些参数
+    /** XX: 仅仅更新存在的成员，不添加新成员。
+        NX: 不更新存在的成员。只添加新成员。
+        CH: 修改返回值为发生变化的成员总数，原始是返回新添加成员的总数 (CH 是 changed 的意思)。更改的元素是新添加的成员，已经存在的成员更新分数。 所以在命令中指定的成员有相同的分数将不被计算在内。注：在通常情况下，ZADD返回值只计算新添加成员的数量。
+       INCR: 当ZADD指定这个选项时，成员的操作就等同ZINCRBY命令，对成员的分数进行递增操作。
+
+    Sorted sets 101
+        有序集合按照分数以递增的方式进行排序。相同的成员（member）只存在一次，有序集合不允许存在重复的成员。 分数可以通过ZADD命令进行更新或者也可以通过ZINCRBY命令递增来修改之前的值，相应的他们的排序位置也会随着分数变化而改变。
+
+        相同分数的成员
+            有序集合里面的成员是不能重复的都是唯一的，但是，不同成员间有可能有相同的分数。当多个成员有相同的分数时，他们将是有序的字典（ordered lexicographically）（仍由分数作为第一排序条件，然后，相同分数的成员按照字典规则相对排序）。
+            字典顺序排序用的是二进制，它比较的是字符串的字节数组。
+            如果用户将所有元素设置相同分数（例如0），有序集合里面的所有元素将按照字典顺序进行排序，范围查询元素可以使用ZRANGEBYLEX命令（注：范围查询分数可以使用ZRANGEBYSCORE命令）。
+     **/
     @Override
     public List<Integer> readSetIntList(final String uid) {
         return redisTemplate.execute(new RedisCallback<List<Integer>>() {
