@@ -86,6 +86,7 @@ public class girlInfoRedisDaoImpl implements girlInfoRedisDao {
             字典顺序排序用的是二进制，它比较的是字符串的字节数组。
             如果用户将所有元素设置相同分数（例如0），有序集合里面的所有元素将按照字典顺序进行排序，范围查询元素可以使用ZRANGEBYLEX命令（注：范围查询分数可以使用ZRANGEBYSCORE命令）。
      **/
+    //sorted-set 查询      member为int类型
     @Override
     public List<Integer> readSetIntList(final String uid) {
         return redisTemplate.execute(new RedisCallback<List<Integer>>() {
@@ -110,7 +111,7 @@ public class girlInfoRedisDaoImpl implements girlInfoRedisDao {
     }
 
     @Override
-    //sorted-set 查询
+    //sorted-set 查询      member为String类型
     public List<String> readSetStrList(final String uid) {
         return redisTemplate.execute(new RedisCallback<List<String>>() {
             @Override
@@ -134,7 +135,7 @@ public class girlInfoRedisDaoImpl implements girlInfoRedisDao {
     }
 
     @Override
-    //sorted-set 查询
+    //sorted-set 查询 获取scores
     public List<Double> readSetStrListWithScores(final String uid) {
         return redisTemplate.execute(new RedisCallback<List<Double>>() {
             @Override
@@ -188,7 +189,7 @@ public class girlInfoRedisDaoImpl implements girlInfoRedisDao {
     }
 
     @Override
-    //哈希类型保存
+    //哈希类型保存与更新
     public void saveHash(String key,String subkey,String subvalue) {
         redisTemplate.execute(new RedisCallback<Object>() {
             @Override
@@ -213,9 +214,11 @@ public class girlInfoRedisDaoImpl implements girlInfoRedisDao {
                     ex.printStackTrace();
                     //回滚事务
                     redisConnection.discard();
+                    redisConnection.close();
                 }finally {
                     //提交事务
                     redisConnection.exec();
+                    redisConnection.close();
                 }
                 return null;
             }
@@ -239,7 +242,7 @@ public class girlInfoRedisDaoImpl implements girlInfoRedisDao {
                             redisTemplate.getStringSerializer().serialize("name"))));
                     obj.setScore(Integer.parseInt(redisTemplate.getStringSerializer().deserialize(redisConnection.hGet(redisTemplate.getStringSerializer().serialize("set_hash"),
                             redisTemplate.getStringSerializer().serialize("age")))));
-
+                    redisConnection.close();
                     return obj;
                 }
                 return null;
