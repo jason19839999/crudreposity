@@ -46,7 +46,7 @@ public class girlController {
     @RequestMapping(value = "/getRedis", method = RequestMethod.GET)
     public String getRedis() {
 
-        objgirlInfoRedisDao.save("set_age");
+        //objgirlInfoRedisDao.save("set_age");
         String result = objgirlInfoRedisDao.read("name");
         //zadd set_age 100 10 100 9 100 8   100为SCORES，必须为整数 10/9/8 可以为数组或者字符串
         //List<Integer> listInt = objgirlInfoRedisDao.readSetIntList("set_age");

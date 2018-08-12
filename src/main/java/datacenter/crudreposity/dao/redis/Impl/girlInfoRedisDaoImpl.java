@@ -66,6 +66,9 @@ public class girlInfoRedisDaoImpl implements girlInfoRedisDao {
                 //设置访问哪个redis实例，默认选择配置的
                 redisConnection.select(12);
                 byte[] in = redisConnection.get(redisTemplate.getStringSerializer().serialize(key));
+                if(in==null){
+                    return "没有查到此key";
+                }
                 return ObjectTranscoder.deserialize(in).toString();
             }
         });

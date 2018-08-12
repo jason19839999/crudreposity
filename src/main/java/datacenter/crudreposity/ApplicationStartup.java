@@ -17,11 +17,11 @@ public class ApplicationStartup implements ApplicationListener<ContextRefreshedE
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent)  {
-        try {
-            String conf = contextRefreshedEvent.getApplicationContext().getBean(ServingSettings.class).getHbase_conf_dir();
-            HBaseConnectionFactory.init(conf);
-        } catch (IOException e) {
-            logger.error(e.getMessage());
-        }
+        //try {
+            //String conf = contextRefreshedEvent.getApplicationContext().getBean(ServingSettings.class).getHbase_conf_dir();
+            //HBaseConnectionFactory.init(conf);
+        //} catch (IOException e) {
+            //logger.error(e.getMessage());
+        //}
     }
 }

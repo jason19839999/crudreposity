@@ -1,15 +1,5 @@
 server:
   port: 8086
-spring:
- profiles: dev
-
-common:
-  hbase_conf_dir: src/main/resources/hbase/hbase-site.xml
-  proxy_host: http://127.0.0.1:8080
-  stock_host: http://192.168.2.218:8080
-  client_proxy: false
- k_url_patern: "http://hqpick.eastmoney.com|http://hqgnqhpic.eastmoney.com|
-  http://hqpicr.eastmoney.com|http://image.sinajs.cn|http://chart.jrjimg.cn/|http://hqzwpic.eastmoney.com/|image_sinajs_cn_newchart_png_min_"
 mysql:
  driver: com.mysql.jdbc.Driver
  master:
@@ -21,7 +11,7 @@ mysql:
    username: root
    password: 123456
 redis:
- ip: 192.168.2.232
+ ip: 192.168.0.105
  port: 6379
  database: 12
  pool_max_active: 1024
