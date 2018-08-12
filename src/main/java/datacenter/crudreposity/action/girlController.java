@@ -75,8 +75,9 @@ public class girlController {
         });
 
 
-        objgirlInfoRedisDao.saveHash("set_hash","name","jason2018");
+        objgirlInfoRedisDao.saveHash("set_hash","name","hello,jason");
+        objgirlInfoRedisDao.saveHash("set_hash","age","36");
         RedisScoreValue obj = objgirlInfoRedisDao.readHash("set_hash");
-        return result;
+        return obj.getValue() + "------" + obj.getScore();
     }
 }
