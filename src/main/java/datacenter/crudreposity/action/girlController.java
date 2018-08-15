@@ -55,7 +55,7 @@ public class girlController {
         //List<String> listStr = objgirlInfoRedisDao.readSetStrList("set_age");
 
         //获取带有scores的set集合，想用value可以，想用scores也可以
-        List<Double> listDouble = objgirlInfoRedisDao.readSetStrListWithScores("set_age");
+        //List<Double> listDouble = objgirlInfoRedisDao.readSetStrListWithScores("set_age");
 
         //获取Score-Value
         List<RedisScoreValue> lst = objgirlInfoRedisDao.readRedisScoreValue("set_age");
@@ -75,8 +75,8 @@ public class girlController {
         });
 
 
-        objgirlInfoRedisDao.saveHash("set_hash","name","hello,jason");
-        objgirlInfoRedisDao.saveHash("set_hash","age","36");
+        objgirlInfoRedisDao.saveHash("set_hash","name","hello,jason,goodmorning");
+        objgirlInfoRedisDao.saveHash("set_hash","age","18");
         RedisScoreValue obj = objgirlInfoRedisDao.readHash("set_hash");
         return obj.getValue() + "------" + obj.getScore();
     }
