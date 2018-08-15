@@ -40,16 +40,16 @@ public class MysqlDatabaseConfig2 {
     }
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory1() {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory2() {
         LocalContainerEntityManagerFactoryBean lef = new LocalContainerEntityManagerFactoryBean();
         lef.setDataSource(dataSource1());
-        lef.setJpaVendorAdapter(jpaVendorAdapter1());
+        lef.setJpaVendorAdapter(jpaVendorAdapter2());
         lef.setPackagesToScan("datacenter.crudreposity.entity.mysql2");
         return lef;
     }
 
     @Bean
-    public JpaVendorAdapter jpaVendorAdapter1() {
+    public JpaVendorAdapter jpaVendorAdapter2() {
         HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
         hibernateJpaVendorAdapter.setShowSql(true);
         hibernateJpaVendorAdapter.setGenerateDdl(false);
@@ -58,10 +58,10 @@ public class MysqlDatabaseConfig2 {
         return hibernateJpaVendorAdapter;
     }
 
-    @Bean(name = "transactionManager1")
-    public PlatformTransactionManager transactionManager1() {
+    @Bean(name = "transactionManager2")
+    public PlatformTransactionManager transactionManager2() {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(entityManagerFactory1().getObject());
+        transactionManager.setEntityManagerFactory(entityManagerFactory2().getObject());
         return transactionManager;
     }
 
