@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <settings>
+        <setting name="localCacheScope" value="STATEMENT"/>
+        <setting name="logImpl" value="SLF4J"/>
+        <setting name="cacheEnabled" value="false"/>
+    </settings>
+    <environments default="app_data">
+
+        <environment id="creeper">
+            <transactionManager type="jdbc"/>
+            <dataSource type="datacenter.crudreposity.util.C3P0DataSourceFactory">
+                <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+                <property name="jdbcUrl"
+                          value="jdbc:mysql://192.168.2.231:3306/creeper?useUnicode=true&amp;zeroDateTimeBehavior=round&amp;characterEncoding=utf8"/>
+                <property name="password" value="zunjiazichan123"/>
+                <property name="user" value="root"/>
+                <property name="idleConnectionTestPeriod" value="60"/>
+                <property name="maxPoolSize" value="20"/>
+                <property name="minPoolSize" value="2"/>
+                <property name="maxIdleTime" value="3600"/>
+                <property name="maxStatements" value="10"/>
+                <property name="preferredTestQuery" value="SELECT 1"/>
+            </dataSource>
+
+        </environment>
+
+
+        <environment id="app_data">
+            <transactionManager type="jdbc"/>
+            <dataSource type="datacenter.crudreposity.util.C3P0DataSourceFactory">
+                <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+                <property name="jdbcUrl"
+                          value="jdbc:mysql://192.168.2.231:3306/app_data?useUnicode=true&amp;characterEncoding=utf8"/>
+                <property name="password" value="zunjiazichan123"/>
+                <property name="user" value="root"/>
+                <property name="idleConnectionTestPeriod" value="60"/>
+                <property name="maxPoolSize" value="48"/>
+                <property name="minPoolSize" value="4"/>
+                <property name="maxIdleTime" value="3600"/>
+                <property name="maxStatements" value="10"/>
+                <property name="preferredTestQuery" value="SELECT 1"/>
+            </dataSource>
+        </environment>
+
+        <environment id="report">
+            <transactionManager type="jdbc"/>
+            <dataSource type="datacenter.crudreposity.util.C3P0DataSourceFactory">
+                <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+                <property name="jdbcUrl"
+                          value="jdbc:mysql://192.168.5.106:3306/report?useUnicode=true&amp;characterEncoding=utf8"/>
+                <property name="password" value="zunjiazichan123"/>
+                <property name="user" value="root"/>
+                <property name="idleConnectionTestPeriod" value="60"/>
+                <property name="maxPoolSize" value="48"/>
+                <property name="minPoolSize" value="4"/>
+                <property name="maxIdleTime" value="3600"/>
+                <property name="maxStatements" value="10"/>
+                <property name="preferredTestQuery" value="SELECT 1"/>
+            </dataSource>
+        </environment>
+
+        <environment id="us_data">
+            <transactionManager type="jdbc"/>
+            <dataSource type="datacenter.crudreposity.util.C3P0DataSourceFactory">
+                <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+                <property name="jdbcUrl"
+                          value="jdbc:mysql://192.168.2.231:3306/us_data?useUnicode=true&amp;characterEncoding=utf8"/>
+                <property name="password" value="zunjiazichan123"/>
+                <property name="user" value="root"/>
+                <property name="idleConnectionTestPeriod" value="60"/>
+                <property name="maxPoolSize" value="48"/>
+                <property name="minPoolSize" value="4"/>
+                <property name="maxIdleTime" value="3600"/>
+                <property name="maxStatements" value="10"/>
+                <property name="preferredTestQuery" value="SELECT 1"/>
+            </dataSource>
+        </environment>
+
+        <!--
+		<environment id="app_data">
+			<transactionManager type="jdbc" />
+			<dataSource type="com.vip.seek.util.C3P0DataSourceFactory">
+				<property name="driverClass" value="com.mysql.jdbc.Driver" />
+				<property name="jdbcUrl"
+					value="jdbc:mysql://192.168.2.231:3306/app_data?useUnicode=true&amp;characterEncoding=utf8" />
+				<property name="password" value="zunjiazichan123" />
+				<property name="user" value="root" />
+				<property name="idleConnectionTestPeriod" value="60" />
+				<property name="maxPoolSize" value="32" />
+				<property name="minPoolSize" value="20" />
+				<property name="maxIdleTime" value="3600" />
+				<property name="maxStatements" value="0" />
+				<property name="preferredTestQuery" value="SELECT 1" />
+			</dataSource>
+		</environment>
+		-->
+
+        <environment id="trade_data">
+            <transactionManager type="jdbc"/>
+            <dataSource type="datacenter.crudreposity.util.C3P0DataSourceFactory">
+                <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+                <property name="jdbcUrl"
+                          value="jdbc:mysql://192.168.2.231:3306/trade_data?useUnicode=true&amp;characterEncoding=utf8"/>
+                <property name="password" value="zunjiazichan123"/>
+                <property name="user" value="root"/>
+                <property name="idleConnectionTestPeriod" value="60"/>
+                <property name="maxPoolSize" value="32"/>
+                <property name="minPoolSize" value="2"/>
+                <property name="maxIdleTime" value="3600"/>
+                <property name="maxStatements" value="10"/>
+                <property name="preferredTestQuery" value="SELECT 1"/>
+            </dataSource>
+        </environment>
+
+        <environment id="classification">
+            <transactionManager type="jdbc"/>
+            <dataSource type="datacenter.crudreposity.util.C3P0DataSourceFactory">
+                <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+                <property name="jdbcUrl"
+                          value="jdbc:mysql://192.168.2.231:3306/classification?useUnicode=true&amp;characterEncoding=utf8"/>
+                <property name="password" value="zunjiazichan123"/>
+                <property name="user" value="root"/>
+                <property name="idleConnectionTestPeriod" value="60"/>
+                <property name="maxPoolSize" value="32"/>
+                <property name="minPoolSize" value="2"/>
+                <property name="maxIdleTime" value="3600"/>
+                <property name="maxStatements" value="10"/>
+                <property name="preferredTestQuery" value="SELECT 1"/>
+            </dataSource>
+        </environment>
+
+        <environment id="trade_data_local">
+            <transactionManager type="jdbc"/>
+            <dataSource type="datacenter.crudreposity.util.C3P0DataSourceFactory">
+                <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+                <property name="jdbcUrl"
+                          value="jdbc:mysql://192.168.2.231:3306/trade_data?useUnicode=true&amp;characterEncoding=utf8"/>
+                <property name="password" value="zunjiazichan123"/>
+                <property name="user" value="root"/>
+                <property name="idleConnectionTestPeriod" value="60"/>
+                <property name="maxPoolSize" value="32"/>
+                <property name="minPoolSize" value="4"/>
+                <property name="maxIdleTime" value="3600"/>
+                <property name="maxStatements" value="10"/>
+                <property name="preferredTestQuery" value="SELECT 1"/>
+            </dataSource>
+        </environment>
+
+        <environment id="app_miningstock">
+            <transactionManager type="jdbc"/>
+            <dataSource type="datacenter.crudreposity.util.C3P0DataSourceFactory">
+                <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+                <property name="jdbcUrl"
+                          value="jdbc:mysql://192.168.2.218:3306/miningstock?useUnicode=true&amp;characterEncoding=utf8"/>
+                <property name="password" value="stock99admin81"/>
+                <property name="user" value="root"/>
+                <property name="idleConnectionTestPeriod" value="60"/>
+                <property name="maxPoolSize" value="32"/>
+                <property name="minPoolSize" value="4"/>
+                <property name="maxIdleTime" value="3600"/>
+                <property name="maxStatements" value="10"/>
+                <property name="preferredTestQuery" value="SELECT 1"/>
+            </dataSource>
+        </environment>
+
+        <environment id="train_data">
+            <transactionManager type="jdbc"/>
+            <dataSource type="datacenter.crudreposity.util.C3P0DataSourceFactory">
+                <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+                <property name="jdbcUrl"
+                          value="jdbc:mysql://192.168.2.231:3306/train_data?useUnicode=true&amp;characterEncoding=utf8"/>
+                <property name="password" value="zunjiazichan123"/>
+                <property name="user" value="root"/>
+                <property name="idleConnectionTestPeriod" value="60"/>
+                <property name="maxPoolSize" value="32"/>
+                <property name="minPoolSize" value="2"/>
+                <property name="maxIdleTime" value="3600"/>
+                <property name="maxStatements" value="10"/>
+                <property name="preferredTestQuery" value="SELECT 1"/>
+            </dataSource>
+        </environment>
+
+        <environment id="gp_jydb">
+            <transactionManager type="jdbc"/>
+            <dataSource type="datacenter.crudreposity.util.C3P0DataSourceFactory">
+                <property name="driverClass" value="com.pivotal.jdbc.GreenplumDriver"/>
+                <property name="jdbcUrl"
+                          value="jdbc:pivotal:greenplum://192.168.11.201:5432;DatabaseName=jydb"/>
+                <property name="password" value="gpquery"/>
+                <property name="user" value="gpquery"/>
+                <property name="idleConnectionTestPeriod" value="60"/>
+                <property name="maxPoolSize" value="32"/>
+                <property name="minPoolSize" value="2"/>
+                <property name="maxIdleTime" value="3600"/>
+                <property name="maxStatements" value="10"/>
+                <property name="preferredTestQuery" value="SELECT 1"/>
+            </dataSource>
+        </environment>
+
+        <environment id="oracle_jydb">
+            <transactionManager type="jdbc"/>
+            <dataSource type="datacenter.crudreposity.util.C3P0DataSourceFactory">
+                <property name="driverClass" value="oracle.jdbc.OracleDriver"/>
+                <property name="jdbcUrl"
+                          value="jdbc:oracle:thin:@192.168.2.248:1521:ZUNJIA"/>
+                <property name="password" value="jydb"/>
+                <property name="user" value="jydb"/>
+                <property name="idleConnectionTestPeriod" value="60"/>
+                <property name="maxPoolSize" value="32"/>
+                <property name="minPoolSize" value="2"/>
+                <property name="maxIdleTime" value="3600"/>
+                <property name="maxStatements" value="10"/>
+                <property name="preferredTestQuery" value="SELECT 1"/>
+            </dataSource>
+        </environment>
+
+        <environment id="app_miningtrade">
+            <transactionManager type="jdbc"/>
+            <dataSource type="datacenter.crudreposity.util.C3P0DataSourceFactory">
+                <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+                <property name="jdbcUrl"
+                          value="jdbc:mysql://192.168.2.218:3306/miningtrade?useUnicode=true&amp;characterEncoding=utf8"/>
+                <property name="password" value="stock99admin81"/>
+                <property name="user" value="root"/>
+                <property name="idleConnectionTestPeriod" value="60"/>
+                <property name="maxPoolSize" value="32"/>
+                <property name="minPoolSize" value="2"/>
+                <property name="maxIdleTime" value="3600"/>
+                <property name="maxStatements" value="10"/>
+                <property name="preferredTestQuery" value="SELECT 1"/>
+            </dataSource>
+        </environment>
+
+
+    </environments>
+    <mappers>
+        <!-- <mapper resource="com/vipshop/creeper/dao/test.xml"/> -->
+        <!-- <mapper class="com.vip.creeper.schedule.Word"/> -->
+        <package name="datacenter.crudreposity.dao.mybatis"/>
+    </mappers>
+
+</configuration>

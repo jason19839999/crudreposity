@@ -1,10 +1,14 @@
 package datacenter.crudreposity.action;
 
+import datacenter.crudreposity.config.MybatisSessionFactory;
+import datacenter.crudreposity.dao.mybatis.HKBillsDao;
 import datacenter.crudreposity.dao.redis.girlInfoRedisDao;
 import datacenter.crudreposity.entity.Girlnfo;
+import datacenter.crudreposity.entity.HKBill;
 import datacenter.crudreposity.entity.RedisScoreValue;
 import datacenter.crudreposity.entity.girlInfoListResponse;
 import datacenter.crudreposity.service.girlInfoDealService;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -75,9 +79,18 @@ public class girlController {
         });
 
 
-        objgirlInfoRedisDao.saveHash("set_hash","name","hello,jason,goodmorning");
-        objgirlInfoRedisDao.saveHash("set_hash","age","18");
+        objgirlInfoRedisDao.saveHash("set_hash","name","hello,jason,goodafternoon");
+        objgirlInfoRedisDao.saveHash("set_hash","age","28");
         RedisScoreValue obj = objgirlInfoRedisDao.readHash("set_hash");
+
         return obj.getValue() + "------" + obj.getScore();
+    }
+
+    @RequestMapping(value = "/getMybatis", method = RequestMethod.GET)
+    public String getMybatis() {
+        SqlSession sqlSession = MybatisSessionFactory.openSession("app_data");
+        HKBillsDao hkBillsDao = sqlSession.getMapper(HKBillsDao.class);
+        ArrayList<HKBill> hkBills = hkBillsDao.getAllBills();
+        return "调用成功";
     }
 }
