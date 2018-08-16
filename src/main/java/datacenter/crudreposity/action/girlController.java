@@ -94,7 +94,7 @@ public class girlController {
         SqlSession sqlSession = MybatisSessionFactory.openSession("app_data");
         HKBillsDao hkBillsDao = sqlSession.getMapper(HKBillsDao.class);
         ArrayList<HKBill> hkBills = hkBillsDao.getAllBills();
-
+        sqlSession.close();
         return "调用成功";
     }
 }
