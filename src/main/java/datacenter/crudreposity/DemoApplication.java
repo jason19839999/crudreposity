@@ -25,19 +25,14 @@ public class DemoApplication {
         //SpringApplication springApplication = new SpringApplication(DemoApplication.class);
         //springApplication.addListeners(new ApplicationStartup());// Register listener of hbase Connection initialized.
         //springApplication.run(args);
-        /* init mybatis session factory */
 
+
+        /* init mybatis session factory */
         String args2[] = new String[2];
         args2[0] = "-c";
         args2[1] = SeekConstants.CONF_DIR + "/creeper_service.properties";
-
         State state = new State(args2);
         MybatisSessionFactory.init(state);
-
-        SqlSession sqlSession = MybatisSessionFactory.openSession("app_data");
-        HKBillsDao hkBillsDao = sqlSession.getMapper(HKBillsDao.class);
-        ArrayList<HKBill> hkBills = hkBillsDao.getAllBills();
-
 
         SpringApplication.run(DemoApplication.class, args);
     }

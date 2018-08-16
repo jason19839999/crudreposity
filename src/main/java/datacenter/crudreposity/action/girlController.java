@@ -1,6 +1,8 @@
 package datacenter.crudreposity.action;
 
 import datacenter.crudreposity.config.MybatisSessionFactory;
+import datacenter.crudreposity.config.SeekConstants;
+import datacenter.crudreposity.config.State;
 import datacenter.crudreposity.dao.mybatis.HKBillsDao;
 import datacenter.crudreposity.dao.redis.girlInfoRedisDao;
 import datacenter.crudreposity.entity.Girlnfo;
@@ -87,10 +89,12 @@ public class girlController {
     }
 
     @RequestMapping(value = "/getMybatis", method = RequestMethod.GET)
-    public String getMybatis() {
+    public String getMybatis() throws Exception {
+       //创建连接
         SqlSession sqlSession = MybatisSessionFactory.openSession("app_data");
         HKBillsDao hkBillsDao = sqlSession.getMapper(HKBillsDao.class);
         ArrayList<HKBill> hkBills = hkBillsDao.getAllBills();
+
         return "调用成功";
     }
 }
