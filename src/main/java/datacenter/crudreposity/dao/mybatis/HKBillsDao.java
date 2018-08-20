@@ -1,10 +1,7 @@
 package datacenter.crudreposity.dao.mybatis;
 
 import datacenter.crudreposity.entity.HKBill;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.ArrayList;
 
@@ -13,6 +10,7 @@ public interface HKBillsDao {
     ArrayList<HKBill> getAllBills();
 
     @Insert("insert into hk_bills(name,rowkey,code,bill_type,bill_date,png_location,pdf_location,email) values(#{name},#{rowkey},#{code},#{bill_type},#{bill_date},#{png_location},#{pdf_location},#{email})")
+    @SelectKey(keyProperty="id", resultType=int.class, before=false, statement="select last_insert_id()")
     int insertBill(HKBill hkBill);
 
     @Select("select * from hk_bills where name=#{name} and code=#{code} and bill_date = #{bill_date} limit 1")

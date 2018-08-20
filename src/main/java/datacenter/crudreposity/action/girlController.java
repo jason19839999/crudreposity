@@ -102,10 +102,25 @@ public class girlController {
         SqlSession sqlSession = MybatisSessionFactory.openSession("app_data");
         HKBillsDao hkBillsDao = sqlSession.getMapper(HKBillsDao.class);
         ArrayList<HKBill> hkBills = hkBillsDao.getAllBills();
+        HKBill objHKBill = new HKBill();
+        objHKBill.setBill_date("2018-08-20");
+        objHKBill.setBill_type("daily");
+        objHKBill.setCode("1000200");
+        objHKBill.setEmail("");
+        objHKBill.setName("");
+        objHKBill.setPdf_location("");
+        objHKBill.setPng_location("");
+        objHKBill.setRowkey("adfaa");
+        int  result = hkBillsDao.insertBill(objHKBill);
+
+        sqlSession.commit();
         sqlSession.close();
 
         //测试msql2这个连接是否通了
         List<String> strList = userRepository.getHK_ShareIPOModelNames();
+
+
+
         return "调用成功";
     }
 }
