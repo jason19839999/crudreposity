@@ -4,6 +4,7 @@ import datacenter.crudreposity.config.MybatisSessionFactory;
 import datacenter.crudreposity.config.SeekConstants;
 import datacenter.crudreposity.config.State;
 import datacenter.crudreposity.dao.mybatis.HKBillsDao;
+import datacenter.crudreposity.dao.mysql2.UserRepository;
 import datacenter.crudreposity.dao.redis.girlInfoRedisDao;
 import datacenter.crudreposity.entity.Girlnfo;
 import datacenter.crudreposity.entity.HKBill;
@@ -35,11 +36,17 @@ public class girlController {
     @Autowired
     private girlInfoDealService objgirlInfoDealService;
 
+    //为了方便测试，所以调用dao写在了controller层，正常应该写在service层。。。
     @Autowired
     private girlInfoRedisDao objgirlInfoRedisDao;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @RequestMapping(value = "/getGirlInfo", method = RequestMethod.GET)
     public ResponseEntity<girlInfoListResponse> getNewsList() {
+
+        //测试msql这个连接是否通了。这里面包含了读写分离
         List<Girlnfo> lst = objgirlInfoDealService.getAllGirls();
         //girlInfoListResponse obj = new girlInfoListResponse(lst);
         girlInfoListResponse obj = new girlInfoListResponse();
@@ -90,11 +97,15 @@ public class girlController {
 
     @RequestMapping(value = "/getMybatis", method = RequestMethod.GET)
     public String getMybatis() throws Exception {
-       //创建连接
+
+       //创建mybatis连接  她所用的配置文件为creeper_service.properties，mybatis-setting.xml
         SqlSession sqlSession = MybatisSessionFactory.openSession("app_data");
         HKBillsDao hkBillsDao = sqlSession.getMapper(HKBillsDao.class);
         ArrayList<HKBill> hkBills = hkBillsDao.getAllBills();
         sqlSession.close();
+
+        //测试msql2这个连接是否通了
+        List<String> strList = userRepository.getHK_ShareIPOModelNames();
         return "调用成功";
     }
 }
