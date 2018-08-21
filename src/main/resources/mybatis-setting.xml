@@ -29,7 +29,6 @@
 
         </environment>
 
-
         <environment id="app_data">
             <transactionManager type="jdbc"/>
             <dataSource type="datacenter.crudreposity.util.C3P0DataSourceFactory">
@@ -80,25 +79,6 @@
                 <property name="preferredTestQuery" value="SELECT 1"/>
             </dataSource>
         </environment>
-
-        <!--
-		<environment id="app_data">
-			<transactionManager type="jdbc" />
-			<dataSource type="com.vip.seek.util.C3P0DataSourceFactory">
-				<property name="driverClass" value="com.mysql.jdbc.Driver" />
-				<property name="jdbcUrl"
-					value="jdbc:mysql://192.168.2.231:3306/app_data?useUnicode=true&amp;characterEncoding=utf8" />
-				<property name="password" value="zunjiazichan123" />
-				<property name="user" value="root" />
-				<property name="idleConnectionTestPeriod" value="60" />
-				<property name="maxPoolSize" value="32" />
-				<property name="minPoolSize" value="20" />
-				<property name="maxIdleTime" value="3600" />
-				<property name="maxStatements" value="0" />
-				<property name="preferredTestQuery" value="SELECT 1" />
-			</dataSource>
-		</environment>
-		-->
 
         <environment id="trade_data">
             <transactionManager type="jdbc"/>
