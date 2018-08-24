@@ -1,10 +1,17 @@
 package datacenter.crudreposity.action;
 
+import datacenter.crudreposity.config.MybatisSessionFactory;
+import datacenter.crudreposity.config.SeekConstants;
+import datacenter.crudreposity.config.State;
+import datacenter.crudreposity.dao.mybatis.HKBillsDao;
+import datacenter.crudreposity.dao.mysql2.UserRepository;
 import datacenter.crudreposity.dao.redis.girlInfoRedisDao;
 import datacenter.crudreposity.entity.Girlnfo;
+import datacenter.crudreposity.entity.HKBill;
 import datacenter.crudreposity.entity.RedisScoreValue;
 import datacenter.crudreposity.entity.girlInfoListResponse;
 import datacenter.crudreposity.service.girlInfoDealService;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,11 +36,17 @@ public class girlController {
     @Autowired
     private girlInfoDealService objgirlInfoDealService;
 
+    //为了方便测试，所以调用dao写在了controller层，正常应该写在service层。。。
     @Autowired
     private girlInfoRedisDao objgirlInfoRedisDao;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @RequestMapping(value = "/getGirlInfo", method = RequestMethod.GET)
     public ResponseEntity<girlInfoListResponse> getNewsList() {
+
+        //测试msql这个连接是否通了。这里面包含了读写分离
         List<Girlnfo> lst = objgirlInfoDealService.getAllGirls();
         //girlInfoListResponse obj = new girlInfoListResponse(lst);
         girlInfoListResponse obj = new girlInfoListResponse();
@@ -55,7 +68,7 @@ public class girlController {
         List<String> listStr = objgirlInfoRedisDao.readSetStrList("set_age");
 
         //获取带有scores的set集合，想用value可以，想用scores也可以
-        List<Double> listDouble = objgirlInfoRedisDao.readSetStrListWithScores("set_age");
+        //List<Double> listDouble = objgirlInfoRedisDao.readSetStrListWithScores("set_age");
 
         //获取Score-Value
         List<RedisScoreValue> lst = objgirlInfoRedisDao.readRedisScoreValue("set_age");
@@ -75,9 +88,39 @@ public class girlController {
         });
 
 
-        objgirlInfoRedisDao.saveHash("set_hash","name","hello,jason");
-        objgirlInfoRedisDao.saveHash("set_hash","age","36");
+        objgirlInfoRedisDao.saveHash("set_hash","name","hello,jason,goodafternoon");
+        objgirlInfoRedisDao.saveHash("set_hash","age","28");
         RedisScoreValue obj = objgirlInfoRedisDao.readHash("set_hash");
+
         return obj.getValue() + "------" + obj.getScore();
+    }
+
+    @RequestMapping(value = "/getMybatis", method = RequestMethod.GET)
+    public String getMybatis() throws Exception {
+
+       //创建mybatis连接  她所用的配置文件为creeper_service.properties，mybatis-setting.xml
+        SqlSession sqlSession = MybatisSessionFactory.openSession("app_data");
+        HKBillsDao hkBillsDao = sqlSession.getMapper(HKBillsDao.class);
+        ArrayList<HKBill> hkBills = hkBillsDao.getAllBills();
+        HKBill objHKBill = new HKBill();
+        objHKBill.setBill_date("2018-08-20");
+        objHKBill.setBill_type("daily");
+        objHKBill.setCode("1000200");
+        objHKBill.setEmail("");
+        objHKBill.setName("");
+        objHKBill.setPdf_location("");
+        objHKBill.setPng_location("");
+        objHKBill.setRowkey("adfaa");
+        int  result = hkBillsDao.insertBill(objHKBill);
+
+        sqlSession.commit();
+        sqlSession.close();
+
+        //测试msql2这个连接是否通了
+        List<String> strList = userRepository.getHK_ShareIPOModelNames();
+
+
+
+        return "调用成功";
     }
 }

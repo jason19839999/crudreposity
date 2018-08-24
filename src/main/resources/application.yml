@@ -3,19 +3,37 @@ server:
 mysql:
  driver: com.mysql.jdbc.Driver
  master:
-   url: jdbc:mysql://127.0.0.1:3306/o2o?useUnicode=true&amp;characterEncoding=utf8"
+   url: jdbc:mysql://192.168.2.231:3306/app_data?useUnicode=true&amp;characterEncoding=utf8"
    username: root
-   password: 123456
+   password: zunjiazichan123
  replica1:
-   url: jdbc:mysql://127.0.0.1:3306/o2o?useUnicode=true&amp;characterEncoding=utf8"
+   url: jdbc:mysql://192.168.2.231:3306/app_data?useUnicode=true&amp;characterEncoding=utf8"
    username: root
-   password: 123456
+   password: zunjiazichan123
+mysql2:
+  driver: com.mysql.jdbc.Driver
+  url: jdbc:mysql://192.168.2.218:3306/miningstock?autoReconnect=true&useUnicode=true&amp;characterEncoding=utf8"
+  username: root
+  password: stock99admin81
 redis:
- ip: 192.168.0.105
- port: 6379
- database: 12
- pool_max_active: 1024
- pool_max_idle: 200
- pool_max_wait_time: 1000
- pool_test_on_borrow: true
+  ip: 192.168.2.232
+  port: 6379
+  database: 12
+  pool_max_active: 1024
+  pool_max_idle: 200
+  pool_max_wait_time: 1000
+  pool_test_on_borrow: true
+
+mongodb:
+  primary:
+    host: 192.168.9.60
+    port: 20000
+    database: test
+  secondary:
+    host: 192.168.9.60
+    port: 20000
+    database: test1
+
+
+
 
