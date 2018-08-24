@@ -52,7 +52,7 @@ public class girlController {
         //List<Integer> listInt = objgirlInfoRedisDao.readSetIntList("set_age");
 
         //zadd set_age 100 榆树 100 北京 100 河北   100为SCORES，必须为整数 10/9/8 可以为数组或者字符串
-        //List<String> listStr = objgirlInfoRedisDao.readSetStrList("set_age");
+        List<String> listStr = objgirlInfoRedisDao.readSetStrList("set_age");
 
         //获取带有scores的set集合，想用value可以，想用scores也可以
         List<Double> listDouble = objgirlInfoRedisDao.readSetStrListWithScores("set_age");
