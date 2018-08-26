@@ -16,7 +16,7 @@ import java.util.ArrayList;
  */
 
 @Repository
-public interface UserRepository extends CrudRepository<HK_ShareIPOModel, Long> {
+public interface UserMysqlRepository extends CrudRepository<HK_ShareIPOModel, Long> {
     @Query(name = "getHK_ShareIPOModelNames", value = "SELECT  name  FROM hk_shareipo ORDER BY  proposedlistdate DESC LIMIT 10", nativeQuery = true)
     public ArrayList<String> getHK_ShareIPOModelNames();
 

@@ -1,10 +1,8 @@
 package datacenter.crudreposity.action;
 
 import datacenter.crudreposity.config.MybatisSessionFactory;
-import datacenter.crudreposity.config.SeekConstants;
-import datacenter.crudreposity.config.State;
 import datacenter.crudreposity.dao.mybatis.HKBillsDao;
-import datacenter.crudreposity.dao.mysql2.UserRepository;
+import datacenter.crudreposity.dao.mysql2.UserMysqlRepository;
 import datacenter.crudreposity.dao.redis.girlInfoRedisDao;
 import datacenter.crudreposity.entity.Girlnfo;
 import datacenter.crudreposity.entity.HKBill;
@@ -41,7 +39,7 @@ public class girlController {
     private girlInfoRedisDao objgirlInfoRedisDao;
 
     @Autowired
-    private UserRepository userRepository;
+    private UserMysqlRepository userRepository;
 
     @RequestMapping(value = "/getGirlInfo", method = RequestMethod.GET)
     public ResponseEntity<girlInfoListResponse> getNewsList() {
