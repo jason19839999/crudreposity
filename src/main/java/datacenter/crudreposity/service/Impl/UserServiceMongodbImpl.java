@@ -55,11 +55,11 @@ public class UserServiceMongodbImpl implements UserServiceMongodb {
     @Override
     public void updateUser(User user) {
         Query query=new Query(Criteria.where("id").is(user.getId()));
-        Update update= new Update().set("userName", user.getId()).set("age", user.getAge());
+        Update update= new Update().set("userName", user.getName()).set("age", user.getAge());
         //更新查询返回结果集的第一条
         mongoTemplate.updateFirst(query,update,User.class);
         //更新查询返回结果集的所有
-        // mongoTemplate.updateMulti(query,update,UserEntity.class);
+        mongoTemplate.updateMulti(query,update,User.class);
     }
 
     /**
