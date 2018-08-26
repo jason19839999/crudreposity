@@ -10,7 +10,8 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  * @修改人和其它信息
  */
 public interface UserRepository extends MongoRepository<User, String> {
-    User findByName(String name);
+
+    User findUserByAgeAndName(String name,int age);
 
 
 }

@@ -24,6 +24,6 @@ public class UserServiceMongodbImpl implements UserServiceMongodb {
 
     @Override
     public User findByName(String name) {
-        return userRepository.findByName(name);
+        return userRepository.findUserByAgeAndName(name,30);
     }
 }
