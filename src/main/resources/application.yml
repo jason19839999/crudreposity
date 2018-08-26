@@ -29,6 +29,7 @@ spring:
     mongodb:
       uri: mongodb://localhost:27017
       database: test
+      port: 2371
 
 
 

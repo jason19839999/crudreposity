@@ -1,10 +1,11 @@
 package datacenter.crudreposity.dao.mongodb;
 
 
+import lombok.Data;
 import org.springframework.boot.autoconfigure.mongo.MongoProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-//@Data
+@Data
 @ConfigurationProperties(prefix = "mongodb")
 public class Config {
 
