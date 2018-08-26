@@ -8,6 +8,8 @@ import datacenter.crudreposity.entity.Girlnfo;
 import datacenter.crudreposity.entity.HKBill;
 import datacenter.crudreposity.entity.RedisScoreValue;
 import datacenter.crudreposity.entity.girlInfoListResponse;
+import datacenter.crudreposity.entity.mongodb.User;
+import datacenter.crudreposity.service.Impl.UserServiceMongodbImpl;
 import datacenter.crudreposity.service.girlInfoDealService;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +42,10 @@ public class girlController {
 
     @Autowired
     private UserMysqlRepository userRepository;
+
+    @Autowired
+    private UserServiceMongodbImpl userServiceMongodbImpl;
+
 
     @RequestMapping(value = "/getGirlInfo", method = RequestMethod.GET)
     public ResponseEntity<girlInfoListResponse> getNewsList() {
@@ -121,4 +127,23 @@ public class girlController {
 
         return "调用成功";
     }
+
+    @RequestMapping(value = "/getMongodb", method = RequestMethod.GET)
+    public String getMongodb() throws Exception {
+        User objUser = new User();
+        objUser.setName("jason");
+        objUser.setAge(18);
+        //插入到数据库
+        userServiceMongodbImpl.saveUser(objUser);
+
+        //按照名字查询
+        objUser = userServiceMongodbImpl.findUserByUserName(objUser.getName());
+
+
+
+        return "调用成功";
+    }
+
+
+
 }
