@@ -11,6 +11,9 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface UserServiceMongodb {
-    void save(User user);
-    User findByName(String name);
+    void saveUser(User user);
+    User findUserByUserName(String userName);
+    public void updateUser(User user);
+    public void deleteUserById(Long id);
+
 }

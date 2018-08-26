@@ -1,6 +1,11 @@
 package datacenter.crudreposity.dao.mongodb;
 
 import datacenter.crudreposity.entity.mongodb.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
@@ -11,7 +16,8 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  */
 public interface UserRepository extends MongoRepository<User, String> {
 
-    User findUserByAgeAndName(String name,int age);
+
+
 
 
 }
