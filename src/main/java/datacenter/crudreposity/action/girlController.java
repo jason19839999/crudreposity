@@ -148,8 +148,8 @@ public class girlController {
 
     //@AccessLimit(seconds = 30)
     @RequestMapping(value = "/getAccess", method = RequestMethod.GET)
-    public String getAccess(User user) throws Exception {
-        if(user != null){
+    public String getAccess(User user,RedisScoreValue redisScoreValue) throws Exception {
+        if(user != null && redisScoreValue != null){
             user.setAge(28);
         }else{
             return "登录超时了";

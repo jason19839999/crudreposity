@@ -12,14 +12,18 @@ import java.util.List;
 @Configuration
 public class WebMvcConfigurer extends WebMvcConfigurerAdapter{
     @Autowired
-    UserArgumentResolver userArgumentResolver;
+    private  UserArgumentResolver userArgumentResolver;
 
     @Autowired
-    AccessInterceptor accessInterceptor;
+    private RedisScoreValueArgumentResolver redisScoreValueArgumentResolver;
+
+    @Autowired
+    private AccessInterceptor accessInterceptor;
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
         argumentResolvers.add(userArgumentResolver);
+        argumentResolvers.add(redisScoreValueArgumentResolver);
     }
 
     @Override
