@@ -22,14 +22,7 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
 
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
                                   NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
-        //在这同一处理用户相关信息
-        User user = new User();
-        user.setId(1);
-        user.setName("jason");
-        user.setAge(18);
-        return  user;
-//        UserContext.setUser(user);
-//        return UserContext.getUser();
+        return UserContext.getUser();
     }
 
 }
