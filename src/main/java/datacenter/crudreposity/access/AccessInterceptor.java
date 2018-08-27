@@ -33,7 +33,8 @@ public class AccessInterceptor  extends HandlerInterceptorAdapter{
             //用户合法性判断
             if(token == null || cookie == null){
                 //跳转到登录页面，这里没写，用return false代替了
-                render(response,"登录超时，请重新登录");
+                request.getRequestDispatcher("/NoAuthority").forward(request,response);
+                //render(response,"登录超时，请重新登录");
                 return false;
             }else{
                 User user = new User();
