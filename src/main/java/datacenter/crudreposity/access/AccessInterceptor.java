@@ -29,7 +29,7 @@ public class AccessInterceptor  extends HandlerInterceptorAdapter{
 
             HandlerMethod hm = (HandlerMethod)handler;
             AccessLimit accessLimit = hm.getMethodAnnotation(AccessLimit.class);
-            int seconds = accessLimit.seconds();
+            //int seconds = accessLimit.seconds();
 
         }
         return true;
