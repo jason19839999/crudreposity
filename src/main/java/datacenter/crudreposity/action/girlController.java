@@ -1,5 +1,6 @@
 package datacenter.crudreposity.action;
 
+import datacenter.crudreposity.access.AccessLimit;
 import datacenter.crudreposity.config.MybatisSessionFactory;
 import datacenter.crudreposity.dao.mybatis.HKBillsDao;
 import datacenter.crudreposity.dao.mysql2.UserMysqlRepository;
@@ -145,6 +146,24 @@ public class girlController {
         return "调用成功";
     }
 
+    //@AccessLimit(seconds = 30)
+    @RequestMapping(value = "/getAccess", method = RequestMethod.GET)
+    public String getAccess(User user) throws Exception {
+        if(user != null){
+            user.setAge(28);
+        }else{
+            return "登录超时了";
+        }
+        return "调用成功";
+    }
 
+    @RequestMapping(value = "/logIn", method = RequestMethod.GET)
+    public String logIn() throws Exception {
+        User objUser = new User();
+        objUser.setId(1);
+        objUser.setName("jason");
+        objUser.setAge(18);
+        return "登录成功";
+    }
 
 }
