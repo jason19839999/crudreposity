@@ -53,17 +53,17 @@ public class UserServiceMongodbImpl implements UserServiceMongodb {
         //查询且语句：a && b
         query.addCriteria(Criteria.where("userName").is(userName));
         query.addCriteria(Criteria.where("age").is(age));
+        User user =  mongoTemplate.findOne(query , User.class);
         //查询且语句：a && b   或者如下
         criteria.and("userName").is(userName);
         criteria.and("age").is(age);
         query = new Query(criteria);
-        User user =  mongoTemplate.findOne(query , User.class);
+        user =  mongoTemplate.findOne(query , User.class);
 
         //查询或语句：a || b
         criteria.orOperator(Criteria.where("userName").is(userName),Criteria.where("age").is(age));
         query = new Query(criteria);
         user =  mongoTemplate.findOne(query , User.class);
-
 
         //where a && b && (a || b)
         Criteria criteriaAnd = new Criteria();
@@ -73,9 +73,9 @@ public class UserServiceMongodbImpl implements UserServiceMongodb {
         Criteria criteriaOr = new Criteria();
         criteriaOr.orOperator(Criteria.where("userName").is(userName),Criteria.where("age").is(age));
 
+        query.addCriteria(criteriaAnd);
         query.addCriteria(criteriaOr);
-        query.addCriteria(criteriaOr);
-
+        user =  mongoTemplate.findOne(query , User.class);
         return user;
     }
 
