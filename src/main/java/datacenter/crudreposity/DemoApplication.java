@@ -27,6 +27,9 @@ public class DemoApplication {
         //springApplication.run(args);
 
 
+        double log1p =  Math.log1p(1);
+        double log =  Math.log(3);
+        double log10 = Math.log10(10000);
         /* init mybatis session factory */
         String args2[] = new String[2];
         args2[0] = "-c";

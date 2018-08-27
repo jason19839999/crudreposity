@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.ToString;
 
 import javax.persistence.Id;
+import  java.lang.Integer;
 
 /**
  * @描述
@@ -14,13 +15,23 @@ import javax.persistence.Id;
  */
 
 @Data
-@AllArgsConstructor
+//@AllArgsConstructor
 @ToString
 public class User {
     @Id
     private Integer id;
     private String name;
     private Integer age;
+
+    public User() {
+
+    }
+
+    public User(Integer id, String name, Integer age) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+    }
 
     public Integer getId() {
         return id;

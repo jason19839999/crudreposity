@@ -131,6 +131,7 @@ public class girlController {
     @RequestMapping(value = "/getMongodb", method = RequestMethod.GET)
     public String getMongodb() throws Exception {
         User objUser = new User();
+        objUser.setId(1);
         objUser.setName("jason");
         objUser.setAge(18);
         //插入到数据库
