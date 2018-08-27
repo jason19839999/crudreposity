@@ -76,6 +76,11 @@ public class UserServiceMongodbImpl implements UserServiceMongodb {
         query.addCriteria(criteriaAnd);
         query.addCriteria(criteriaOr);
         user =  mongoTemplate.findOne(query , User.class);
+
+        //按照年龄排序，并且实现分页
+        query.limit(10 - 1).skip(0).with(new Sort(new Sort.Order(Sort.Direction.DESC, "age")));
+        List<User> userList =  mongoTemplate.find(query , User.class);
+
         return user;
     }
 
