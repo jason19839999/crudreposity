@@ -138,7 +138,7 @@ public class girlController {
         userServiceMongodbImpl.saveUser(objUser);
 
         //按照名字查询
-        objUser = userServiceMongodbImpl.findUserByUserName(objUser.getName());
+        objUser = userServiceMongodbImpl.findUserByUserName(objUser.getName(),objUser.getAge());
 
 
 

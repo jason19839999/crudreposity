@@ -1,17 +1,22 @@
 package datacenter.crudreposity.service.Impl;
 
+import com.mongodb.BasicDBObject;
+import com.mongodb.QueryBuilder;
 import datacenter.crudreposity.dao.mongodb.UserRepository;
 import datacenter.crudreposity.entity.mongodb.User;
 import datacenter.crudreposity.service.UserServiceMongodb;
+import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.BasicQuery;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
-
-
 import java.util.List;
+
+//https://blog.csdn.net/zhuchunyan_aijia/article/details/80298529  参照学习地址
 
 /**
  * @描述
@@ -42,9 +47,35 @@ public class UserServiceMongodbImpl implements UserServiceMongodb {
      * @return
      */
     @Override
-    public User findUserByUserName(String userName) {
-        Query query=new Query(Criteria.where("userName").is(userName));
+    public User findUserByUserName(String userName,int age) {
+        Query query=new Query();
+        Criteria criteria = new Criteria();
+        //查询且语句：a && b
+        query.addCriteria(Criteria.where("userName").is(userName));
+        query.addCriteria(Criteria.where("age").is(age));
+        //查询且语句：a && b   或者如下
+        criteria.and("userName").is(userName);
+        criteria.and("age").is(age);
+        query = new Query(criteria);
         User user =  mongoTemplate.findOne(query , User.class);
+
+        //查询或语句：a || b
+        criteria.orOperator(Criteria.where("userName").is(userName),Criteria.where("age").is(age));
+        query = new Query(criteria);
+        user =  mongoTemplate.findOne(query , User.class);
+
+
+        //where a && b && (a || b)
+        Criteria criteriaAnd = new Criteria();
+        criteriaAnd.and("userName").is(userName);
+        criteriaAnd.and("age").is(age);
+
+        Criteria criteriaOr = new Criteria();
+        criteriaOr.orOperator(Criteria.where("userName").is(userName),Criteria.where("age").is(age));
+
+        query.addCriteria(criteriaOr);
+        query.addCriteria(criteriaOr);
+
         return user;
     }
 
