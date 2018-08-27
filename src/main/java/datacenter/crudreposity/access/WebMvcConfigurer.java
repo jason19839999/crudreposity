@@ -27,7 +27,7 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(accessInterceptor);
+        registry.addInterceptor(accessInterceptor).excludePathPatterns("/logIn");
         //addPathPatterns("/**")对所有请求都拦截，但是排除了/toLogin和/login请求的拦截
         //registry.addInterceptor(accessInterceptor).addPathPatterns("/**").excludePathPatterns("/toLogin","/login");
     }

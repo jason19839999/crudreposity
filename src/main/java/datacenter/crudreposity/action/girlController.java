@@ -13,13 +13,17 @@ import datacenter.crudreposity.entity.mongodb.User;
 import datacenter.crudreposity.service.Impl.UserServiceMongodbImpl;
 import datacenter.crudreposity.service.girlInfoDealService;
 import org.apache.ibatis.session.SqlSession;
+import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -148,7 +152,7 @@ public class girlController {
 
     //@AccessLimit(seconds = 30)
     @RequestMapping(value = "/getAccess", method = RequestMethod.GET)
-    public String getAccess(User user,RedisScoreValue redisScoreValue) throws Exception {
+    public String getAccess(User user, RedisScoreValue redisScoreValue, @RequestParam("token")  String token ) throws Exception {
         if(user != null && redisScoreValue != null){
             user.setAge(28);
         }else{
@@ -158,12 +162,21 @@ public class girlController {
     }
 
     @RequestMapping(value = "/logIn", method = RequestMethod.GET)
-    public String logIn() throws Exception {
+    public String logIn(HttpServletResponse response) throws Exception {
         User objUser = new User();
         objUser.setId(1);
         objUser.setName("jason");
         objUser.setAge(18);
+        addCookie(response,"123456789");
+
         return "登录成功";
+    }
+
+    private void addCookie(HttpServletResponse response, String token) {
+        Cookie cookie = new Cookie("token", token);
+        cookie.setMaxAge(20000);
+        cookie.setPath("/");
+        response.addCookie(cookie);
     }
 
 }
