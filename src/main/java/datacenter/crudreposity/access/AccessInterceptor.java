@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import datacenter.crudreposity.entity.mongodb.User;
+import datacenter.crudreposity.exception.CodeMsg;
+import datacenter.crudreposity.exception.GlobalException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.method.HandlerMethod;
@@ -32,11 +34,20 @@ public class AccessInterceptor  extends HandlerInterceptorAdapter{
             String cookie= getCookieValue(request,"token");
             //用户合法性判断
             if(token == null || cookie == null){
-                //跳转到登录页面，这里没写，用return false代替了
-                request.getRequestDispatcher("/NoAuthority").forward(request,response);
+                //通过以下三种方式处理异常逻辑信息提示
+
+                //①跳转到登录页面或者无权限页面，这里没写，用return false代替了
+                //request.getRequestDispatcher("/NoAuthority").forward(request,response);
+                //return false;
+
+                //②将错误信息输出到页面
                 //render(response,"登录超时，请重新登录");
-                return false;
-            }else{
+                //return false;
+
+                //③通过统一的异常处理输出格式统一的结果给前端或者app客户端
+                throw new GlobalException(CodeMsg.SESSION_ERROR);
+
+            }else{  //获取用户信息，添加到ThreadLocal线程，供接口参数初始化用，addArgumentResolvers
                 User user = new User();
                 user.setId(1);
                 user.setName("jason[AccessInterceptor]");

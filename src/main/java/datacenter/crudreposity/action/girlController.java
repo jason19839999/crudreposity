@@ -10,6 +10,9 @@ import datacenter.crudreposity.entity.HKBill;
 import datacenter.crudreposity.entity.RedisScoreValue;
 import datacenter.crudreposity.entity.girlInfoListResponse;
 import datacenter.crudreposity.entity.mongodb.User;
+import datacenter.crudreposity.exception.CodeMsg;
+import datacenter.crudreposity.exception.GlobalException;
+import datacenter.crudreposity.exception.Result;
 import datacenter.crudreposity.service.Impl.UserServiceMongodbImpl;
 import datacenter.crudreposity.service.girlInfoDealService;
 import org.apache.ibatis.session.SqlSession;
@@ -152,13 +155,18 @@ public class girlController {
 
     //@AccessLimit(seconds = 30)
     @RequestMapping(value = "/getAccess", method = RequestMethod.GET)
-    public String getAccess(User user, RedisScoreValue redisScoreValue, @RequestParam("token")  String token ) throws Exception {
+    public Result<User> getAccess(User user, RedisScoreValue redisScoreValue, @RequestParam("token")  String token ) throws Exception {
+        //业务逻辑处理都可以用GlobalException处理，
+        // 直接 throw new GlobalException(CodeMsg.SESSION_ERROR)即可，直接返回给前端或者客户端错误信息
+        //拦截器里面也可以使用此方法
         if(user != null && redisScoreValue != null){
             user.setAge(28);
         }else{
-            return "登录超时了";
+            throw new GlobalException(CodeMsg.MOBILE_ERROR);
+            //return "登录超时了";
         }
-        return "调用成功";
+        return  Result.success(user);
+
     }
 
     @RequestMapping(value = "/logIn", method = RequestMethod.GET)
