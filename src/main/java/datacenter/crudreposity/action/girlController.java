@@ -1,6 +1,5 @@
 package datacenter.crudreposity.action;
 
-import datacenter.crudreposity.access.AccessLimit;
 import datacenter.crudreposity.config.MybatisSessionFactory;
 import datacenter.crudreposity.dao.mybatis.HKBillsDao;
 import datacenter.crudreposity.dao.mysql2.UserMysqlRepository;
@@ -10,13 +9,12 @@ import datacenter.crudreposity.entity.HKBill;
 import datacenter.crudreposity.entity.RedisScoreValue;
 import datacenter.crudreposity.entity.girlInfoListResponse;
 import datacenter.crudreposity.entity.mongodb.User;
-import datacenter.crudreposity.exception.CodeMsg;
+import datacenter.crudreposity.entity.responseParam.CodeMsg;
 import datacenter.crudreposity.exception.GlobalException;
-import datacenter.crudreposity.exception.Result;
+import datacenter.crudreposity.entity.responseParam.Result;
 import datacenter.crudreposity.service.Impl.UserServiceMongodbImpl;
 import datacenter.crudreposity.service.girlInfoDealService;
 import org.apache.ibatis.session.SqlSession;
-import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

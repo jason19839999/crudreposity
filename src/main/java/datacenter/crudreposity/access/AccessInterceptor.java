@@ -6,14 +6,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import datacenter.crudreposity.entity.mongodb.User;
-import datacenter.crudreposity.exception.CodeMsg;
+import datacenter.crudreposity.entity.responseParam.CodeMsg;
 import datacenter.crudreposity.exception.GlobalException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-
-import com.alibaba.fastjson.JSON;
 
 @Service
 public class AccessInterceptor  extends HandlerInterceptorAdapter{

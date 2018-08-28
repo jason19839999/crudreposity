@@ -1,5 +1,7 @@
 package datacenter.crudreposity.exception;
 
+import datacenter.crudreposity.entity.responseParam.CodeMsg;
+
 public class GlobalException extends RuntimeException {
     private static final long serialVersionUID = 1L;
 

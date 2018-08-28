@@ -1,4 +1,4 @@
-package datacenter.crudreposity.exception;
+package datacenter.crudreposity.entity.responseParam;
 
 public class Result<T> {
 
