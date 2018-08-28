@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
  */
 public class UserLogin {
 
-    @Length(max = 20)    //这里注解的顺序决定了GlobalException处理中错误信息的顺序11
+    @Length(max = 11)    //这里注解的顺序决定了GlobalException处理中错误信息的顺序11
     @IsMobile
     @NotNull
     private String loginName;

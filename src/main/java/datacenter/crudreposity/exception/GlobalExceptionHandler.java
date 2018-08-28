@@ -7,6 +7,7 @@ import datacenter.crudreposity.entity.responseParam.CodeMsg;
 import datacenter.crudreposity.entity.responseParam.Result;
 import org.springframework.validation.BindException;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,6 +25,17 @@ public class GlobalExceptionHandler {
             BindException ex = (BindException)e;
             List<ObjectError> errors = ex.getAllErrors();
             ObjectError error = errors.get(1);  //手机号码格式错误 :获取@interface IsMobile里面的信息
+            String msg = error.getDefaultMessage();
+            return Result.error(CodeMsg.BIND_ERROR.fillArgs(msg));
+        }else if(e instanceof MethodArgumentNotValidException) {
+            MethodArgumentNotValidException ex = (MethodArgumentNotValidException)e;
+            List<ObjectError> errors =ex.getBindingResult().getAllErrors();
+            ObjectError error;
+            if(errors.size() > 0){
+                 error = errors.get(0);  //手机号码格式错误 :获取@interface IsMobile里面的信息
+            }else{
+                error = new ObjectError("","未知错误！");
+            }
             String msg = error.getDefaultMessage();
             return Result.error(CodeMsg.BIND_ERROR.fillArgs(msg));
         }else {
