@@ -23,7 +23,7 @@ public class GlobalExceptionHandler {
         }else if(e instanceof BindException) {
             BindException ex = (BindException)e;
             List<ObjectError> errors = ex.getAllErrors();
-            ObjectError error = errors.get(0);
+            ObjectError error = errors.get(1);  //手机号码格式错误 :获取@interface IsMobile里面的信息
             String msg = error.getDefaultMessage();
             return Result.error(CodeMsg.BIND_ERROR.fillArgs(msg));
         }else {

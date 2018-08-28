@@ -1,5 +1,6 @@
 package datacenter.crudreposity.action;
 
+import datacenter.crudreposity.aspect.Servicelock;
 import datacenter.crudreposity.config.MybatisSessionFactory;
 import datacenter.crudreposity.dao.mybatis.HKBillsDao;
 import datacenter.crudreposity.dao.mysql2.UserMysqlRepository;
@@ -19,10 +20,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -154,6 +152,7 @@ public class girlController {
     }
 
     //@AccessLimit(seconds = 30)
+    @Servicelock   //实现分布式锁功能，主要采用了Lock,reentrantLock(true) 公平锁
     @RequestMapping(value = "/getAccess", method = RequestMethod.GET)
     public Result<User> getAccess(User user, RedisScoreValue redisScoreValue, @RequestParam("token")  String token ) throws Exception {
         //业务逻辑处理都可以用GlobalException处理，
@@ -170,15 +169,15 @@ public class girlController {
     }
 
     //利用@Valid注解，对传入参数进行校验 ，使用的是这个  <artifactId>spring-boot-starter-validation</artifactId>，现在已经成为了标准。
-    @RequestMapping(value = "/logIn", method = RequestMethod.GET)
-    public String logIn(HttpServletResponse response,@Valid UserLogin loginVo) throws Exception {
-        User objUser = new User();
-        objUser.setId(1);
-        objUser.setName("jason");
-        objUser.setAge(18);
+    @RequestMapping(value = "/logIn")
+    @ResponseBody
+    public Result<String> logIn(HttpServletResponse response,  //下面要注意，先获取值，再加@Valid
+                                      @Valid @RequestBody UserLogin loginVo) throws Exception {
+
+        UserLogin obj = loginVo;
         addCookie(response,"123456789");
 
-        return "登录成功";
+        return Result.success("登录成功了");
     }
 
     private void addCookie(HttpServletResponse response, String token) {

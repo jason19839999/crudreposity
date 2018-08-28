@@ -3,7 +3,6 @@ package datacenter.crudreposity.entity.requestParam;
 import datacenter.crudreposity.validator.IsMobile;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -14,13 +13,13 @@ import javax.validation.constraints.NotNull;
  */
 public class UserLogin {
 
+    @Length(max = 20)    //这里注解的顺序决定了GlobalException处理中错误信息的顺序11
     @IsMobile
     @NotNull
-    @Length(max=11)
-    private String loginName ;
+    private String loginName;
 
     @NotNull
-    @Length(min=32)
+    @Length(min = 32)
     private String pwd;
 
 
@@ -29,5 +28,19 @@ public class UserLogin {
     }
 
 
+    public String getLoginName() {
+        return loginName;
+    }
 
+    public void setLoginName(String loginName) {
+        this.loginName = loginName;
+    }
+
+    public String getPwd() {
+        return pwd;
+    }
+
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
+    }
 }
