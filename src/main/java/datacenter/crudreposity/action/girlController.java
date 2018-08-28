@@ -9,6 +9,7 @@ import datacenter.crudreposity.entity.HKBill;
 import datacenter.crudreposity.entity.RedisScoreValue;
 import datacenter.crudreposity.entity.girlInfoListResponse;
 import datacenter.crudreposity.entity.mongodb.User;
+import datacenter.crudreposity.entity.requestParam.UserLogin;
 import datacenter.crudreposity.entity.responseParam.CodeMsg;
 import datacenter.crudreposity.exception.GlobalException;
 import datacenter.crudreposity.entity.responseParam.Result;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -167,8 +169,9 @@ public class girlController {
 
     }
 
+    //利用@Valid注解，对传入参数进行校验 ，使用的是这个  <artifactId>spring-boot-starter-validation</artifactId>，现在已经成为了标准。
     @RequestMapping(value = "/logIn", method = RequestMethod.GET)
-    public String logIn(HttpServletResponse response) throws Exception {
+    public String logIn(HttpServletResponse response,@Valid UserLogin loginVo) throws Exception {
         User objUser = new User();
         objUser.setId(1);
         objUser.setName("jason");
