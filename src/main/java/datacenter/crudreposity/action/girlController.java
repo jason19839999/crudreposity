@@ -16,10 +16,13 @@ import datacenter.crudreposity.exception.GlobalException;
 import datacenter.crudreposity.entity.responseParam.Result;
 import datacenter.crudreposity.service.Impl.UserServiceMongodbImpl;
 import datacenter.crudreposity.service.girlInfoDealService;
+import datacenter.crudreposity.websocket.WebSocketServer;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
@@ -36,7 +39,7 @@ import java.util.List;
  * @创建时间 $date$
  * @修改人和其它信息
  */
-@RestController
+@Controller
 public class girlController {
 
     @Autowired
@@ -172,20 +175,39 @@ public class girlController {
     @RequestMapping(value = "/logIn")
     @Servicelock
     @ResponseBody
-    public Result<String> logIn(HttpServletResponse response,  //下面要注意，先获取值，再加@Valid
+    public String logIn(HttpServletResponse response,  //下面要注意，先获取值，再加@Valid
                                       @Valid @RequestBody UserLogin loginVo) throws Exception {
 
         UserLogin obj = loginVo;
         addCookie(response,"123456789");
 
-        return Result.success("登录成功了");
+        return "index";
     }
 
+    //利用@Valid注解，对传入参数进行校验 ，使用的是这个  <artifactId>spring-boot-starter-validation</artifactId>，现在已经成为了标准。
+    @RequestMapping(value = "/denglu")
+    //@ResponseBody
+    public String denglu(Model model,HttpServletResponse response) throws Exception {
+        model.addAttribute("name","jason");
+        addCookie(response,"123456789");
+        return "index";
+    }
+
+    //添加cookie
     private void addCookie(HttpServletResponse response, String token) {
         Cookie cookie = new Cookie("token", token);
         cookie.setMaxAge(20000);
         cookie.setPath("/");
         response.addCookie(cookie);
+    }
+
+    @Servicelock   //实现分布式锁功能，主要采用了Lock,reentrantLock(true) 公平锁
+    @RequestMapping(value = "/sendWebsocketMsg", method = RequestMethod.GET)
+    public Result<String> sendWebsocketMsg( ) throws Exception {
+
+        WebSocketServer.sendInfo("", "秒杀成功");//推送给前台
+        return  Result.success("发送成功");
+
     }
 
 }
