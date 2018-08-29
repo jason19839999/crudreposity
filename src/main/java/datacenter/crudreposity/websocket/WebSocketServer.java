@@ -10,7 +10,7 @@ import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.util.concurrent.CopyOnWriteArraySet;
 
-@ServerEndpoint("/websocket/{userId}")
+@ServerEndpoint("/websocket/{userId}/{goodsId}")
 @Component
 public class WebSocketServer {  
 	private final static Logger log = LoggerFactory.getLogger(WebSocketServer.class);
@@ -23,17 +23,20 @@ public class WebSocketServer {
     private Session session;
 
     //接收userId
-    private String userId="";
+    private int userId=0;
+    //接收商品Id
+    private int goodsId=0;
     /**
      * 连接建立成功调用的方法*/
     @OnOpen
-    public void onOpen(Session session, @PathParam("userId") String userId) {
+    public void onOpen(@PathParam("userId") int userId,@PathParam("goodsId") int goodsId,Session session ) {
         this.session = session;
+        this.userId=userId;
+        this.goodsId = goodsId;
         webSocketSet.add(this);     //加入set中
         addOnlineCount();           //在线数加1
         log.info("有新窗口开始监听:"+userId+",当前在线人数为" + getOnlineCount());
-        this.userId=userId;
-        try {
+            try {
              sendMessage("连接成功");
         } catch (IOException e) {
             log.error("websocket IO异常");
@@ -84,14 +87,14 @@ public class WebSocketServer {
     /**
      * 群发自定义消息
      * */
-    public static void sendInfo(String message,@PathParam("userId") String userId){
+    public static void sendInfo(String message,@PathParam("userId") int userId){
         log.info("推送消息到窗口"+userId+"，推送内容:"+message);
         for (WebSocketServer item : webSocketSet) {
             try {
                 //这里可以设定只推送给这个userId的，为null则全部推送
-                if(userId==null) {
+                if(userId==0) {
                     item.sendMessage(message);
-                }else if(item.userId.equals(userId)){
+                }else if(item.userId==userId){
                     item.sendMessage(message);
                 }
             } catch (IOException e) {

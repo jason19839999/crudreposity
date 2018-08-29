@@ -205,8 +205,8 @@ public class girlController {
     @RequestMapping(value = "/sendWebsocketMsg", method = RequestMethod.GET)
     @ResponseBody
     public Result<String> sendWebsocketMsg( ) throws Exception {
-
-        WebSocketServer.sendInfo("hello,jason", "1");//推送给前台
+        //如果不指定userId就全部用户都发送
+        WebSocketServer.sendInfo("hello,jason", 0);//推送给前台
         return  Result.success("发送成功");
 
     }

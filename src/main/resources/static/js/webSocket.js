@@ -4,16 +4,21 @@ socket = {
 	init : function() {
 		alert("socket连接中，请稍后...")
 		//userId：自行追加
+		var userId = 10;
+		var goodsId = 1001;
 		if ('WebSocket' in window) {
-			webSocket = new WebSocket(basePath+'websocket/1'); 
-		} 
+			//webSocket = new WebSocket(basePath+'websocket/' + userId);  //需要在服务端添加注解 @ServerEndpoint("/websocket/{userId}/{goodsId}")
+            webSocket = new WebSocket(basePath+'websocket/' + userId +'/' +goodsId );
+		}
 		else if ('MozWebSocket' in window) {
-			webSocket = new MozWebSocket(basePath+"websocket/1");
-		} 
+			webSocket = new MozWebSocket(basePath+"websocket/" + userId+'/' +goodsId);
+		}
 		else {
 			webSocket = new SockJS(basePath+"sockjs/websocket");
 		}
-		webSocket.onerror = function(event) {
+
+
+        webSocket.onerror = function(event) {
 			alert("websockt连接发生错误，请刷新页面重试!")
 		};
 		webSocket.onopen = function(event) {
