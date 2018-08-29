@@ -185,9 +185,9 @@ public class girlController {
     }
 
     //利用@Valid注解，对传入参数进行校验 ，使用的是这个  <artifactId>spring-boot-starter-validation</artifactId>，现在已经成为了标准。
-    @RequestMapping(value = "/denglu")
+    @RequestMapping(value = "/connectionSocket")
     //@ResponseBody
-    public String denglu(Model model,HttpServletResponse response) throws Exception {
+    public String connectionSocket(Model model,HttpServletResponse response) throws Exception {
         model.addAttribute("name","jason");
         addCookie(response,"123456789");
         return "index";
@@ -206,7 +206,7 @@ public class girlController {
     @ResponseBody
     public Result<String> sendWebsocketMsg( ) throws Exception {
 
-        WebSocketServer.sendInfo("", "秒杀成功");//推送给前台
+        WebSocketServer.sendInfo("hello,jason", "1");//推送给前台
         return  Result.success("发送成功");
 
     }
