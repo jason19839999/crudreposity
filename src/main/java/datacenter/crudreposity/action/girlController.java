@@ -203,6 +203,7 @@ public class girlController {
 
     @Servicelock   //实现分布式锁功能，主要采用了Lock,reentrantLock(true) 公平锁
     @RequestMapping(value = "/sendWebsocketMsg", method = RequestMethod.GET)
+    @ResponseBody
     public Result<String> sendWebsocketMsg( ) throws Exception {
 
         WebSocketServer.sendInfo("", "秒杀成功");//推送给前台

@@ -1,10 +1,8 @@
-$(function(){
-	socket.init();
-});
-var basePath = "ws://localhost:8086/seckill/";
+var basePath = "ws://localhost:8086/";
 socket = {
 	webSocket : "",
 	init : function() {
+		alert("socket连接中，请稍后...")
 		//userId：自行追加
 		if ('WebSocket' in window) {
 			webSocket = new WebSocket(basePath+'websocket/1'); 
