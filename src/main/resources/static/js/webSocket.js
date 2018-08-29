@@ -19,6 +19,11 @@ socket = {
 		webSocket.onopen = function(event) {
 			
 		};
+
+        webSocket.onclose =  function(event) {
+              alert("已经断开连接");
+        };
+
 		webSocket.onmessage = function(event) {
 			var message = event.data;
 			alert(message)//判断秒杀是否成功、自行写逻辑
