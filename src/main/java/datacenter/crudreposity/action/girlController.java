@@ -151,7 +151,7 @@ public class girlController {
         return "调用成功";
     }
 
-    //@AccessLimit(seconds = 30)
+    //@AccessLimit(seconds = 30)    //接口下流注入 比如：每分钟只能请求60次。思路：每次请求count放入redis,然后设置redis过期时间为1分钟，判断一分钟内不能超过60次。一分钟后过期重新计算
     @Servicelock   //实现分布式锁功能，主要采用了Lock,reentrantLock(true) 公平锁
     @RequestMapping(value = "/getAccess", method = RequestMethod.GET)
     public Result<User> getAccess(User user, RedisScoreValue redisScoreValue, @RequestParam("token")  String token ) throws Exception {
@@ -170,6 +170,7 @@ public class girlController {
 
     //利用@Valid注解，对传入参数进行校验 ，使用的是这个  <artifactId>spring-boot-starter-validation</artifactId>，现在已经成为了标准。
     @RequestMapping(value = "/logIn")
+    @Servicelock
     @ResponseBody
     public Result<String> logIn(HttpServletResponse response,  //下面要注意，先获取值，再加@Valid
                                       @Valid @RequestBody UserLogin loginVo) throws Exception {
