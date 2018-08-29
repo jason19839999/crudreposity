@@ -175,13 +175,11 @@ public class girlController {
     @RequestMapping(value = "/logIn")
     @Servicelock
     @ResponseBody
-    public String logIn(HttpServletResponse response,  //下面要注意，先获取值，再加@Valid
+    public Result<String> logIn(HttpServletResponse response,  //下面要注意，先获取值，再加@Valid
                                       @Valid @RequestBody UserLogin loginVo) throws Exception {
-
         UserLogin obj = loginVo;
         addCookie(response,"123456789");
-
-        return "index";
+        return Result.success("登录成功");
     }
 
     //利用@Valid注解，对传入参数进行校验 ，使用的是这个  <artifactId>spring-boot-starter-validation</artifactId>，现在已经成为了标准。
