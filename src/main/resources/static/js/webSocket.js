@@ -1,5 +1,5 @@
         var basePath = "ws://localhost:8086/";
-	    webSocket : "",
+	    webSocket =""
 		alert("socket连接中，请稍后...")
 		//userId：自行追加
 		var userId = 10;
