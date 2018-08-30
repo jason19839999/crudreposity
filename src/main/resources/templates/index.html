@@ -13,17 +13,23 @@
     <META name="format-detection" content="telephone=no" />
 
 </head>
-<body>
-<div class="container" style="margin-top: 1%;text-align:center;font-size: 20px;">
-          WebSocket实时通信监测
+<input>
+<br class="container" style="margin-top: 1%;text-align:center;font-size: 20px;">
+    WebSocket实时通信监测</br>
+
+<input id="sendMsg" th:type="button" onclick="return sendMsg()" th:value="广播消息" ></input>
+
 </div>
 
 
 <script th:src="@{/js/webSocket.js}"></script>
 
 
+
 <script>
-    socket.init();
+    function sendMsg(){
+        return send();
+    }
 </script>
 </body>
 </html>
