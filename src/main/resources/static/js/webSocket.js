@@ -1,38 +1,9 @@
         var basePath = "ws://localhost:8086/";
-	    webSocket =""
-		alert("socket连接中，请稍后...")
+	    webSocket ="";
 		//userId：自行追加
 		var userId = 10;
 		var goodsId = 1001;
-		if ('WebSocket' in window) {
-			//webSocket = new WebSocket(basePath+'websocket/' + userId);  //需要在服务端添加注解 @ServerEndpoint("/websocket/{userId}/{goodsId}")
-            webSocket = new WebSocket(basePath+'websocket/' + userId +'/' +goodsId );
-		}
-		else if ('MozWebSocket' in window) {
-			webSocket = new MozWebSocket(basePath+"websocket/" + userId+'/' +goodsId);
-		}
-		else {
-			webSocket = new SockJS(basePath+"sockjs/websocket");
-		}
-
-        webSocket.onerror = function(event) {
-			alert("websockt连接发生错误，请刷新页面重试!")
-		};
-		webSocket.onopen = function(event) {
-            //心跳检测重置
-            heartCheck.reset().start();
-		};
-
-        webSocket.onclose =  function(event) {
-              alert("已经断开连接");
-        };
-
-		webSocket.onmessage = function(event) {
-			var message = event.data;
-            //如果获取到消息，心跳检测重置
-            heartCheck.reset().start();
-			alert(message)//判断秒杀是否成功、自行写逻辑
-		};
+        connectSocket();
 
         //监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
         window.onbeforeunload = function(){
@@ -49,7 +20,6 @@
             var message = "每天进步要飞跃式的";
             webSocket.send(message);
         }
-
 
         //心跳检测,每20s心跳一次
         var heartCheck = {
@@ -70,7 +40,48 @@
                     console.info("客户端发送心跳：");
                     self.serverTimeoutObj = setTimeout(function(){//如果超过一定时间还没重置，说明后端主动断开了
                         webSocket.close();//如果onclose会执行reconnect，我们执行ws.close()就行了.如果直接执行reconnect 会触发onclose导致重连两次
+                        connectSocket();
                     }, self.timeout)
                 }, this.timeout)
             }
+        }
+
+        function connectSocket() {
+            //$("#result").text("socket连接中，请稍后...");
+            webSocket = "";
+            if ('WebSocket' in window) {
+                //webSocket = new WebSocket(basePath+'websocket/' + userId);  //需要在服务端添加注解 @ServerEndpoint("/websocket/{userId}/{goodsId}")
+                webSocket = new WebSocket(basePath+'websocket/' + userId +'/' +goodsId );
+            }
+            else if ('MozWebSocket' in window) {
+                webSocket = new MozWebSocket(basePath+"websocket/" + userId+'/' +goodsId);
+            }
+            else {
+                webSocket = new SockJS(basePath+"sockjs/websocket");
+            }
+
+            webSocket.onerror = function(event) {
+                //alert("websockt连接发生错误，请刷新页面重试!");
+                $("#message").text("websockt连接发生错误，请刷新页面重试!");
+            };
+
+            webSocket.onopen = function(event) {
+                //心跳检测重置
+                //heartCheck.reset().start();
+            };
+
+            webSocket.onclose =  function(event) {
+                //alert("已经断开连接");
+                $("#result").text("已经断开连接");
+            };
+
+            webSocket.onmessage = function(event) {
+                var message = event.data;
+                $("#result").text("恭喜您，已经连接成功了！");
+                $("#message").text(message);
+                //如果获取到消息，心跳检测重置
+                heartCheck.reset().start();
+                //alert(message)//判断秒杀是否成功、自行写逻辑
+            };
+
         }

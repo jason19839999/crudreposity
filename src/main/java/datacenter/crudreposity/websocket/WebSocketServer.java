@@ -18,6 +18,14 @@ public class WebSocketServer {
     private static int onlineCount = 0;
     //concurrent包的线程安全Set，用来存放每个客户端对应的MyWebSocket对象。
     private static CopyOnWriteArraySet<WebSocketServer> webSocketSet = new CopyOnWriteArraySet<WebSocketServer>();
+    private  static WebSocketServer instance;
+
+    public synchronized static WebSocketServer getInstance(){
+        if(null == instance){
+            instance = new WebSocketServer();
+        }
+        return instance;
+    }
 
     //与某个客户端的连接会话，需要通过它来给客户端发送数据
     private Session session;
@@ -57,16 +65,19 @@ public class WebSocketServer {
      * 收到客户端消息后调用的方法
      * @param message 客户端发送过来的消息*/
     @OnMessage
-    public void onMessage(String message, Session session) {
+    public void onMessage(String message, Session session) throws IOException {
         log.info("收到来自窗口"+userId+"的信息:"+message);
         //群发消息
-        for (WebSocketServer item : webSocketSet) {
-            try {
-                item.sendMessage(message);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+//        for (WebSocketServer item : webSocketSet) {
+//            try {
+//                item.sendMessage(message);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+        //处理用户发过来的消息，再给用户发回去，这里面是心跳应用
+        this.session.getBasicRemote().sendText(message);
+        //WebSocketServer.instance.sendMessage(message);
     }
 
     /**
