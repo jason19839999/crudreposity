@@ -19,7 +19,8 @@
 			alert("websockt连接发生错误，请刷新页面重试!")
 		};
 		webSocket.onopen = function(event) {
-			
+            //心跳检测重置
+            heartCheck.reset().start();
 		};
 
         webSocket.onclose =  function(event) {
@@ -28,6 +29,8 @@
 
 		webSocket.onmessage = function(event) {
 			var message = event.data;
+            //如果获取到消息，心跳检测重置
+            heartCheck.reset().start();
 			alert(message)//判断秒杀是否成功、自行写逻辑
 		};
 
@@ -45,4 +48,29 @@
         function send(){
             var message = "每天进步要飞跃式的";
             webSocket.send(message);
+        }
+
+
+        //心跳检测,每20s心跳一次
+        var heartCheck = {
+            timeout: 5000,
+            timeoutObj: null,
+            serverTimeoutObj: null,
+            reset: function(){
+                clearTimeout(this.timeoutObj);
+                clearTimeout(this.serverTimeoutObj);
+                return this;
+            },
+            start: function(){
+                var self = this;
+                this.timeoutObj = setTimeout(function(){
+                    //这里发送一个心跳，后端收到后，返回一个心跳消息，
+                    //onmessage拿到返回的心跳就说明连接正常
+                    webSocket.send("HeartBeat");
+                    console.info("客户端发送心跳：");
+                    self.serverTimeoutObj = setTimeout(function(){//如果超过一定时间还没重置，说明后端主动断开了
+                        webSocket.close();//如果onclose会执行reconnect，我们执行ws.close()就行了.如果直接执行reconnect 会触发onclose导致重连两次
+                    }, self.timeout)
+                }, this.timeout)
+            }
         }
