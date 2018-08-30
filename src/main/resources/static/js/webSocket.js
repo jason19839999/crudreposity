@@ -23,7 +23,7 @@
 
         //心跳检测,每20s心跳一次
         var heartCheck = {
-            timeout: 5000,
+            timeout: 10000,
             timeoutObj: null,
             serverTimeoutObj: null,
             reset: function(){
