@@ -17,6 +17,11 @@ import datacenter.crudreposity.entity.responseParam.Result;
 import datacenter.crudreposity.service.Impl.UserServiceMongodbImpl;
 import datacenter.crudreposity.service.girlInfoDealService;
 import datacenter.crudreposity.websocket.WebSocketServer;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,13 +30,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.zip.GZIPOutputStream;
 
 /**
  * @描述
@@ -207,6 +218,39 @@ public class girlController {
         WebSocketServer.sendInfo("hello,jason", 0,0);//推送给前台
         return  Result.success("发送成功");
 
+    }
+
+    @RequestMapping(value = "/sendUrl", method = RequestMethod.GET)
+    @ResponseBody
+    public String sendUrl( ) throws Exception {
+
+        HttpClient httpClient = new DefaultHttpClient();
+        HttpPost method = new HttpPost("http://localhost:8080/getNewsListNewest");
+        method.addHeader("Content-type","application/x-gzip");
+        method.setHeader("Accept", "application/x-gzip");
+        method.setHeader("Content-Encoding", "gzip");
+        method.setEntity(new StringEntity(compress("adfafafa"), Charset.forName("ISO-8859-1")));
+
+        HttpResponse response = httpClient.execute(method);
+
+        int statusCode = response.getStatusLine().getStatusCode();
+
+
+        // Read the response body
+        String body = response.getEntity().toString();
+        System.out.println(body);
+        return body;
+    }
+
+    public static String compress(String str) throws IOException {
+        if (str == null || str.length() == 0) {
+            return str;
+        }
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        GZIPOutputStream gzip = new GZIPOutputStream(out);
+        gzip.write(str.getBytes());
+        gzip.close();
+        return out.toString("ISO-8859-1"); // UTF-8 ISO-8859-1
     }
 
 }

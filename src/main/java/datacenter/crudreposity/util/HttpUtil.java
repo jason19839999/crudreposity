@@ -1,9 +1,16 @@
 package datacenter.crudreposity.util;
 
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import javax.servlet.http.HttpServletRequest;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.zip.InflaterInputStream;
 
 /**
  * @author 605162215@qq.com
@@ -41,4 +48,34 @@ public class HttpUtil {
 			t.start();
 		}
 	}
+
+
+	//处理post请求参数content_type为application/x-gzip的情况
+//	public static  NewsListRequest getReqestData(HttpServletRequest request) throws IOException, ClassNotFoundException {
+//		ObjectMapper objMapper = getJacksonMapper();
+//		NewsListRequest newsListRequest = null;
+//		String errMsg = null;
+//		InputStream is = null;
+//		OutputStream out = null;
+//		boolean clientSupportCompress = false;
+//		String clientIp = "";
+//		try {
+//			is = new InflaterInputStream(request.getInputStream());
+//			clientSupportCompress = true;
+//		} catch (IOException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+//		try {
+//			JavaType beanType = objMapper.getTypeFactory().constructParametricType(NewsListRequest.class,
+//					RequestHeaderWithuuid.class,
+//					NewsListRequestData.class,
+//					RequestHeader.class);
+//			newsListRequest = objMapper.readValue(is, beanType);
+//		}catch (IOException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+//		return  newsListRequest;
+//	}
 }
