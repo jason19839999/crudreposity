@@ -227,8 +227,10 @@ public class girlController {
         HttpClient httpClient = new DefaultHttpClient();
         HttpPost method = new HttpPost("http://localhost:8080/getNewsListNewest");
         method.addHeader("Content-type","application/x-gzip");
-        method.setHeader("Accept", "application/x-gzip");
+        //method.addHeader("Content-type","application/json");
+        method.setHeader("Accept", "application/json");
         method.setHeader("Content-Encoding", "gzip");
+        //method.setHeader("Allow", "GET, POST,HEAD");
         method.setEntity(new StringEntity(compress("adfafafa"), Charset.forName("ISO-8859-1")));
 
         HttpResponse response = httpClient.execute(method);
