@@ -22,4 +22,7 @@ public interface girlInfoRedisDao {
     List<RedisScoreValue> readRedisScoreValue(final String uid);
     void saveHash(String key,String subkey,String subvalue);
     RedisScoreValue readHash (final String uid);
+    void saveStock(String key,int count);
+    Integer readStockCount(final String key);
+
 }

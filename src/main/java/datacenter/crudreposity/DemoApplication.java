@@ -5,14 +5,14 @@ import datacenter.crudreposity.config.MybatisSessionFactory;
 import datacenter.crudreposity.config.SeekConstants;
 import datacenter.crudreposity.config.State;
 import datacenter.crudreposity.dao.mybatis.HKBillsDao;
+import datacenter.crudreposity.dao.redis.girlInfoRedisDao;
 import datacenter.crudreposity.entity.HKBill;
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 
 
 @SpringBootApplication
@@ -26,7 +26,6 @@ public class DemoApplication {
         //springApplication.addListeners(new ApplicationStartup());// Register listener of hbase Connection initialized.
         //springApplication.run(args);
 
-
         double log1p =  Math.log1p(1);
         double log =  Math.log(3);
         double log10 = Math.log10(10000);
@@ -36,8 +35,8 @@ public class DemoApplication {
         args2[1] = SeekConstants.CONF_DIR + "/creeper_service.properties";
         State state = new State(args2);
         MybatisSessionFactory.init(state);
-
         SpringApplication.run(DemoApplication.class, args);
     }
+
 
 }

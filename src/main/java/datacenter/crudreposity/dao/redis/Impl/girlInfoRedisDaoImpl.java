@@ -256,4 +256,37 @@ public class girlInfoRedisDaoImpl implements girlInfoRedisDao {
         });
     }
 
+    @Override
+    public void saveStock(String key,int count) {
+        redisTemplate.execute(new RedisCallback<Object>() {
+            @Override
+            public Object doInRedis(RedisConnection redisConnection)
+                    throws DataAccessException {
+                //设置访问哪个redis实例，默认选择配置的
+                redisConnection.select(12);
+                redisConnection.set(redisTemplate.getStringSerializer().serialize(key), ObjectTranscoder.serialize(count));
+                return null;
+            }
+        });
+
+    }
+
+    @Override
+    public   Integer readStockCount(final String key) {
+        return redisTemplate.execute(new RedisCallback<Integer>() {
+            @Override
+            public Integer doInRedis(RedisConnection redisConnection)
+                    throws DataAccessException {
+                //设置访问哪个redis实例，默认选择配置的
+                redisConnection.select(12);
+                byte[] in = redisConnection.get(redisTemplate.getStringSerializer().serialize(key));
+                if(in==null){
+                    return 0;
+                }
+                return Integer.parseInt(ObjectTranscoder.deserialize(in).toString());
+            }
+        });
+     }
+
+
 }
