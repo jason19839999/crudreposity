@@ -12,8 +12,8 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.redisson.config.SentinelServersConfig;
 
-//import org.redisson.config.SentinelServersConfig;
 
 @Configuration
 @ConditionalOnClass(org.redisson.config.Config.class)
@@ -27,21 +27,21 @@ public class RedissonAutoConfiguration {
      * 哨兵模式自动装配
      * @return
      */
-//    @Bean
-//    @ConditionalOnProperty(name="redisson.master-name")
-//    RedissonClient redissonSentinel() {
-//        Config config = new Config();
-//        SentinelServersConfig serverConfig = config.useSentinelServers().addSentinelAddress(redssionProperties.getSentinelAddresses())
-//                .setMasterName(redssionProperties.getMasterName())
-//                .setTimeout(redssionProperties.getTimeout())
-//                .setMasterConnectionPoolSize(redssionProperties.getMasterConnectionPoolSize())
-//                .setSlaveConnectionPoolSize(redssionProperties.getSlaveConnectionPoolSize());
-//        
-//        if(StringUtils.isNotBlank(redssionProperties.getPassword())) {
-//            serverConfig.setPassword(redssionProperties.getPassword());
-//        }
-//        return Redisson.create(config);
-//    }
+    @Bean
+    @ConditionalOnProperty(name="redisson.master-name")
+    RedissonClient redissonSentinel() {
+        Config config = new Config();
+        SentinelServersConfig serverConfig = config.useSentinelServers().addSentinelAddress(redssionProperties.getSentinelAddresses())
+                .setMasterName(redssionProperties.getMasterName())
+                .setTimeout(redssionProperties.getTimeout())
+                .setMasterConnectionPoolSize(redssionProperties.getMasterConnectionPoolSize())
+                .setSlaveConnectionPoolSize(redssionProperties.getSlaveConnectionPoolSize());
+
+        if(StringUtils.isNotBlank(redssionProperties.getPassword())) {
+            serverConfig.setPassword(redssionProperties.getPassword());
+        }
+        return Redisson.create(config);
+    }
 
     /**
      * 单机模式自动装配
