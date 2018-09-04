@@ -51,6 +51,9 @@ public class girlInfoRedisDaoImpl implements girlInfoRedisDao {
                 //redisConnection.set(redisTemplate.getStringSerializer().serialize(key), ObjectTranscoder.serialize("test2018-08-06 OK? Yes Or No @#@￥@#￥#%"));
                 redisConnection.zAdd(redisTemplate.getStringSerializer().serialize(key),999,redisTemplate.getStringSerializer().serialize("长春"));
 
+                //采用分布式锁
+                //redisConnection.setNX(redisTemplate.getStringSerializer().serialize(key),redisTemplate.getStringSerializer().serialize("长春"));
+
                 return null;
             }
         });
