@@ -268,9 +268,10 @@ public class girlController {
 
     //分布式锁的应用，多台负载，保证数据一致性
     @RequestMapping(value = "/distributted")
-    //@ResponseBody
+    @ResponseBody
     public String distributted() throws InterruptedException {
         String lockKey = "testRedisson";//分布式锁的key
+        //初始化数据
         //objgirlInfoRedisDao.saveStock("StockCount",100);
         //执行的业务代码
         for (int i = 0; i < 55; i++) {
