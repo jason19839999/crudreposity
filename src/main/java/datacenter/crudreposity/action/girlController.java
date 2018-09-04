@@ -78,7 +78,6 @@ public class girlController {
     @Autowired
     private UserServiceMongodbImpl userServiceMongodbImpl;
 
-
     @RequestMapping(value = "/getGirlInfo", method = RequestMethod.GET)
     public ResponseEntity<girlInfoListResponse> getNewsList() {
 
@@ -264,7 +263,6 @@ public class girlController {
         gzip.close();
         return out.toString("ISO-8859-1"); // UTF-8 ISO-8859-1
     }
-
 
     //分布式锁的应用，多台负载，保证数据一致性
     @RequestMapping(value = "/distributted")
