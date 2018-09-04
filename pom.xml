@@ -245,6 +245,25 @@
             <artifactId>spring-boot-starter-websocket</artifactId>
         </dependency>
 
+
+        <!-- Redisson 实现分布式锁 -->
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson</artifactId>
+            <version>2.11.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.7</version>
+        </dependency>
+        <!--kafka 支持-->
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+            <version>1.3.5.RELEASE</version><!--$NO-MVN-MAN-VER$-->
+        </dependency>
+
     </dependencies>
 
     <build>
