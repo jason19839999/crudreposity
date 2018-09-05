@@ -17,7 +17,7 @@ public class WebSocketServer {
     //静态变量，用来记录当前在线连接数。应该把它设计成线程安全的。
     private static int onlineCount = 0;
     //concurrent包的线程安全Set，用来存放每个客户端对应的MyWebSocket对象。
-    private static CopyOnWriteArraySet<WebSocketServer> webSocketSet = new CopyOnWriteArraySet<WebSocketServer>();
+    public static CopyOnWriteArraySet<WebSocketServer> webSocketSet = new CopyOnWriteArraySet<WebSocketServer>();
     private  static WebSocketServer instance;
 
     public synchronized static WebSocketServer getInstance(){
@@ -31,9 +31,9 @@ public class WebSocketServer {
     private Session session;
 
     //接收userId
-    private int userId=0;
+    public int userId=0;
     //接收商品Id
-    private int goodsId=0;
+    public int goodsId=0;
     /**
      * 连接建立成功调用的方法*/
     @OnOpen

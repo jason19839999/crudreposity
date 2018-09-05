@@ -44,14 +44,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 import java.util.zip.GZIPOutputStream;
 import org.redisson.RedissonMultiLock;
 import org.redisson.RedissonRedLock;
 import org.redisson.api.RLock;
 
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.ArrayList;
 
@@ -284,4 +282,17 @@ public class girlController {
         }
         return "Success";
     }
+
+    @RequestMapping(value = "/getConectors")
+    @ResponseBody
+    public String getConectors() throws InterruptedException {
+
+        String result = "";
+        CopyOnWriteArraySet<WebSocketServer> list=  WebSocketServer.webSocketSet;
+        for (WebSocketServer item : list) {
+                result += "userId: " + item.userId + "  goodsId: " + item.goodsId + "<br>";
+            }
+            return result;
+        }
+
 }
