@@ -270,7 +270,7 @@ public class girlController {
     public String distributted() throws InterruptedException {
         String lockKey = "testRedisson";//分布式锁的key
         //初始化数据
-        //objgirlInfoRedisDao.saveStock("StockCount",100);
+        objgirlInfoRedisDao.saveStock("StockCount",100);
         //执行的业务代码
         for (int i = 0; i < 55; i++) {
             RLock lock = RedissLockUtil.lock(lockKey,60);

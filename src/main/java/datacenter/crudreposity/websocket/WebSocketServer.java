@@ -67,16 +67,21 @@ public class WebSocketServer {
     @OnMessage
     public void onMessage(String message, Session session) throws IOException {
         log.info("收到来自窗口"+userId+"的信息:"+message);
-        //群发消息
-//        for (WebSocketServer item : webSocketSet) {
-//            try {
-//                item.sendMessage(message);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
+
         //处理用户发过来的消息，再给用户发回去，这里面是心跳应用
-        this.session.getBasicRemote().sendText(message);
+        if(message.equals("HeartBeat")) {
+
+            this.session.getBasicRemote().sendText(message);
+        }else{
+            //群发消息
+            for (WebSocketServer item : webSocketSet) {
+                try {
+                    item.sendMessage(message);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
         //WebSocketServer.instance.sendMessage(message);
     }
 
