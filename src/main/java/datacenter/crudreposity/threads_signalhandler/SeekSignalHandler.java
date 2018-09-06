@@ -17,7 +17,7 @@ import org.apache.thrift.server.TServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@SuppressWarnings("restriction")
+@SuppressWarnings("restriction")           //多线程处理的地方通过判断SeekSignalHandler.stop来决定是否继续执行   while(!SeekSignalHandler.stop){处理业务逻辑。。。}
 public class SeekSignalHandler implements SignalHandler {
 	final static Logger logger = LoggerFactory
 			.getLogger(SeekSignalHandler.class);
