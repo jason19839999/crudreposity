@@ -1,9 +1,15 @@
 package datacenter.crudreposity.threads_signalhandler;
 
+import org.apache.thrift.protocol.TBinaryProtocol;
+import org.apache.thrift.server.TThreadPoolServer;
+import org.apache.thrift.transport.TServerSocket;
+import org.apache.thrift.transport.TServerTransport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sun.misc.Signal;
 import sun.misc.SignalHandler;
+
+import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -80,6 +86,31 @@ public class SeekSignalHandler implements SignalHandler {
 	}
 
 	public static void main(String[] args) throws InterruptedException {
+		try {
+			int port = 9888;
+			int minWorkerThreads = 5;
+			int maxWorkerThreads = Integer.MAX_VALUE;
+			CreeperService.Processor<CreeperServiceHandler> processor = new CreeperService.Processor<CreeperServiceHandler>(
+					new CreeperServiceHandler());
+			TServerTransport transport;
+			transport = new TServerSocket(port);
+			TBinaryProtocol.Factory portFactory = new TBinaryProtocol.Factory(true, true);
+			TThreadPoolServer.Args argsPool = new TThreadPoolServer.Args(transport);
+			//config thrift server Args
+			argsPool.processor(processor);
+			argsPool.protocolFactory(portFactory);
+			argsPool.maxWorkerThreads(maxWorkerThreads);
+			argsPool.minWorkerThreads(minWorkerThreads);
+
+			TServer server = new TThreadPoolServer(argsPool);
+			// bind signals
+			new SeekSignalHandler(server).bind();
+			//启动服务
+			server.serve();
+		}catch (Exception ex){
+			ex.printStackTrace();
+		}
+
 		SeekSignalHandler testSignalHandler = new SeekSignalHandler();
 		// install signals
 		// in eclipse you can't see the log after Terminate (the red button)
