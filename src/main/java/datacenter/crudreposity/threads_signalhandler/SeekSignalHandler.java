@@ -101,8 +101,11 @@ public class SeekSignalHandler implements SignalHandler {
 			argsPool.protocolFactory(portFactory);
 			argsPool.maxWorkerThreads(maxWorkerThreads);
 			argsPool.minWorkerThreads(minWorkerThreads);
-
 			TServer server = new TThreadPoolServer(argsPool);
+			//执行业务逻辑
+			//	CreeperMQHandler.init(state);
+			//	CreeperMQHandler.startWorkers();
+
 			// bind signals
 			new SeekSignalHandler(server).bind();
 			logger.info("seek service for creeper is starting. Listening to port " + port);
@@ -111,6 +114,8 @@ public class SeekSignalHandler implements SignalHandler {
 			ex.printStackTrace();
 		}
 
+
+		//以下是多线程处理
 		SeekSignalHandler testSignalHandler = new SeekSignalHandler();
 		// install signals
 		// in eclipse you can't see the log after Terminate (the red button)
