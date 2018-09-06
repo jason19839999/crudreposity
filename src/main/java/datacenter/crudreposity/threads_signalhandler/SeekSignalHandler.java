@@ -105,7 +105,7 @@ public class SeekSignalHandler implements SignalHandler {
 			TServer server = new TThreadPoolServer(argsPool);
 			// bind signals
 			new SeekSignalHandler(server).bind();
-			//启动服务
+			logger.info("seek service for creeper is starting. Listening to port " + port);
 			server.serve();
 		}catch (Exception ex){
 			ex.printStackTrace();
