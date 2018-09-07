@@ -103,9 +103,7 @@ public class SeekSignalHandler implements SignalHandler {
 			argsPool.minWorkerThreads(minWorkerThreads);
 			TServer server = new TThreadPoolServer(argsPool);
 			//执行业务逻辑
-			//	CreeperMQHandler.init(state);
-			//	CreeperMQHandler.startWorkers();
-
+			startWorker();
 			// bind signals
 			new SeekSignalHandler(server).bind();
 			logger.info("seek service for creeper is starting. Listening to port " + port);
@@ -113,8 +111,9 @@ public class SeekSignalHandler implements SignalHandler {
 		}catch (Exception ex){
 			ex.printStackTrace();
 		}
+	}
 
-
+	private  static void startWorker() throws InterruptedException {
 		//以下是多线程处理
 		SeekSignalHandler testSignalHandler = new SeekSignalHandler();
 		// install signals
