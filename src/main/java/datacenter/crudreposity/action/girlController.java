@@ -206,7 +206,7 @@ public class girlController {
     @Servicelock
     @ResponseBody
     public Result<String> denglu(HttpServletResponse response,@RequestParam("token") String token) throws Exception {
-        addCookie(response, "token---123456789");
+        addCookie(response, token);
         return Result.success("登录成功");
     }
 
