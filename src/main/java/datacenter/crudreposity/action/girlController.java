@@ -35,6 +35,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.ByteArrayOutputStream;
@@ -175,6 +176,7 @@ public class girlController {
     //@AccessLimit(seconds = 30)    //接口下流注入 比如：每分钟只能请求60次。思路：每次请求count放入redis,然后设置redis过期时间为1分钟，判断一分钟内不能超过60次。一分钟后过期重新计算
     @Servicelock   //实现分布式锁功能，主要采用了Lock,reentrantLock(true) 公平锁
     @RequestMapping(value = "/getAccess", method = RequestMethod.GET)
+    @ResponseBody
     public Result<User> getAccess(User user, RedisScoreValue redisScoreValue, @RequestParam("token") String token) throws Exception {
         //业务逻辑处理都可以用GlobalException处理，
         // 直接 throw new GlobalException(CodeMsg.SESSION_ERROR)即可，直接返回给前端或者客户端错误信息
@@ -196,9 +198,18 @@ public class girlController {
     public Result<String> logIn(HttpServletResponse response,  //下面要注意，先获取值，再加@Valid
                                 @Valid @RequestBody UserLogin loginVo) throws Exception {
         UserLogin obj = loginVo;
-        addCookie(response, "123456789");
+        addCookie(response, "token---123456789");
         return Result.success("登录成功");
     }
+
+    @RequestMapping(value = "/denglu")
+    @Servicelock
+    @ResponseBody
+    public Result<String> denglu(HttpServletResponse response,@RequestParam("token") String token) throws Exception {
+        addCookie(response, "token---123456789");
+        return Result.success("登录成功");
+    }
+
 
     //利用@Valid注解，对传入参数进行校验 ，使用的是这个  <artifactId>spring-boot-starter-validation</artifactId>，现在已经成为了标准。
     @RequestMapping(value = "/connectionSocket")
