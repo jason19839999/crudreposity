@@ -27,7 +27,9 @@ public class AccessInterceptor  extends HandlerInterceptorAdapter{
         if(handler instanceof HandlerMethod) {
             //获取接口传过来的token值，
             String token = request.getParameter("token");
+            //获取用户信息，主要从cookie和redis获取
             //获取cookie值,注意：这个是用户登录的时候保存的cookie值
+            // 或者读取redis的session值，由于接口过来的保存不了cookie,所有这里必须用分布式session处理
             String cookie= getCookieValue(request,"token");
             //用户合法性判断
             if(token == null || cookie == null){
