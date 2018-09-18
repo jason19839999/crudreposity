@@ -130,6 +130,7 @@ public class girlController {
     }
 
     @RequestMapping(value = "/getMybatis", method = RequestMethod.GET)
+    @ResponseBody
     public String getMybatis() throws Exception {
 
         //创建mybatis连接  她所用的配置文件为creeper_service.properties，mybatis-setting.xml

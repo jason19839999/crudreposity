@@ -2,9 +2,11 @@ package datacenter.crudreposity.filters;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import datacenter.crudreposity.config.ServingSettings;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -19,6 +21,9 @@ public class TokenFilter extends OncePerRequestFilter {
 
     private static final String KEY_CODE_PRE_CONFUSION = "BeijingMiningTechnology";
     private static final String KEY_CODE_END_CONFUSION = "ZunjiaStock";
+
+    @Autowired
+    private ServingSettings servingSettings;
 
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {

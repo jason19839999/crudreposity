@@ -47,7 +47,7 @@ public class DemoApplication {
     @Bean
     public FilterRegistrationBean tokenFilter(){
         TokenFilter filter =  tokenFilterobj();  //这样做的目的是为了能在TokenFilter使用@Autowire。要不然注入为null....
-        String [] arras = {"/getCurrentNews","/getNewsListNewest","/getSubscribeTagNew","/saveUserSubscribeColumnsTag","/getHotNews","/saveViewPointAciton"};
+        String [] arras = {"/distributted","/getTest"};
         return filtersGen(filter, Arrays.asList(arras),null, "tokenFilter", 1);
     }
     @Bean
