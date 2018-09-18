@@ -30,16 +30,27 @@ import java.util.Map;
 public class DemoApplication {
 
 
+    /** Filters */
+    @Bean
+    public TokenFilter tokenFilterobj(){
+        return new TokenFilter();
+    }
+
+    @Bean
+    public VersionFilter versionFilterobj(){
+        return new VersionFilter();
+    }
+
     //指定过滤某个接口
     @Bean
     public FilterRegistrationBean tokenFilter(){
-        TokenFilter filter =  new TokenFilter();
+        TokenFilter filter =  tokenFilterobj();  //这样做的目的是为了能在TokenFilter使用@Autowire。要不然注入为null....
         String [] arras = {"/getCurrentNews","/getNewsListNewest","/getSubscribeTagNew","/saveUserSubscribeColumnsTag","/getHotNews","/saveViewPointAciton"};
         return filtersGen(filter, Arrays.asList(arras),null, "tokenFilter", 1);
     }
     @Bean
     public FilterRegistrationBean versionFilter(){
-        VersionFilter filter =  new VersionFilter();
+        VersionFilter filter =  versionFilterobj();  //这样做的目的是为了能在TokenFilter使用@Autowire。要不然注入为null....
         return filtersGen(filter, Arrays.asList("/getAppChannel"),null, "versionFilter", 1);
     }
 
