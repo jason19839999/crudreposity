@@ -29,6 +29,8 @@ import java.util.Map;
 @Service
 public class DemoApplication {
 
+    //注意：除了Controller和Service层，其他地方如果通过@Autowire引用其他类的实例的时候
+    //需要在这里注入一下，就可以通过@Autowire了。
 
     /** Filters */
     @Bean
