@@ -34,13 +34,13 @@ public class TokenFilter extends OncePerRequestFilter {
             String keyCode = jsonObject.getJSONObject("header").getString("key_code");
             String targetUri = uri;
 
-//            if (CacheCommandLineRunner.URIS.contains(targetUri) && keyCodeValid(imei,keyCode)) {
-//                requestWrapper.getRequestDispatcher(targetUri).forward(requestWrapper, httpServletResponse);
-//            }
-//            else {
-//                targetUri = "/NoAuthority";
-//                requestWrapper.getRequestDispatcher(targetUri).forward(requestWrapper, httpServletResponse);
-//           }
+            if (keyCodeValid(imei,keyCode)) {
+                requestWrapper.getRequestDispatcher(targetUri).forward(requestWrapper, httpServletResponse);
+            }
+            else {
+                targetUri = "/NoAuthority";
+                requestWrapper.getRequestDispatcher(targetUri).forward(requestWrapper, httpServletResponse);
+           }
 
         } catch (Exception ex) {
             logger.info(ex.getMessage());
