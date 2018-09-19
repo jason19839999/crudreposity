@@ -1,6 +1,6 @@
 package datacenter.crudreposity.factorymode_abstract;
 /**
- * ����ϵ�мӹ���
+ * 创建新年人工厂
  * @author Administrator
  *
  */

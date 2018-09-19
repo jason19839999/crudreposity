@@ -1,10 +1,10 @@
 package datacenter.crudreposity.factorymode_abstract;
 /**
- * ʥ��ϵ�мӹ���
+ * 创建圣诞人工厂
  * @author Administrator
  *
  */
-public class MCFctory implements PersonFactory {
+public class MCFactory implements PersonFactory {
 
 	@Override
 	public Boy getBoy() {
