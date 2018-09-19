@@ -283,7 +283,8 @@ public class girlController {
         objgirlInfoRedisDao.saveStock("StockCount",100);
         //执行的业务代码
         for (int i = 0; i < 55; i++) {
-            RLock lock = RedissLockUtil.lock(lockKey,60);
+            //设置锁的过期时间
+            RLock lock = RedissLockUtil.lock(lockKey,TimeUnit.MILLISECONDS,50);
             int stock = objgirlInfoRedisDao.readStockCount("StockCount");
             if (stock > 0) {
                 objgirlInfoRedisDao.saveStock("StockCount",stock - 1);
