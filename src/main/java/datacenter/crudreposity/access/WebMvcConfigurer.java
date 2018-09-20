@@ -5,9 +5,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import java.util.List;
+//WebMvcConfigurerAdapter 在高版本替换方案
+//方案一： extends WebMvcConfigurationSupport
+//方案二：implements WebMvcConfigurer
 
 @Configuration
 public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
