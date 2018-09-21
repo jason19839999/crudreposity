@@ -1,0 +1,35 @@
+common:
+ hbase_conf_dir: src/main/resources/hbase/hbase-site-test.xml
+ proxy_host: http://127.0.0.1:8080
+ stock_host: http://192.168.2.218:8080
+ client_proxy: false
+ k_url_patern: "http://hqpick.eastmoney.com|http://hqgnqhpic.eastmoney.com|
+  http://hqpicr.eastmoney.com|http://image.sinajs.cn|http://chart.jrjimg.cn/|http://hqzwpic.eastmoney.com/|image_sinajs_cn_newchart_png_min_"
+mysql:
+ driver: com.mysql.jdbc.Driver
+ master:
+   url: jdbc:mysql://192.168.2.231:3306/app_data?useUnicode=true&amp;characterEncoding=utf8"
+   username: root
+   password: zunjiazichan123
+ replica1:
+   url: jdbc:mysql://192.168.2.231:3306/app_data?useUnicode=true&amp;characterEncoding=utf8"
+   username: root
+   password: zunjiazichan123
+mysql2:
+  driver: com.mysql.jdbc.Driver
+  url: jdbc:mysql://192.168.2.218:3306/miningstock?autoReconnect=true&useUnicode=true&amp;characterEncoding=utf8"
+  username: root
+  password: stock99admin81
+redis:
+  ip: 192.168.2.232
+  port: 6379
+  database: 12
+  pool_max_active: 1024
+  pool_max_idle: 200
+  pool_max_wait_time: 1000
+  pool_test_on_borrow: true
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017
+      database: test
