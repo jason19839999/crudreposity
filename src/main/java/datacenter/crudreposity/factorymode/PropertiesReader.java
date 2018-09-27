@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * properties�ļ��Ķ�ȡ����
+ * 读取配置
  * @author Administrator
  *
  */

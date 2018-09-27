@@ -3,14 +3,14 @@ package datacenter.crudreposity.factorymode;
 import java.util.Map;
 
 /**
- * ���͹���
+ *
  * @author Administrator
  *
  */
 public class HairFactory {
 
 	/**
-	 * ������������������
+	 * 通过关键字创建对象
 	 * @param key
 	 * @return
 	 */
@@ -23,7 +23,7 @@ public class HairFactory {
 		return null;
 	}
 	/**
-	 * ���������������������
+	 * 通过类名创建对象
 	 * @param className
 	 * @return
 	 */
@@ -47,7 +47,7 @@ public class HairFactory {
 	
 	
 	/**
-	 * ���������������������
+	 * 通过配置创建对象
 	 * @param className
 	 * @return
 	 */

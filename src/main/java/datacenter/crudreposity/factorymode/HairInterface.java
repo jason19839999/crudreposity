@@ -1,6 +1,6 @@
 package datacenter.crudreposity.factorymode;
 /**
- * ���ͽӿ�
+ * 创建接口
  * @author Administrator
  *
  */
