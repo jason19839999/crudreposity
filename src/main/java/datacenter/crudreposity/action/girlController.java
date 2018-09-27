@@ -159,6 +159,7 @@ public class girlController {
     }
 
     @RequestMapping(value = "/getMongodb", method = RequestMethod.GET)
+    @ResponseBody  //返回strng或者json
     public String getMongodb() throws Exception {
         User objUser = new User();
         objUser.setId(1);
