@@ -27,5 +27,14 @@ public class SunnyTest {
 		PersonFactory facoty = new HNFactory();
 		Boy boy =  facoty.getBoy();
 		boy.drawMan();
+		Girl girl = facoty.getGirl();
+		girl.drawWomen();
+
+		PersonFactory facotyMC = new MCFactory();
+		Boy boyMC = facotyMC.getBoy();
+		boyMC.drawMan();
+		Girl girlMC = facotyMC.getGirl();
+		girlMC.drawWomen();
+
 	}
 }
