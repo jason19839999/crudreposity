@@ -10,7 +10,7 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import java.io.IOException;
 
 /**
- * Created by qingtao.kong on 2015/2/6.
+ *
  */
 public class ApplicationStartup implements ApplicationListener<ContextRefreshedEvent> {
     private static final Logger logger = LoggerFactory.getLogger(ApplicationStartup.class);
