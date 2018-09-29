@@ -1,5 +1,8 @@
 package datacenter.crudreposity.filters;
 
+import org.springframework.amqp.core.AmqpTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.servlet.ReadListener;
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +15,8 @@ import java.io.*;
 public class ServingRequestWrapper extends HttpServletRequestWrapper {
     private final String body;
 
+    @Autowired
+    AmqpTemplate amqpTemplate ;
 
     public ServingRequestWrapper(HttpServletRequest request) throws IOException {
         super(request);
