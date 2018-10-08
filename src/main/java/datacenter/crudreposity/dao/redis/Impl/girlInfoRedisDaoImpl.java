@@ -1,5 +1,6 @@
 package datacenter.crudreposity.dao.redis.Impl;
 
+import com.alibaba.fastjson.JSON;
 import datacenter.crudreposity.dao.redis.girlInfoRedisDao;
 import datacenter.crudreposity.entity.RedisScoreValue;
 import datacenter.crudreposity.util.ObjectTranscoder;
@@ -16,6 +17,7 @@ import org.springframework.data.redis.connection.RedisStringCommands;
 import org.springframework.data.redis.connection.RedisZSetCommands;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.types.Expiration;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +31,9 @@ import org.springframework.stereotype.Service;
 public class girlInfoRedisDaoImpl implements girlInfoRedisDao {
     @Autowired
     private RedisTemplate<Serializable, Serializable> redisTemplate;
+
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
 
     //说明 util里面的ObjectTranscoder，负责序列化value和反序列化value,他序列化的可以是Object,其中Object可以是List<Object>,
     //String等等类型的value,
@@ -289,4 +294,59 @@ public class girlInfoRedisDaoImpl implements girlInfoRedisDao {
      }
 
 
+    /**
+     * StringRedisTemplate  访问redis
+     * @param key
+     * @return
+     */
+    @Override
+    public Integer readStockCountByStringRedisTemplate(final String key){
+       int result =stringToBean(stringRedisTemplate.opsForValue().get(key), Integer.class) ;
+       return  result;
+    }
+
+    /**
+     * 实体转 json -String
+     * @param value
+     * @param <T>
+     * @return
+     */
+    public static <T> String beanToString(T value) {
+        if(value == null) {
+            return null;
+        }
+        Class<?> clazz = value.getClass();
+        if(clazz == int.class || clazz == Integer.class) {
+            return ""+value;
+        }else if(clazz == String.class) {
+            return (String)value;
+        }else if(clazz == long.class || clazz == Long.class) {
+            return ""+value;
+        }else {
+            return JSON.toJSONString(value);
+        }
+    }
+
+    /**
+     * string 转 实体
+     * @param
+     * @param clazz
+     * @param <T>
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    public static <T> T stringToBean(String str, Class<T> clazz) {
+        if(str == null || str.length() <= 0 || clazz == null) {
+            return null;
+        }
+        if(clazz == int.class || clazz == Integer.class) {
+            return (T)Integer.valueOf(str);
+        }else if(clazz == String.class) {
+            return (T)str;
+        }else if(clazz == long.class || clazz == Long.class) {
+            return  (T)Long.valueOf(str);
+        }else {
+            return JSON.toJavaObject(JSON.parseObject(str), clazz);
+        }
+    }
 }

@@ -24,5 +24,5 @@ public interface girlInfoRedisDao {
     RedisScoreValue readHash (final String uid);
     void saveStock(String key,int count);
     Integer readStockCount(final String key);
-
+    Integer readStockCountByStringRedisTemplate(final String key);
 }
