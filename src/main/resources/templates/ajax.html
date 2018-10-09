@@ -27,6 +27,10 @@
                contentType: "application/json",
                data: JSON.stringify(data_res),
                dataType: "json",
+               beforeSend: function(request) {
+                   // 对应后台的获取header→httpServletRequest.getHeader("X-Requested-Width")  前台需要如下设置：
+                   request.setRequestHeader("X-Requested-Width", "XMLHttpRequest");
+                 },
                success: function (data) {
                    if (data.code == 0) {
                        alert(data.msg);
@@ -34,7 +38,8 @@
                        alert(data.msg);
                    }
                }
-           })
+
+          })
        }
    </script>
 </body>

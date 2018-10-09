@@ -15,7 +15,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
+
     @ExceptionHandler(value=Exception.class)
+    @ResponseBody
     public Object exceptionHandler(HttpServletRequest request, Exception e){
         e.printStackTrace();
 
