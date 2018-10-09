@@ -177,16 +177,16 @@ public class girlController {
 
     //@AccessLimit(seconds = 30)    //接口下流注入 比如：每分钟只能请求60次。思路：每次请求count放入redis,然后设置redis过期时间为1分钟，判断一分钟内不能超过60次。一分钟后过期重新计算
     @Servicelock   //实现分布式锁功能，主要采用了Lock,reentrantLock(true) 公平锁
-    @RequestMapping(value = "/getAccess", method = RequestMethod.GET)
+    @RequestMapping(value = "/getAccess", method = RequestMethod.POST)
     @ResponseBody
-    public Result<User> getAccess(User user, RedisScoreValue redisScoreValue, @RequestParam("token") String token) throws Exception {
+    public Result<User> getAccess(User user, RedisScoreValue redisScoreValue, @RequestBody String token) throws Exception {
         //业务逻辑处理都可以用GlobalException处理，
         // 直接 throw new GlobalException(CodeMsg.SESSION_ERROR)即可，直接返回给前端或者客户端错误信息
         //拦截器里面也可以使用此方法
         if (user != null && redisScoreValue != null) {
             user.setAge(28);
         } else {
-            throw new GlobalException(CodeMsg.MOBILE_ERROR);
+            throw new GlobalException(CodeMsg.SESSION_ERROR);
             //return "登录超时了";
         }
         return Result.success(user);
@@ -309,4 +309,9 @@ public class girlController {
             return result;
         }
 
+    @RequestMapping(value = "/ajax")
+    public String ajax() {
+
+        return "ajax";
+    }
 }

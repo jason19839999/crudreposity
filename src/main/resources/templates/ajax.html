@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Title</title>
+</head>
+<body>
+
+   <div>
+
+       <input id="sendMsg" type="button" onclick="return sendMsg()" value="ajax请求" ></input>
+
+   </div>
+
+
+   <script src="/js/jquery.min.js" type="text/javascript"></script>
+
+   <script>
+       function sendMsg(){
+
+           var data_res = {
+               token:"aaaaaa"
+           };
+           $.ajax({
+               type: "POST",
+               url: "/getAccess",
+               contentType: "application/json",
+               data: JSON.stringify(data_res),
+               dataType: "json",
+               success: function (data) {
+                   if (data.code == 0) {
+                       alert(data.msg);
+                   } else {
+                       alert(data.msg);
+                   }
+               }
+           })
+       }
+   </script>
+</body>
+</html>

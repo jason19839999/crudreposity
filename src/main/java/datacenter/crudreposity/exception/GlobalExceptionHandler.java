@@ -11,35 +11,65 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 @ControllerAdvice
-@ResponseBody
 public class GlobalExceptionHandler {
     @ExceptionHandler(value=Exception.class)
-    public Result<String> exceptionHandler(HttpServletRequest request, Exception e){
+    public Object exceptionHandler(HttpServletRequest request, Exception e){
         e.printStackTrace();
-        if(e instanceof GlobalException) {
-            GlobalException ex = (GlobalException)e;
-            return Result.error(ex.getCm());
-        }else if(e instanceof BindException) {
-            BindException ex = (BindException)e;
-            List<ObjectError> errors = ex.getAllErrors();
-            ObjectError error = errors.get(1);  //手机号码格式错误 :获取@interface IsMobile里面的信息
-            String msg = error.getDefaultMessage();
-            return Result.error(CodeMsg.BIND_ERROR.fillArgs(msg));
-        }else if(e instanceof MethodArgumentNotValidException) {
-            MethodArgumentNotValidException ex = (MethodArgumentNotValidException)e;
-            List<ObjectError> errors =ex.getBindingResult().getAllErrors();
-            ObjectError error;
-            if(errors.size() > 0){
-                 error = errors.get(0);  //手机号码格式错误 :获取@interface IsMobile里面的信息
+
+        //如果异常存在ajax请求和web端页面的，加个是否是ajax请求即可。代码如下类：
+        if(isAjax(request)){
+            if(e instanceof GlobalException) {
+                GlobalException ex = (GlobalException)e;
+                return Result.error(ex.getCm());
             }else{
-                error = new ObjectError("","未知错误！");
+                return Result.error(CodeMsg.SERVER_ERROR);
             }
-            String msg = error.getDefaultMessage();
-            return Result.error(CodeMsg.BIND_ERROR.fillArgs(msg));
-        }else {
-            return Result.error(CodeMsg.SERVER_ERROR);
+        }else{
+            if(e instanceof GlobalException) {
+                GlobalException ex = (GlobalException)e;
+                ModelAndView mv = new ModelAndView();
+                mv.addObject("exception",ex.getCm().getMsg());
+                mv.addObject("url",request.getRequestURI());
+                mv.setViewName("error");
+                return mv;
+            }else{
+                ModelAndView mv = new ModelAndView();
+                mv.addObject("exception","服务端异常");
+                mv.addObject("url",request.getRequestURI());
+                mv.setViewName("error");
+                return mv;
+            }
         }
+//        if(e instanceof GlobalException) {
+//            GlobalException ex = (GlobalException)e;
+//            return Result.error(ex.getCm());
+//        }else if(e instanceof BindException) {
+//            BindException ex = (BindException)e;
+//            List<ObjectError> errors = ex.getAllErrors();
+//            ObjectError error = errors.get(1);  //手机号码格式错误 :获取@interface IsMobile里面的信息
+//            String msg = error.getDefaultMessage();
+//            return Result.error(CodeMsg.BIND_ERROR.fillArgs(msg));
+//        }else if(e instanceof MethodArgumentNotValidException) {
+//            MethodArgumentNotValidException ex = (MethodArgumentNotValidException)e;
+//            List<ObjectError> errors =ex.getBindingResult().getAllErrors();
+//            ObjectError error;
+//            if(errors.size() > 0){
+//                 error = errors.get(0);  //手机号码格式错误 :获取@interface IsMobile里面的信息
+//            }else{
+//                error = new ObjectError("","未知错误！");
+//            }
+//            String msg = error.getDefaultMessage();
+//            return Result.error(CodeMsg.BIND_ERROR.fillArgs(msg));
+//        }else {
+//            return Result.error(CodeMsg.SERVER_ERROR);
+//        }
+    }
+
+    private static boolean isAjax(HttpServletRequest httpServletRequest){
+        return httpServletRequest.getHeader("X-Requested-Width")!= null &&
+                "XMLHttpRequest".equals(httpServletRequest.getHeader("X-Requested-Width").toString());
     }
 }
