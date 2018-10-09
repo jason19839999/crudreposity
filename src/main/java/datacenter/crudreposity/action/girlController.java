@@ -80,14 +80,15 @@ public class girlController {
     @RequestMapping(value = "/getGirlInfo", method = RequestMethod.GET)
     public ResponseEntity<girlInfoListResponse> getNewsList() {
 
+        throw new GlobalException(CodeMsg.MOBILE_NOT_EXIST);
         //测试msql这个连接是否通了。这里面包含了读写分离
-        List<Girlnfo> lst = objgirlInfoDealService.getAllGirls();
-        //girlInfoListResponse obj = new girlInfoListResponse(lst);
-        girlInfoListResponse obj = new girlInfoListResponse();
-        obj.setKey("小雪老婆好呀");
-        obj.setResponse_data(lst);
-
-        return new ResponseEntity<girlInfoListResponse>(obj, HttpStatus.OK);
+//        List<Girlnfo> lst = objgirlInfoDealService.getAllGirls();
+//        //girlInfoListResponse obj = new girlInfoListResponse(lst);
+//        girlInfoListResponse obj = new girlInfoListResponse();
+//        obj.setKey("小雪老婆好呀");
+//        obj.setResponse_data(lst);
+//
+//        return new ResponseEntity<girlInfoListResponse>(obj, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/getRedis", method = RequestMethod.GET)
