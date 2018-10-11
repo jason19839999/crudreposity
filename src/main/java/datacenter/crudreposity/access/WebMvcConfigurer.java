@@ -39,8 +39,12 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
         //registry.addInterceptor(accessInterceptor).excludePathPatterns("/logIn","/NoAuthority","/connectionSocket","/sendWebsocketMsg","/sendUrl","/distributted","/getConectors","/denglu","/ajax");
         //addPathPatterns("/**")对所有请求都拦截，但是排除了/toLogin和/login请求的拦截
         //registry.addInterceptor(accessInterceptor).addPathPatterns("/**").excludePathPatterns("/toLogin","/login");
+
         //测试 处理公共异常用 包含ajax请求和web端请求
-        registry.addInterceptor(accessInterceptor).addPathPatterns("/getAccess","/getGirlInfo");
+        //存在一个问题，页面请求：在拦截和页面controller，公共异常类都能捕捉到，
+        //但是ajax请求：在controller里面throw异常，公共异常类捕捉不到，但是拦截里面抛出异常能捕捉到。
+       //registry.addInterceptor(accessInterceptor).addPathPatterns("/getAccess","/getGirlInfo");
+        registry.addInterceptor(accessInterceptor).addPathPatterns("/getAccess","/");
     }
 
     @Override
