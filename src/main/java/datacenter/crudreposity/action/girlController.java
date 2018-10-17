@@ -236,6 +236,8 @@ public class girlController {
     @ResponseBody
     public Result<String> sendWebsocketMsg() throws Exception {
         //如果不指定userId就全部用户都发送
+        //这里的message和string相互转化.参照:    /datacenter/crudreposity/dao/redis/Impl/girlInfoRedisDaoImpl.java的beanToString，stringToBean
+        //或者list<>和string相互转化也可以参照：/datacenter/crudreposity/util/JsonUtils.java
         WebSocketServer.sendInfo("hello,jason", 0, 0);//推送给前台
         return Result.success("发送成功");
 
