@@ -6,9 +6,11 @@ import datacenter.crudreposity.config.SeekConstants;
 import datacenter.crudreposity.config.State;
 import datacenter.crudreposity.dao.mybatis.HKBillsDao;
 import datacenter.crudreposity.dao.redis.girlInfoRedisDao;
+import datacenter.crudreposity.entity.Girlnfo;
 import datacenter.crudreposity.entity.HKBill;
 import datacenter.crudreposity.filters.TokenFilter;
 import datacenter.crudreposity.filters.VersionFilter;
+import datacenter.crudreposity.util.JsonUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -19,6 +21,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.Filter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -84,6 +87,23 @@ public class DemoApplication {
         //SpringApplication springApplication = new SpringApplication(DemoApplication.class);
         //springApplication.addListeners(new ApplicationStartup());// Register listener of hbase Connection initialized.
         //springApplication.run(args);
+
+        Girlnfo obj = new Girlnfo();
+        obj.setAge(18);
+        obj.setId(1);
+        obj.setCup_size("D");
+        Girlnfo obj2 = new Girlnfo();
+        obj2.setAge(19);
+        obj2.setId(2);
+        obj2.setCup_size("F");
+        List<Girlnfo> lst = new ArrayList<Girlnfo>();
+        lst.add(obj);
+        lst.add(obj2);
+        String girlString = JsonUtils.objectToJson(obj);
+        Girlnfo obj3 = JsonUtils.jsonToPojo(girlString,Girlnfo.class);
+
+        String girlString2 = JsonUtils.objectToJson(lst);
+        List<Girlnfo> lst2 = JsonUtils.jsonToList(girlString2,Girlnfo.class);
 
         double log1p =  Math.log1p(1);
         double log =  Math.log(3);
