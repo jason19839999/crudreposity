@@ -86,7 +86,7 @@
                 $("#result").text("恭喜您，已经连接成功了！");
                 $("#message").text(message);
                 //如果获取到消息，心跳检测重置
-                heartCheck.reset().start();
+                //heartCheck.reset().start();
                 //alert(message)//判断秒杀是否成功、自行写逻辑
             };
 
