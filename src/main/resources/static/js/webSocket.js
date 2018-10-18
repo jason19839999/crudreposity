@@ -3,6 +3,33 @@
 		//userId：自行追加
 		var userId = 10;
 		var goodsId = 1001;
+
+        //心跳检测,每20s心跳一次
+        var heartCheck = {
+            timeout: 5000,
+            timeoutObj: null,
+            serverTimeoutObj: null,
+            reset: function(){
+                clearTimeout(this.timeoutObj);
+                clearTimeout(this.serverTimeoutObj);
+                return this;
+            },
+            start: function(){
+                var self = this;
+                this.timeoutObj = setTimeout(function(){
+                    //这里发送一个心跳，后端收到后，返回一个心跳消息，
+                    //onmessage拿到返回的心跳就说明连接正常
+                    webSocket.send("HeartBeat");
+                    console.info("客户端发送心跳：");
+                    self.serverTimeoutObj = setTimeout(function(){//如果超过一定时间还没重置，说明后端主动断开了
+                        webSocket.close();//如果onclose会执行reconnect，我们执行ws.close()就行了.如果直接执行reconnect 会触发onclose导致重连两次
+                        console.info("已经断了");
+                        connectSocket();
+                    }, self.timeout)
+                }, this.timeout)
+            }
+        }
+
         connectSocket();
 
         //监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
@@ -21,32 +48,11 @@
             webSocket.send(message);
         }
 
-        //心跳检测,每20s心跳一次
-        var heartCheck = {
-            timeout: 1000,
-            timeoutObj: null,
-            serverTimeoutObj: null,
-            reset: function(){
-                clearTimeout(this.timeoutObj);
-                clearTimeout(this.serverTimeoutObj);
-                return this;
-            },
-            start: function(){
-                var self = this;
-                this.timeoutObj = setTimeout(function(){
-                    //这里发送一个心跳，后端收到后，返回一个心跳消息，
-                    //onmessage拿到返回的心跳就说明连接正常
-                    webSocket.send("HeartBeat");
-                    console.info("客户端发送心跳：");
-                    self.serverTimeoutObj = setTimeout(function(){//如果超过一定时间还没重置，说明后端主动断开了
-                        webSocket.close();//如果onclose会执行reconnect，我们执行ws.close()就行了.如果直接执行reconnect 会触发onclose导致重连两次
-                        connectSocket();
-                    }, self.timeout)
-                }, this.timeout)
-            }
-        }
-
         function connectSocket() {
+
+            //每次连接要重置心跳，这样保证服务端挂了还能继续轮询，保证客户端能连上服务端，如果服务端一直挂，那么客户端可以一直坚持心跳发送，一直到服务端恢复正常。
+            heartCheck.reset().start();
+
             //$("#result").text("socket连接中，请稍后...");
             webSocket = "";
             if ('WebSocket' in window) {
