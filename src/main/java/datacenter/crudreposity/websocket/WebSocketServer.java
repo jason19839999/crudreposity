@@ -17,6 +17,18 @@ public class WebSocketServer {
     //静态变量，用来记录当前在线连接数。应该把它设计成线程安全的。
     private static int onlineCount = 0;
     //concurrent包的线程安全Set，用来存放每个客户端对应的MyWebSocket对象。
+    //CopyOnWriteArrayList适合使用在读操作远远大于写操作的场景里，比如缓存。发生修改时候做copy，新老版本分离，保证读的高性能，适用于以读为主的情况。
+//     *      对于CopyOnWriteArraySet<E>类： 
+//             *      1）它最适合于具有以下特征的应用程序：set 大小通常保持很小，只读操作远多于可变操作，需要在遍历期间防止线程间的冲突。  
+//             *      2）它是线程安全的, 底层的实现是CopyOnWriteArrayList；   
+//             *      3）因为通常需要复制整个基础数组，所以可变操作（add、set 和 remove 等等）的开销很大。  
+//             *      4）迭代器不支持可变 remove 操作。  
+//             *      5）使用迭代器进行遍历的速度很快，并且不会与其他线程发生冲突。在构造迭代器时，迭代器依赖于不变的数组快照。  
+//            ---------------------
+//    作者：学无止境qwer
+//    来源：CSDN
+//    原文：https://blog.csdn.net/u012956987/article/details/50811703
+//    版权声明：本文为博主原创文章，转载请附上博文链接！
     public static CopyOnWriteArraySet<WebSocketServer> webSocketSet = new CopyOnWriteArraySet<WebSocketServer>();
     private  static WebSocketServer instance;
 
