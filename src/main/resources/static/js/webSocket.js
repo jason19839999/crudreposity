@@ -6,7 +6,7 @@
 
         //心跳检测,每20s心跳一次
         var heartCheck = {
-            timeout: 5000,
+            timeout: 3000,
             timeoutObj: null,
             serverTimeoutObj: null,
             reset: function(){
@@ -69,6 +69,7 @@
             webSocket.onerror = function(event) {
                 //alert("websockt连接发生错误，请刷新页面重试!");
                 $("#message").text("websockt连接发生错误，请刷新页面重试!");
+                heartCheck.reset().start();
             };
 
             webSocket.onopen = function(event) {
@@ -86,7 +87,7 @@
                 $("#result").text("恭喜您，已经连接成功了！");
                 $("#message").text(message);
                 //如果获取到消息，心跳检测重置
-                //heartCheck.reset().start();
+                heartCheck.reset().start();
                 //alert(message)//判断秒杀是否成功、自行写逻辑
             };
 
