@@ -21,7 +21,9 @@
                     //onmessage拿到返回的心跳就说明连接正常
                     webSocket.send("HeartBeat");
                     console.info("客户端发送心跳：");
-                    self.serverTimeoutObj = setTimeout(function(){//如果超过一定时间还没重置，说明后端主动断开了
+                    self.serverTimeoutObj = setTimeout(function(){//如果超过一定时间还没重置，说明后端主动断开了,
+                        // 一般服务端收到信息就会回调js   webSocket.onmessage = function(event),在这里面就重置了这个定时器，重新发起心跳，
+                        // 否则的话，肯定是服务端挂了，那么在这里定时轮询连接服务端。
                         webSocket.close();//如果onclose会执行reconnect，我们执行ws.close()就行了.如果直接执行reconnect 会触发onclose导致重连两次
                         console.info("已经断了");
                         connectSocket();
