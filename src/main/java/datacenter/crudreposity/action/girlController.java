@@ -2,11 +2,11 @@ package datacenter.crudreposity.action;
 
 import datacenter.crudreposity.aspect.Servicelock;
 import datacenter.crudreposity.config.MybatisSessionFactory;
+import datacenter.crudreposity.dao.mongodb.Impl.UserServiceMongodbImpl;
 import datacenter.crudreposity.dao.mybatis.HKBillsDao;
 import datacenter.crudreposity.dao.mysql2.UserMysqlRepository;
 import datacenter.crudreposity.dao.redis.girlInfoRedisDao;
 import datacenter.crudreposity.distributedlock.redis.RedissLockUtil;
-import datacenter.crudreposity.entity.Girlnfo;
 import datacenter.crudreposity.entity.HKBill;
 import datacenter.crudreposity.entity.RedisScoreValue;
 import datacenter.crudreposity.entity.girlInfoListResponse;
@@ -15,7 +15,6 @@ import datacenter.crudreposity.entity.requestParam.UserLogin;
 import datacenter.crudreposity.entity.responseParam.CodeMsg;
 import datacenter.crudreposity.entity.responseParam.Result;
 import datacenter.crudreposity.exception.GlobalException;
-import datacenter.crudreposity.service.Impl.UserServiceMongodbImpl;
 import datacenter.crudreposity.service.girlInfoDealService;
 import datacenter.crudreposity.websocket.WebSocketServer;
 import org.apache.http.HttpResponse;
@@ -24,18 +23,13 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.ibatis.session.SqlSession;
-import org.redisson.api.*;
-import org.redisson.client.codec.Codec;
-import org.redisson.config.Config;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.ByteArrayOutputStream;
@@ -47,12 +41,10 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.*;
 import java.util.zip.GZIPOutputStream;
-import org.redisson.RedissonMultiLock;
-import org.redisson.RedissonRedLock;
+
 import org.redisson.api.RLock;
 
 import java.util.concurrent.TimeUnit;
-import java.util.ArrayList;
 
 
 /**

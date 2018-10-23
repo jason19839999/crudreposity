@@ -1,4 +1,4 @@
-package datacenter.crudreposity.service;
+package datacenter.crudreposity.dao.mongodb;
 
 import datacenter.crudreposity.entity.mongodb.User;
 import org.springframework.stereotype.Repository;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserServiceMongodb {
     void saveUser(User user);
-    User findUserByUserName(String userName,int age);
+    User findUserByUserName(String userName, int age);
     public void updateUser(User user);
     public void deleteUserById(Long id);
 

@@ -1,19 +1,15 @@
-package datacenter.crudreposity.service.Impl;
+package datacenter.crudreposity.dao.mongodb.Impl;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.QueryBuilder;
-import datacenter.crudreposity.dao.mongodb.UserRepository;
+import datacenter.crudreposity.dao.mongodb.UserServiceMongodb;
 import datacenter.crudreposity.entity.mongodb.User;
-import datacenter.crudreposity.service.UserServiceMongodb;
-import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.BasicQuery;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 //https://blog.csdn.net/zhuchunyan_aijia/article/details/80298529  参照学习地址
@@ -26,8 +22,6 @@ import java.util.List;
  */
 @Service
 public class UserServiceMongodbImpl implements UserServiceMongodb {
-    @Autowired
-    private UserRepository userRepository;
 
     @Autowired
     MongoTemplate mongoTemplate;
