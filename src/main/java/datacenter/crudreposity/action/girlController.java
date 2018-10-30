@@ -17,6 +17,8 @@ import datacenter.crudreposity.entity.responseParam.Result;
 import datacenter.crudreposity.exception.GlobalException;
 import datacenter.crudreposity.service.girlInfoDealService;
 import datacenter.crudreposity.websocket.WebSocketServer;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -53,7 +55,7 @@ import java.util.concurrent.TimeUnit;
  * @创建时间 $date$
  * @修改人和其它信息
  */
-@Controller
+@RestController
 public class girlController {
 
     @Autowired
@@ -83,8 +85,10 @@ public class girlController {
 //        return new ResponseEntity<girlInfoListResponse>(obj, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/getRedis", method = RequestMethod.GET)
-    public String getRedis() {
+    @ApiOperation(value="获取用户详细信息", notes="根据url的id来获取用户详细信息")
+    @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Long")
+    @RequestMapping(value="getRedis/{id}", method=RequestMethod.GET)
+    public String getRedis(@PathVariable Long id) {
 
         //objgirlInfoRedisDao.save("set_age");
         String result = objgirlInfoRedisDao.read("name");
