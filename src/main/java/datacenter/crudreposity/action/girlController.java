@@ -56,6 +56,7 @@ import java.util.concurrent.TimeUnit;
  * @修改人和其它信息
  */
 @RestController
+@RequestMapping(value="/girl")
 public class girlController {
 
     @Autowired
@@ -86,9 +87,9 @@ public class girlController {
     }
 
     @ApiOperation(value="获取用户详细信息", notes="根据url的id来获取用户详细信息")
-    @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Long")
-    @RequestMapping(value="getRedis/{id}", method=RequestMethod.GET)
-    public String getRedis(@PathVariable Long id) {
+    @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "String")
+    @RequestMapping(value="/{id}", method=RequestMethod.GET)
+    public String getRedis(@PathVariable String id) {
 
         //objgirlInfoRedisDao.save("set_age");
         String result = objgirlInfoRedisDao.read("name");
