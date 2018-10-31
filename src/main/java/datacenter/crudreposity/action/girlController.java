@@ -7,6 +7,7 @@ import datacenter.crudreposity.dao.mybatis.HKBillsDao;
 import datacenter.crudreposity.dao.mysql2.UserMysqlRepository;
 import datacenter.crudreposity.dao.redis.girlInfoRedisDao;
 import datacenter.crudreposity.distributedlock.redis.RedissLockUtil;
+import datacenter.crudreposity.entity.Girlnfo;
 import datacenter.crudreposity.entity.HKBill;
 import datacenter.crudreposity.entity.RedisScoreValue;
 import datacenter.crudreposity.entity.girlInfoListResponse;
@@ -87,9 +88,9 @@ public class girlController {
     }
 
     @ApiOperation(value="获取用户详细信息", notes="根据url的id来获取用户详细信息")
-    @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "String")
-    @RequestMapping(value="/{id}", method=RequestMethod.GET)
-    public String getRedis(@PathVariable String id) {
+    @ApiImplicitParam(name = "Girlnfo", value = "用户ID", required = true, dataType = "Girlnfo")
+    @RequestMapping(value="", method=RequestMethod.GET)
+    public String getRedis(@RequestBody Girlnfo objGirlnfo) {
 
         //objgirlInfoRedisDao.save("set_age");
         String result = objgirlInfoRedisDao.read("name");

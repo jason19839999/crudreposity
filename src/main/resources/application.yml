@@ -31,5 +31,5 @@ redis:
 spring:
   data:
     mongodb:
-      uri: mongodb://localhost:9999
+      uri: mongodb://localhost:27017
       database: test
