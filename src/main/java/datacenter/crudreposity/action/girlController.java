@@ -56,8 +56,7 @@ import java.util.concurrent.TimeUnit;
  * @创建时间 $date$
  * @修改人和其它信息
  */
-@RestController
-@RequestMapping(value="/girl")
+@Controller
 public class girlController {
 
     @Autowired
@@ -73,6 +72,14 @@ public class girlController {
     @Autowired
     private UserServiceMongodbImpl userServiceMongodbImpl;
 
+    //模拟登录页面，如下配置即可
+    @RequestMapping(value = "/")
+    public String connectSocket(Model model, HttpServletResponse response) throws Exception {
+        model.addAttribute("name", "jason");
+        addCookie(response, "123456789");
+        return "index";
+    }
+
     @RequestMapping(value = "/getGirlInfo", method = RequestMethod.GET)
     public ResponseEntity<girlInfoListResponse> getNewsList() {
 
@@ -87,8 +94,6 @@ public class girlController {
 //        return new ResponseEntity<girlInfoListResponse>(obj, HttpStatus.OK);
     }
 
-    @ApiOperation(value="获取用户详细信息", notes="根据url的id来获取用户详细信息")
-    @ApiImplicitParam(name = "Girlnfo", value = "用户ID", required = true, dataType = "Girlnfo")
     @RequestMapping(value="", method=RequestMethod.GET)
     public String getRedis(@RequestBody Girlnfo objGirlnfo) {
 
@@ -315,4 +320,6 @@ public class girlController {
 
         return "ajax";
     }
+
+
 }
