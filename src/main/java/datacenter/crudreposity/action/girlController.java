@@ -27,6 +27,8 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.alps.Ext;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -81,9 +83,19 @@ public class girlController {
     }
 
     @RequestMapping(value = "/getGirlInfo", method = RequestMethod.GET)
-    public ResponseEntity<girlInfoListResponse> getNewsList() {
+    public ResponseEntity<String> getNewsList() {
+        User user = new User();
+        try {
+//            user.setId(1);
+//            user.setAge(18);
+//            user.setName("zhang laosan");
+//            userServiceMongodbImpl.saveUser(user);
+            user = userServiceMongodbImpl.findUByID("",18);
 
-        throw new GlobalException(CodeMsg.MOBILE_NOT_EXIST);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+//        throw new GlobalException(CodeMsg.MOBILE_NOT_EXIST);
         //测试msql这个连接是否通了。这里面包含了读写分离
 //        List<Girlnfo> lst = objgirlInfoDealService.getAllGirls();
 //        //girlInfoListResponse obj = new girlInfoListResponse(lst);
@@ -91,10 +103,10 @@ public class girlController {
 //        obj.setKey("小雪老婆好呀");
 //        obj.setResponse_data(lst);
 //
-//        return new ResponseEntity<girlInfoListResponse>(obj, HttpStatus.OK);
+        return new ResponseEntity<String>("Success", HttpStatus.OK);
     }
 
-    @RequestMapping(value="", method=RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public String getRedis(@RequestBody Girlnfo objGirlnfo) {
 
         //objgirlInfoRedisDao.save("set_age");
@@ -211,7 +223,7 @@ public class girlController {
     @RequestMapping(value = "/denglu")
     @Servicelock
     @ResponseBody
-    public Result<String> denglu(HttpServletResponse response,@RequestParam("token") String token) throws Exception {
+    public Result<String> denglu(HttpServletResponse response, @RequestParam("token") String token) throws Exception {
         addCookie(response, token);
         return Result.success("登录成功");
     }
@@ -287,14 +299,14 @@ public class girlController {
     public String distributted() throws InterruptedException {
         String lockKey = "testRedisson";//分布式锁的key
         //初始化数据
-        objgirlInfoRedisDao.saveStock("StockCount",100);
+        objgirlInfoRedisDao.saveStock("StockCount", 100);
         //执行的业务代码
         for (int i = 0; i < 55; i++) {
             //设置锁的过期时间
-            RLock lock = RedissLockUtil.lock(lockKey,TimeUnit.MILLISECONDS,200);
+            RLock lock = RedissLockUtil.lock(lockKey, TimeUnit.MILLISECONDS, 200);
             int stock = objgirlInfoRedisDao.readStockCount("StockCount");
             if (stock > 0) {
-                objgirlInfoRedisDao.saveStock("StockCount",stock - 1);
+                objgirlInfoRedisDao.saveStock("StockCount", stock - 1);
                 System.out.println("test1_:lockkey:" + lockKey + ",stock:" + (stock - 1) + "");
             }
             lock.unlock(); //释放锁
@@ -308,12 +320,12 @@ public class girlController {
     public String getConectors() throws InterruptedException {
 
         String result = "";
-        CopyOnWriteArraySet<WebSocketServer> list=  WebSocketServer.webSocketSet;
+        CopyOnWriteArraySet<WebSocketServer> list = WebSocketServer.webSocketSet;
         for (WebSocketServer item : list) {
-                result += "userId: " + item.userId + "  goodsId: " + item.goodsId + "<br>";
-            }
-            return result;
+            result += "userId: " + item.userId + "  goodsId: " + item.goodsId + "<br>";
         }
+        return result;
+    }
 
     @RequestMapping(value = "/ajax")
     public String ajax() {

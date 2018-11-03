@@ -102,6 +102,16 @@ public class UserServiceMongodbImpl implements UserServiceMongodb {
         mongoTemplate.remove(query,User.class);
     }
 
-
+    @Override
+    public User findUByID(String userName,int age) {
+        Query query=new Query();
+        Criteria criteria = new Criteria();
+        User user = null;
+        //查询或语句：a || b
+        criteria.orOperator(Criteria.where("userName").is(userName),Criteria.where("age").is(age));
+        query = new Query(criteria);
+        user =  mongoTemplate.findOne(query , User.class);
+        return user;
+    }
 
 }
