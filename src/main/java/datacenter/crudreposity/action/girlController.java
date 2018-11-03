@@ -119,7 +119,8 @@ public class girlController {
     }
 
     @RequestMapping(value = "getRedis", method = RequestMethod.GET)
-    public String getRedis(@RequestBody Girlnfo objGirlnfo) {
+    @ResponseBody
+    public String getRedis() {
 
         //objgirlInfoRedisDao.save("set_age");
         String result = objgirlInfoRedisDao.read("name");
@@ -134,21 +135,22 @@ public class girlController {
 
         //获取Score-Value
         List<RedisScoreValue> lst = objgirlInfoRedisDao.readRedisScoreValue("set_age");
-        //倒序
-        Collections.sort(lst, new Comparator<RedisScoreValue>() {
-            @Override
-            public int compare(RedisScoreValue o1, RedisScoreValue o2) {
-                // 按照新闻时间进行降序排列
-                if (o1.getScore() > o2.getScore()) {
-                    return -1;
+        if(lst != null && lst.size() > 0) {
+            //倒序
+            Collections.sort(lst, new Comparator<RedisScoreValue>() {
+                @Override
+                public int compare(RedisScoreValue o1, RedisScoreValue o2) {
+                    // 按照新闻时间进行降序排列
+                    if (o1.getScore() > o2.getScore()) {
+                        return -1;
+                    }
+                    if (o1.getScore() == o2.getScore()) {
+                        return 0;
+                    }
+                    return 1;
                 }
-                if (o1.getScore() == o2.getScore()) {
-                    return 0;
-                }
-                return 1;
-            }
-        });
-
+            });
+        }
 
         objgirlInfoRedisDao.saveHash("set_hash", "name", "hello,jason,goodafternoon");
         objgirlInfoRedisDao.saveHash("set_hash", "age", "28");
