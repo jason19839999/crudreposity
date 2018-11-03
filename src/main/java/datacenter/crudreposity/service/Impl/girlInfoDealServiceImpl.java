@@ -26,10 +26,9 @@ public class girlInfoDealServiceImpl implements girlInfoDealService {
     @Autowired
     private girlRepository objgirlRepository;
 
-    //配置读写分离
-    @ConnectionJustify(dbType = DbContextHolder.DbType.MASTER)
+
     //事务控制
-    @Transactional
+//    @Transactional
     public List<Girlnfo> getAllGirls(){
         List<Girlnfo> lst = objgirlRepository.getAllGirls();
         return lst;

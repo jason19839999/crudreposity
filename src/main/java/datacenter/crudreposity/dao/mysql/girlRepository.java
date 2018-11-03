@@ -1,5 +1,7 @@
 package datacenter.crudreposity.dao.mysql;
 
+import datacenter.crudreposity.config.ConnectionJustify;
+import datacenter.crudreposity.config.DbContextHolder;
 import datacenter.crudreposity.entity.Girlnfo;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -16,6 +18,8 @@ import java.util.ArrayList;
  */
 @Repository
 public interface girlRepository  extends CrudRepository<Girlnfo, Long> {
+    //配置读写分离
+    @ConnectionJustify(dbType = DbContextHolder.DbType.MASTER)
     @Query(name = "getAllGirls", value = "SELECT * FROM girl_info", nativeQuery = true)
     public ArrayList<Girlnfo> getAllGirls();
 

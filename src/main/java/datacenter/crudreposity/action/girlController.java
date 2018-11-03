@@ -82,7 +82,7 @@ public class girlController {
         return "index";
     }
 
-    @RequestMapping(value = "/getGirlInfo", method = RequestMethod.GET)
+    @RequestMapping(value = "/getUser", method = RequestMethod.GET)
     public ResponseEntity<String> getNewsList() {
         User user = new User();
         try {
@@ -106,7 +106,19 @@ public class girlController {
         return new ResponseEntity<String>("Success", HttpStatus.OK);
     }
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @RequestMapping(value = "/getGirl", method = RequestMethod.GET)
+    public ResponseEntity<List<Girlnfo>> getGirl() {
+//        测试msql这个连接是否通了。这里面包含了读写分离
+        List<Girlnfo> lst = objgirlInfoDealService.getAllGirls();
+        //girlInfoListResponse obj = new girlInfoListResponse(lst);
+        girlInfoListResponse obj = new girlInfoListResponse();
+        obj.setKey("小雪老婆好呀");
+        obj.setResponse_data(lst);
+//
+        return new ResponseEntity<List<Girlnfo>>(lst, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "getRedis", method = RequestMethod.GET)
     public String getRedis(@RequestBody Girlnfo objGirlnfo) {
 
         //objgirlInfoRedisDao.save("set_age");
