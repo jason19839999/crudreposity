@@ -6,6 +6,7 @@ import lombok.ToString;
 
 import javax.persistence.Id;
 import  java.lang.Integer;
+import java.util.Date;
 
 /**
  * @描述
@@ -20,9 +21,18 @@ import  java.lang.Integer;
 public class User {
     @Id
     private String id;
+
+    public Date getCreate_date() {
+        return create_date;
+    }
+
+    public void setCreate_date(Date create_date) {
+        this.create_date = create_date;
+    }
+
     private String name;
     private Integer age;
-
+    private Date create_date;
     public User() {
 
     }

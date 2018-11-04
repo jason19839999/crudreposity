@@ -40,10 +40,7 @@ import javax.validation.Valid;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.*;
 import java.util.zip.GZIPOutputStream;
 
@@ -87,12 +84,17 @@ public class girlController {
         User user = new User();
         List<User> lst = null;
         try {
-            user.setId("5bdec8b17d0fb24780cbc4c5");
-            user.setAge(1);
-            user.setName("小雪老婆111");
+//            user.setId("5bdedd367d0fb201388d4de2");
+            user.setAge(30);
+            user.setName("聪哥");
+            Date date = new Date();
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            cal.add(Calendar.HOUR, 8);// 24小时制
+            date = cal.getTime();
+            user.setCreate_date(date);
             userServiceMongodbImpl.saveUser(user);
-            lst = userServiceMongodbImpl.findByName("zhang laosan",36);
-
+            lst = userServiceMongodbImpl.findByName("聪哥",30);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
