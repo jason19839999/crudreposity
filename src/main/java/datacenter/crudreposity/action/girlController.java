@@ -83,14 +83,15 @@ public class girlController {
     }
 
     @RequestMapping(value = "/getUser", method = RequestMethod.GET)
-    public ResponseEntity<String> getNewsList() {
+    public ResponseEntity<List<User>> getNewsList() {
         User user = new User();
+        List<User> lst = null;
         try {
-//            user.setId(1);
-//            user.setAge(18);
-//            user.setName("zhang laosan");
-//            userServiceMongodbImpl.saveUser(user);
-            user = userServiceMongodbImpl.findUByID("",18);
+            user.setId(2);
+            user.setAge(100);
+            user.setName("zhang laosan");
+            userServiceMongodbImpl.saveUser(user);
+            lst = userServiceMongodbImpl.findByName("zhang laosan","zhang laosan");
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -103,7 +104,7 @@ public class girlController {
 //        obj.setKey("小雪老婆好呀");
 //        obj.setResponse_data(lst);
 //
-        return new ResponseEntity<String>("Success", HttpStatus.OK);
+        return new ResponseEntity<List<User>>(lst, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/getGirl", method = RequestMethod.GET)
