@@ -87,9 +87,9 @@ public class girlController {
         User user = new User();
         List<User> lst = null;
         try {
-            user.setId(3);
-            user.setAge(36);
-            user.setName("zhang laosan");
+            user.setId("5bdec8b17d0fb24780cbc4c5");
+            user.setAge(1);
+            user.setName("小雪老婆111");
             userServiceMongodbImpl.saveUser(user);
             lst = userServiceMongodbImpl.findByName("zhang laosan",36);
 
@@ -193,7 +193,7 @@ public class girlController {
     @ResponseBody  //返回strng或者json
     public String getMongodb() throws Exception {
         User objUser = new User();
-        objUser.setId(1);
+        objUser.setId("1");
         objUser.setName("jason");
         objUser.setAge(18);
         //插入到数据库
@@ -242,7 +242,6 @@ public class girlController {
         addCookie(response, token);
         return Result.success("登录成功");
     }
-
 
     //利用@Valid注解，对传入参数进行校验 ，使用的是这个  <artifactId>spring-boot-starter-validation</artifactId>，现在已经成为了标准。
     @RequestMapping(value = "/connectionSocket")

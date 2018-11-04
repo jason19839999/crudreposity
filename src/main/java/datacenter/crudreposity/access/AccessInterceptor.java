@@ -48,7 +48,7 @@ public class AccessInterceptor  extends HandlerInterceptorAdapter{
 
             }else{  //获取用户信息，添加到ThreadLocal线程，供接口参数初始化用，addArgumentResolvers
                 User user = new User();
-                user.setId(1);
+                user.setId("1");
                 user.setName("jason[AccessInterceptor]" + "///" +cookie);
                 user.setAge(18);
                 //同一个线程使用的，由于每个请求就是一个单独的线程

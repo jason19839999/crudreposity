@@ -19,7 +19,7 @@ import  java.lang.Integer;
 @ToString
 public class User {
     @Id
-    private Integer id;
+    private String id;
     private String name;
     private Integer age;
 
@@ -27,17 +27,17 @@ public class User {
 
     }
 
-    public User(Integer id, String name, Integer age) {
+    public User(String id, String name, Integer age) {
         this.id = id;
         this.name = name;
         this.age = age;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
