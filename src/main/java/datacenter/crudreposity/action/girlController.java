@@ -87,11 +87,11 @@ public class girlController {
         User user = new User();
         List<User> lst = null;
         try {
-            user.setId(2);
-            user.setAge(100);
+            user.setId(3);
+            user.setAge(36);
             user.setName("zhang laosan");
             userServiceMongodbImpl.saveUser(user);
-            lst = userServiceMongodbImpl.findByName("zhang laosan","zhang laosan");
+            lst = userServiceMongodbImpl.findByName("zhang laosan",36);
 
         } catch (Exception ex) {
             ex.printStackTrace();

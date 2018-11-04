@@ -17,5 +17,5 @@ public interface UserServiceMongodb {
     User findUserByUserName(String userName, int age);
     public void updateUser(User user);
     public void deleteUserById(Long id);
-    List<User> findByName(String userName, String userName2);
+    List<User> findByName(String userName, int age);
 }
