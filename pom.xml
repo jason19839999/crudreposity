@@ -183,6 +183,7 @@
             <version>2.5.0</version>
         </dependency>
 
+        <!--org.mybatis经典可配置多个数据源-->
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
