@@ -18,8 +18,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class AppContext {
 
-    @Bean
-    public girlInfoDealService GirlInfoDealService(){return new girlInfoDealServiceImpl();}
+//    @Bean
+//    public girlInfoDealService girlInfoDealService(){return new girlInfoDealServiceImpl();}
     @Bean
     public MysqlConnectionSettings mysqlConnectionSettings(){return new MysqlConnectionSettings();}
     //@Bean

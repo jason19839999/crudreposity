@@ -1,5 +1,6 @@
 package datacenter.crudreposity.action;
 
+import com.alibaba.fastjson.JSONObject;
 import datacenter.crudreposity.aspect.Servicelock;
 import datacenter.crudreposity.config.MybatisSessionFactory;
 import datacenter.crudreposity.dao.mongodb.Impl.UserServiceMongodbImpl;
@@ -7,25 +8,22 @@ import datacenter.crudreposity.dao.mybatis.HKBillsDao;
 import datacenter.crudreposity.dao.mysql2.UserMysqlRepository;
 import datacenter.crudreposity.dao.redis.girlInfoRedisDao;
 import datacenter.crudreposity.distributedlock.redis.RedissLockUtil;
-import datacenter.crudreposity.entity.Girlnfo;
-import datacenter.crudreposity.entity.HKBill;
-import datacenter.crudreposity.entity.RedisScoreValue;
-import datacenter.crudreposity.entity.girlInfoListResponse;
+import datacenter.crudreposity.entity.*;
 import datacenter.crudreposity.entity.mongodb.User;
 import datacenter.crudreposity.entity.requestParam.UserLogin;
 import datacenter.crudreposity.entity.responseParam.CodeMsg;
 import datacenter.crudreposity.entity.responseParam.Result;
 import datacenter.crudreposity.exception.GlobalException;
 import datacenter.crudreposity.service.girlInfoDealService;
+import datacenter.crudreposity.util.ExportUtil;
 import datacenter.crudreposity.websocket.WebSocketServer;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiOperation;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.ibatis.session.SqlSession;
+import org.apache.poi.hssf.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.alps.Ext;
 import org.springframework.http.HttpStatus;
@@ -37,9 +35,12 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.nio.charset.Charset;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.zip.GZIPOutputStream;
@@ -71,7 +72,8 @@ public class girlController {
     @Autowired
     private UserServiceMongodbImpl userServiceMongodbImpl;
 
-    //模拟登录页面，如下配置即可
+
+     //模拟登录页面，如下配置即可
     @RequestMapping(value = "/")
     public String connectSocket(Model model, HttpServletResponse response) throws Exception {
         model.addAttribute("name", "jason");
@@ -348,6 +350,60 @@ public class girlController {
 
         return "ajax";
     }
+
+
+
+
+   //导出excel
+   @GetMapping("/file")
+   public String download(HttpServletResponse response) {
+       List<Map<String, Object>> dataList = null;
+
+       List<News> lst = objgirlInfoDealService.getNews();// 查询到要导出的信息
+
+       if (lst.size() == 0) {
+           return "无数据导出";
+       }
+       String sTitle = "website,navigation,junior_channel,news_time,title";
+       String fName = "News_";
+       String mapKey = "website,navigation,junior_channel,news_time,title";
+       dataList = new ArrayList<>();
+       Map<String, Object> map = null;
+       for (News obj : lst) {
+           map = new HashMap<>();
+           if(obj.getOther_info() != null && obj.getOther_info() != ""){
+               JSONObject json = JSONObject.parseObject(obj.getOther_info());
+               if(json.containsKey("website")){
+                   map.put("website", json.getString("website"));
+               }else{
+                   map.put("website", "");
+               }
+               if(json.containsKey("navigation")){
+                   map.put("navigation", json.getString("navigation"));
+               }else{
+                   map.put("navigation", "");
+               }
+           }else{
+               map.put("website", "");
+               map.put("navigation", "");
+           }
+           map.put("junior_channel", obj.getJunior_channel());
+           SimpleDateFormat format0 = new SimpleDateFormat("MM-dd HH:mm");
+           String time = format0.format(obj.getNews_time());
+           map.put("news_time", time);
+           map.put("title", obj.getTitle());
+
+           dataList.add(map);
+       }
+       try (final OutputStream os = response.getOutputStream()) {
+           ExportUtil.responseSetProperties(fName, response);
+           ExportUtil.doExport(dataList, sTitle, mapKey, os);
+           return null;
+       } catch (Exception e) {
+//           log.error("生成csv文件失败", e);
+       }
+       return "数据导出出错";
+   }
 
 
 }
