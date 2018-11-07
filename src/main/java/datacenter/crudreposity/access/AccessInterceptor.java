@@ -45,7 +45,7 @@ public class AccessInterceptor  extends HandlerInterceptorAdapter{
             // 或者读取redis的session值，由于接口过来的保存不了cookie,所有这里必须用分布式session处理
             String cookie= getCookieValue(request,"token");
             //用户合法性判断
-            if(token == null || cookie == null){
+            if(token == null && cookie == null){
                 //通过以下三种方式处理异常逻辑信息提示
 
                 //①跳转到登录页面或者无权限页面，这里没写，用return false代替了

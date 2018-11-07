@@ -44,7 +44,7 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
         //存在一个问题，页面请求：在拦截和controller，公共异常类都能捕捉到，
         //但是ajax请求：拦截里面抛出异常能捕捉到，但是在controller里面throw异常，公共异常类捕捉不到。
        //registry.addInterceptor(accessInterceptor).addPathPatterns("/getAccess","/getGirlInfo");
-        registry.addInterceptor(accessInterceptor).addPathPatterns("/denglu","");
+        registry.addInterceptor(accessInterceptor).addPathPatterns("/denglu","/getAccess");
     }
 
     @Override
