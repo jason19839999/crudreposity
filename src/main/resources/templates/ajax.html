@@ -6,10 +6,10 @@
 </head>
 <body>
 
-   <div>
+   <br>
 
-       <input id="sendMsg" type="button" onclick="return sendMsg()" value="ajax请求" ></input>
-
+       <input id="sendMsg" type="button" onclick="return sendMsg()" value="ajax请求" ></input></br>
+       <span id="spResult">请执行</span>
    </div>
 
 
@@ -33,7 +33,8 @@
                  },
                success: function (data) {
                    if (data.code == 0) {
-                       alert(data.msg + "--Hello," + data.data.name);
+                       // alert(data.msg + "--Hello," + data.data.name);
+                       $("#spResult").text(data.msg + "--Hello," + data.data.name);
                    } else {
                        alert(data.msg);
                    }
