@@ -33,7 +33,7 @@
                  },
                success: function (data) {
                    if (data.code == 0) {
-                       alert(data.msg);
+                       alert(data.msg + "--Hello," + data.data.name);
                    } else {
                        alert(data.msg);
                    }

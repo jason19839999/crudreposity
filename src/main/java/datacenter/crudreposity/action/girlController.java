@@ -217,7 +217,7 @@ public class girlController {
     public Result<User> getAccess(User user, RedisScoreValue redisScoreValue, @RequestBody String token) throws Exception {
         //业务逻辑处理都可以用GlobalException处理，
         // 直接 throw new GlobalException(CodeMsg.SESSION_ERROR)即可，直接返回给前端或者客户端错误信息
-        //拦截器里面也可以使用此方法
+       //在此只要处理业务逻辑即可。。。
         if (user == null) {
             user = new User();
             user.setId("1");
