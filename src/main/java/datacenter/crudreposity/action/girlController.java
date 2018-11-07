@@ -218,9 +218,14 @@ public class girlController {
         //业务逻辑处理都可以用GlobalException处理，
         // 直接 throw new GlobalException(CodeMsg.SESSION_ERROR)即可，直接返回给前端或者客户端错误信息
         //拦截器里面也可以使用此方法
-        if (user != null && redisScoreValue != null) {
+        if (user == null) {
+            user = new User();
+            user.setId("1");
+            user.setName("congcong");
             user.setAge(28);
         } else {
+            //在这里throw  公共异常处理捕捉不到
+            //记录异常日志
             throw new GlobalException(CodeMsg.SESSION_ERROR);
             //return "登录超时了";
         }

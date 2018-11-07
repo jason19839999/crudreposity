@@ -29,12 +29,17 @@ public class TokenFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
 
+        // ① Get方式：http://localhost:8086/denglu?token=999
+        String token = httpServletRequest.getParameter("token");
+
+        // ② POST方式：参数type：JSON
         //获取接口的requestBody消息体，说白了就是实体对象
         ServingRequestWrapper requestWrapper = new ServingRequestWrapper(httpServletRequest);
         String body = requestWrapper.getBody();
         String uri = requestWrapper.getRequestURI();
-        if(body!=""){
+        if(body!=null && !body.equals("")){
             JSONObject jsonObject = JSON.parseObject(body);
+            token = jsonObject.getString("token");
         }
         try {
             String imei ="";// jsonObject.getJSONObject("header").getString("imei");
