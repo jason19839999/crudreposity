@@ -218,11 +218,11 @@ public class girlController {
         //业务逻辑处理都可以用GlobalException处理，
         // 直接 throw new GlobalException(CodeMsg.SESSION_ERROR)即可，直接返回给前端或者客户端错误信息
        //在此只要处理业务逻辑即可。。。
-        if (user == null) {
-            user = new User();
-            user.setId("1");
-            user.setName("congcong");
-            user.setAge(28);
+        if (user != null) {
+//            user = new User();
+//            user.setId("1");
+//            user.setName("congcong");
+//            user.setAge(28);
         } else {
             //在这里throw  公共异常处理捕捉不到
             //记录异常日志
