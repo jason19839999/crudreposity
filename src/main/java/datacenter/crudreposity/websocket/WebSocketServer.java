@@ -8,6 +8,7 @@ import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 @ServerEndpoint("/websocket/{userId}/{goodsId}")
@@ -117,19 +118,31 @@ public class WebSocketServer {
      * */
     public static void sendInfo(String message,@PathParam("userId") int userId,@PathParam("goodsId") int goodsId){
         log.info("推送消息到窗口"+userId+"，推送内容:"+message);
-        for (WebSocketServer item : webSocketSet) {
+//        for (WebSocketServer item : webSocketSet) {
+//            try {
+//                //这里可以设定只推送给这个userId的，为null则全部推送
+//                if(userId==0) {
+//                    item.sendMessage(message);
+//                    //只给秒杀成功了的用户推送成功秒杀生成订单的消息
+//                }else if(item.userId==userId && item.goodsId == goodsId){
+//                    item.sendMessage(message);
+//                }
+//            } catch (IOException e) {
+//                continue;
+//            }
+//        }
+
+        //迭代器
+        Iterator iter = webSocketSet.iterator();
+        while(iter.hasNext()) {
+            WebSocketServer item = (WebSocketServer)iter.next();
             try {
-                //这里可以设定只推送给这个userId的，为null则全部推送
-                if(userId==0) {
-                    item.sendMessage(message);
-                    //只给秒杀成功了的用户推送成功秒杀生成订单的消息
-                }else if(item.userId==userId && item.goodsId == goodsId){
-                    item.sendMessage(message);
-                }
+                item.sendMessage(message);
             } catch (IOException e) {
-                continue;
+                e.printStackTrace();
             }
         }
+
     }
 
     public static synchronized int getOnlineCount() {
