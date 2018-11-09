@@ -20,7 +20,9 @@ public class PropertiesReader {
 		Map<String, String> map = new HashMap<String, String>();
 		try {
 
-			InputStream in = getClass().getResourceAsStream("type.properties");
+//			InputStream in = getClass().getResourceAsStream("datacenter/crudreposity/factorymode/type.properties");
+//			spring boot getResourceAsStream读取resource properties
+			InputStream in = getClass().getResourceAsStream("/config/type.properties");
 			props.load(in);
 			Enumeration en = props.propertyNames();
 			while (en.hasMoreElements()) {

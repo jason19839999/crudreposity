@@ -22,7 +22,7 @@ public class SunnyTest {
 //		HairInterface left = factory.getHairByClass("datacenter.crudreposity.factorymode.LeftHair");
 //		left.draw();
 		
-		HairInterface hair = factory.getHairByClassKey("in");
+		HairInterface hair = factory.getHairByClassKey("right");
 		hair.draw();
 		
 //		PersonFactory facoty = new MCFctory();
