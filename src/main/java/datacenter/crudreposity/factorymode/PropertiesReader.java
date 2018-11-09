@@ -5,6 +5,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 读取配置
@@ -17,7 +18,7 @@ public class PropertiesReader {
 	public Map<String, String> getProperties() {
 
 		Properties props = new Properties();
-		Map<String, String> map = new HashMap<String, String>();
+		Map<String, String> map = new ConcurrentHashMap<String, String>(); // HashMap<String, String>();
 		try {
 
 //			InputStream in = getClass().getResourceAsStream("datacenter/crudreposity/factorymode/type.properties");
