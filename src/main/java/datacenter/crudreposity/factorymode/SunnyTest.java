@@ -1,5 +1,13 @@
 package datacenter.crudreposity.factorymode;
 
+
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.stereotype.Service;
+
+@SpringBootApplication
+@EnableAsync
+@Service
 public class SunnyTest {
 
 	public static void main(String[] args){

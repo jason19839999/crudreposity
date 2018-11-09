@@ -21,13 +21,13 @@ public class PropertiesReader {
 		try {
 
 			InputStream in = getClass().getResourceAsStream("type.properties");
-//			props.load(in);
+			props.load(in);
 			Enumeration en = props.propertyNames();
 			while (en.hasMoreElements()) {
 				String key = (String) en.nextElement();
 				String property = props.getProperty(key);
 				map.put(key, property);
-//				System.out.println(key + "  " + property);
+				System.out.println(key + "  " + property);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
