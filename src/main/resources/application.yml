@@ -33,5 +33,3 @@ spring:
     mongodb:
       uri: mongodb://localhost:27017
       database: test
-logging:
-  config: classpath:log4j2.xml
