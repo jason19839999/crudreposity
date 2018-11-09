@@ -1,0 +1,511 @@
+2018-11-09 10:17:02,169  INFO State:22 - Command line arguments: [-c, src/main/resources//creeper_service.properties]
+2018-11-09 10:17:02,174  INFO State:32 - loading config file: src/main/resources//creeper_service.properties
+2018-11-09 10:17:03,391  INFO DemoApplication:50 - Starting DemoApplication on DESKTOP-NHJSLBP with PID 19440 (started by jason in D:\myTools\SPRING BOOT & MYSQL\2-SPRING BOOT 源代码\crudreposity实现读写分离和Redis处理（经典）\crudreposity)
+2018-11-09 10:17:03,392  INFO DemoApplication:662 - No active profile set, falling back to default profiles: default
+2018-11-09 10:17:03,456  INFO AnnotationConfigServletWebServerApplicationContext:590 - Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@444548a0: startup date [Fri Nov 09 10:17:03 CST 2018]; root of context hierarchy
+2018-11-09 10:17:04,911  INFO DefaultListableBeanFactory:821 - Overriding bean definition for bean 'mysqlConnectionSettings' with a different definition: replacing [Generic bean: class [datacenter.crudreposity.config.MysqlConnectionSettings]; scope=singleton; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null; defined in file [D:\myTools\SPRING BOOT & MYSQL\2-SPRING BOOT 源代码\crudreposity实现读写分离和Redis处理（经典）\crudreposity\target\classes\datacenter\crudreposity\config\MysqlConnectionSettings.class]] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=appContext; factoryMethodName=mysqlConnectionSettings; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [datacenter/crudreposity/AppContext.class]]
+2018-11-09 10:17:04,927  INFO RepositoryConfigurationDelegate:163 - Multiple Spring Data modules found, entering strict repository configuration mode!
+2018-11-09 10:17:05,037  INFO RepositoryConfigurationDelegate:163 - Multiple Spring Data modules found, entering strict repository configuration mode!
+2018-11-09 10:17:05,051  INFO RepositoryConfigurationDelegate:163 - Multiple Spring Data modules found, entering strict repository configuration mode!
+2018-11-09 10:17:05,315  INFO RepositoryConfigurationDelegate:163 - Multiple Spring Data modules found, entering strict repository configuration mode!
+2018-11-09 10:17:05,363  INFO RepositoryConfigurationExtensionSupport:297 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface datacenter.crudreposity.dao.mysql.girlRepository.
+2018-11-09 10:17:05,364  INFO RepositoryConfigurationExtensionSupport:297 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface datacenter.crudreposity.dao.mysql.newsRepository.
+2018-11-09 10:17:05,365  INFO RepositoryConfigurationExtensionSupport:297 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface datacenter.crudreposity.dao.mysql2.UserMysqlRepository.
+2018-11-09 10:17:05,370  INFO RepositoryConfigurationDelegate:163 - Multiple Spring Data modules found, entering strict repository configuration mode!
+2018-11-09 10:17:05,397  INFO RepositoryConfigurationExtensionSupport:297 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface datacenter.crudreposity.dao.mysql.girlRepository.
+2018-11-09 10:17:05,398  INFO RepositoryConfigurationExtensionSupport:297 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface datacenter.crudreposity.dao.mysql.newsRepository.
+2018-11-09 10:17:05,398  INFO RepositoryConfigurationExtensionSupport:297 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface datacenter.crudreposity.dao.mysql2.UserMysqlRepository.
+2018-11-09 10:17:06,036  INFO PostProcessorRegistrationDelegate$BeanPostProcessorChecker:326 - Bean 'org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration' of type [org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration$$EnhancerBySpringCGLIB$$3b5e2800] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-11-09 10:17:06,136  INFO PostProcessorRegistrationDelegate$BeanPostProcessorChecker:326 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$74f269d2] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-11-09 10:17:06,369  INFO PostProcessorRegistrationDelegate$BeanPostProcessorChecker:326 - Bean 'org.springframework.hateoas.config.HateoasConfiguration' of type [org.springframework.hateoas.config.HateoasConfiguration$$EnhancerBySpringCGLIB$$f472b704] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-11-09 10:17:06,955  INFO TomcatWebServer:91 - Tomcat initialized with port(s): 8086 (http)
+2018-11-09 10:17:06,972  INFO Http11NioProtocol:180 - Initializing ProtocolHandler ["http-nio-8086"]
+2018-11-09 10:17:06,987  INFO StandardService:180 - Starting service [Tomcat]
+2018-11-09 10:17:06,988  INFO StandardEngine:180 - Starting Servlet Engine: Apache Tomcat/8.5.32
+2018-11-09 10:17:06,998  INFO AprLifecycleListener:180 - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_171\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\jason\AppData\Local\Microsoft\WindowsApps;;.]
+2018-11-09 10:17:07,203  INFO [/]:180 - Initializing Spring embedded WebApplicationContext
+2018-11-09 10:17:07,204  INFO ContextLoader:285 - Root WebApplicationContext: initialization completed in 3752 ms
+2018-11-09 10:17:07,459  INFO FilterRegistrationBean:245 - Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-11-09 10:17:07,460  INFO FilterRegistrationBean:245 - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-11-09 10:17:07,460  INFO FilterRegistrationBean:245 - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-11-09 10:17:07,460  INFO FilterRegistrationBean:245 - Mapping filter: 'requestContextFilter' to: [/*]
+2018-11-09 10:17:07,461  INFO FilterRegistrationBean:258 - Mapping filter: 'tokenFilter' to urls: [/denglu, /getAccess]
+2018-11-09 10:17:07,461  INFO FilterRegistrationBean:258 - Mapping filter: 'versionFilter' to urls: [/getAppChannel]
+2018-11-09 10:17:07,461  INFO ServletRegistrationBean:187 - Servlet dispatcherServlet mapped to [/]
+2018-11-09 10:17:07,535  INFO HikariDataSource:80 - HikariPool-1 - Starting...
+2018-11-09 10:17:07,756  INFO HikariDataSource:82 - HikariPool-1 - Start completed.
+2018-11-09 10:17:07,796  INFO HikariDataSource:80 - HikariPool-2 - Starting...
+2018-11-09 10:17:07,813  INFO HikariDataSource:82 - HikariPool-2 - Start completed.
+2018-11-09 10:17:07,898  INFO LocalContainerEntityManagerFactoryBean:361 - Building JPA container EntityManagerFactory for persistence unit 'default'
+2018-11-09 10:17:08,030  INFO Version:45 - HHH000412: Hibernate Core {5.2.17.Final}
+2018-11-09 10:17:08,032  INFO Environment:213 - HHH000206: hibernate.properties not found
+2018-11-09 10:17:08,087  INFO Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2018-11-09 10:17:08,292  INFO Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2018-11-09 10:17:08,903  INFO LocalContainerEntityManagerFactoryBean:415 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2018-11-09 10:17:08,929  INFO HikariDataSource:80 - HikariPool-3 - Starting...
+2018-11-09 10:17:08,949  INFO HikariDataSource:82 - HikariPool-3 - Start completed.
+2018-11-09 10:17:08,955  INFO LocalContainerEntityManagerFactoryBean:361 - Building JPA container EntityManagerFactory for persistence unit 'default'
+2018-11-09 10:17:08,995  INFO Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2018-11-09 10:17:09,035  INFO LocalContainerEntityManagerFactoryBean:415 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2018-11-09 10:17:11,654  INFO cluster:71 - Cluster created with settings {hosts=[localhost:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2018-11-09 10:17:12,571  WARN JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration:235 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2018-11-09 10:17:12,666  INFO RequestMappingHandlerMapping:547 - Mapped "{[/getAccess],methods=[POST]}" onto public datacenter.crudreposity.entity.responseParam.Result<datacenter.crudreposity.entity.mongodb.User> datacenter.crudreposity.action.girlController.getAccess(datacenter.crudreposity.entity.mongodb.User,datacenter.crudreposity.entity.RedisScoreValue,java.lang.String) throws java.lang.Exception
+2018-11-09 10:17:12,667  INFO RequestMappingHandlerMapping:547 - Mapped "{[/getUser],methods=[GET]}" onto public org.springframework.http.ResponseEntity<java.util.List<datacenter.crudreposity.entity.mongodb.User>> datacenter.crudreposity.action.girlController.getNewsList()
+2018-11-09 10:17:12,668  INFO RequestMappingHandlerMapping:547 - Mapped "{[/getMybatis],methods=[GET]}" onto public java.lang.String datacenter.crudreposity.action.girlController.getMybatis() throws java.lang.Exception
+2018-11-09 10:17:12,668  INFO RequestMappingHandlerMapping:547 - Mapped "{[/sendUrl],methods=[GET]}" onto public java.lang.String datacenter.crudreposity.action.girlController.sendUrl() throws java.lang.Exception
+2018-11-09 10:17:12,669  INFO RequestMappingHandlerMapping:547 - Mapped "{[/denglu]}" onto public datacenter.crudreposity.entity.responseParam.Result<java.lang.String> datacenter.crudreposity.action.girlController.denglu(javax.servlet.http.HttpServletResponse,java.lang.String) throws java.lang.Exception
+2018-11-09 10:17:12,669  INFO RequestMappingHandlerMapping:547 - Mapped "{[/]}" onto public java.lang.String datacenter.crudreposity.action.girlController.connectSocket(org.springframework.ui.Model,javax.servlet.http.HttpServletResponse) throws java.lang.Exception
+2018-11-09 10:17:12,670  INFO RequestMappingHandlerMapping:547 - Mapped "{[/getGirl],methods=[GET]}" onto public org.springframework.http.ResponseEntity<java.util.List<datacenter.crudreposity.entity.Girlnfo>> datacenter.crudreposity.action.girlController.getGirl()
+2018-11-09 10:17:12,670  INFO RequestMappingHandlerMapping:547 - Mapped "{[/logIn]}" onto public datacenter.crudreposity.entity.responseParam.Result<java.lang.String> datacenter.crudreposity.action.girlController.logIn(javax.servlet.http.HttpServletResponse,datacenter.crudreposity.entity.requestParam.UserLogin) throws java.lang.Exception
+2018-11-09 10:17:12,670  INFO RequestMappingHandlerMapping:547 - Mapped "{[/connectionSocket]}" onto public java.lang.String datacenter.crudreposity.action.girlController.connectionSocket(org.springframework.ui.Model,javax.servlet.http.HttpServletResponse) throws java.lang.Exception
+2018-11-09 10:17:12,671  INFO RequestMappingHandlerMapping:547 - Mapped "{[/sendWebsocketMsg],methods=[GET]}" onto public datacenter.crudreposity.entity.responseParam.Result<java.lang.String> datacenter.crudreposity.action.girlController.sendWebsocketMsg() throws java.lang.Exception
+2018-11-09 10:17:12,671  INFO RequestMappingHandlerMapping:547 - Mapped "{[/getMongodb],methods=[GET]}" onto public java.lang.String datacenter.crudreposity.action.girlController.getMongodb() throws java.lang.Exception
+2018-11-09 10:17:12,672  INFO RequestMappingHandlerMapping:547 - Mapped "{[/getRedis],methods=[GET]}" onto public java.lang.String datacenter.crudreposity.action.girlController.getRedis()
+2018-11-09 10:17:12,672  INFO RequestMappingHandlerMapping:547 - Mapped "{[/distributted]}" onto public java.lang.String datacenter.crudreposity.action.girlController.distributted() throws java.lang.InterruptedException
+2018-11-09 10:17:12,672  INFO RequestMappingHandlerMapping:547 - Mapped "{[/file],methods=[GET]}" onto public java.lang.String datacenter.crudreposity.action.girlController.download(javax.servlet.http.HttpServletResponse)
+2018-11-09 10:17:12,673  INFO RequestMappingHandlerMapping:547 - Mapped "{[/getConectors]}" onto public java.lang.String datacenter.crudreposity.action.girlController.getConectors() throws java.lang.InterruptedException
+2018-11-09 10:17:12,673  INFO RequestMappingHandlerMapping:547 - Mapped "{[/ajax]}" onto public java.lang.String datacenter.crudreposity.action.girlController.ajax()
+2018-11-09 10:17:12,675  INFO RequestMappingHandlerMapping:547 - Mapped "{[/NoAuthority]}" onto public java.lang.String datacenter.crudreposity.action.ResultController.NoAuthority()
+2018-11-09 10:17:12,676  INFO RequestMappingHandlerMapping:547 - Mapped "{[/users/{id}],methods=[GET]}" onto public java.lang.String datacenter.crudreposity.action.UserController.getUser(java.lang.Long)
+2018-11-09 10:17:12,677  INFO RequestMappingHandlerMapping:547 - Mapped "{[/users/postUser],methods=[POST]}" onto public java.lang.String datacenter.crudreposity.action.UserController.postUser(datacenter.crudreposity.entity.Girlnfo)
+2018-11-09 10:17:12,679  INFO RequestMappingHandlerMapping:547 - Mapped "{[/v2/api-docs],methods=[GET]}" onto public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String)
+2018-11-09 10:17:12,683  INFO RequestMappingHandlerMapping:547 - Mapped "{[/configuration/security]}" onto org.springframework.http.ResponseEntity<springfox.documentation.swagger.web.SecurityConfiguration> springfox.documentation.swagger.web.ApiResourceController.securityConfiguration()
+2018-11-09 10:17:12,684  INFO RequestMappingHandlerMapping:547 - Mapped "{[/configuration/ui]}" onto org.springframework.http.ResponseEntity<springfox.documentation.swagger.web.UiConfiguration> springfox.documentation.swagger.web.ApiResourceController.uiConfiguration()
+2018-11-09 10:17:12,685  INFO RequestMappingHandlerMapping:547 - Mapped "{[/swagger-resources]}" onto org.springframework.http.ResponseEntity<java.util.List<springfox.documentation.swagger.web.SwaggerResource>> springfox.documentation.swagger.web.ApiResourceController.swaggerResources()
+2018-11-09 10:17:12,689  INFO RequestMappingHandlerMapping:547 - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-11-09 10:17:12,689  INFO RequestMappingHandlerMapping:547 - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-11-09 10:17:12,704  INFO cluster:76 - Exception in monitor thread while connecting to server localhost:27017
+com.mongodb.MongoSocketOpenException: Exception opening socket
+	at com.mongodb.connection.SocketStream.open(SocketStream.java:62) ~[mongodb-driver-core-3.6.4.jar:?]
+	at com.mongodb.connection.InternalStreamConnection.open(InternalStreamConnection.java:126) ~[mongodb-driver-core-3.6.4.jar:?]
+	at com.mongodb.connection.DefaultServerMonitor$ServerMonitorRunnable.run(DefaultServerMonitor.java:114) [mongodb-driver-core-3.6.4.jar:?]
+	at java.lang.Thread.run(Thread.java:748) [?:1.8.0_171]
+Caused by: java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method) ~[?:1.8.0_171]
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85) ~[?:1.8.0_171]
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350) ~[?:1.8.0_171]
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206) ~[?:1.8.0_171]
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188) ~[?:1.8.0_171]
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172) ~[?:1.8.0_171]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392) ~[?:1.8.0_171]
+	at java.net.Socket.connect(Socket.java:589) ~[?:1.8.0_171]
+	at com.mongodb.connection.SocketStreamHelper.initialize(SocketStreamHelper.java:59) ~[mongodb-driver-core-3.6.4.jar:?]
+	at com.mongodb.connection.SocketStream.open(SocketStream.java:57) ~[mongodb-driver-core-3.6.4.jar:?]
+	... 3 more
+2018-11-09 10:17:13,267  INFO Version:41 - Redisson 2.11.5
+2018-11-09 10:17:14,551  INFO MasterConnectionPool:145 - 10 connections initialized for /192.168.2.232:6379
+2018-11-09 10:17:14,552  INFO MasterPubSubConnectionPool:145 - 1 connections initialized for /192.168.2.232:6379
+2018-11-09 10:17:14,757  INFO SimpleUrlHandlerMapping:373 - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-11-09 10:17:15,086  INFO RequestMappingHandlerAdapter:574 - Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@444548a0: startup date [Fri Nov 09 10:17:03 CST 2018]; root of context hierarchy
+2018-11-09 10:17:15,165  INFO SimpleUrlHandlerMapping:373 - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-11-09 10:17:15,165  INFO SimpleUrlHandlerMapping:373 - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-11-09 10:17:15,193  INFO ExceptionHandlerExceptionResolver:288 - Detected @ExceptionHandler methods in globalExceptionHandler
+2018-11-09 10:17:15,267  WARN TemplateMode:150 - [THYMELEAF][main] Template Mode 'HTML5' is deprecated. Using Template Mode 'HTML' instead.
+2018-11-09 10:17:15,347  INFO WelcomePageHandlerMapping:61 - Adding welcome page template: index
+2018-11-09 10:17:16,099  INFO ServerEndpointExporter:153 - Registering @ServerEndpoint class: class datacenter.crudreposity.websocket.WebSocketServer
+2018-11-09 10:17:16,112  INFO AnnotationMBeanExporter:433 - Registering beans for JMX exposure on startup
+2018-11-09 10:17:16,113  INFO AnnotationMBeanExporter:895 - Bean with name 'masterDataSource' has been autodetected for JMX exposure
+2018-11-09 10:17:16,113  INFO AnnotationMBeanExporter:895 - Bean with name 'replica1DataSource' has been autodetected for JMX exposure
+2018-11-09 10:17:16,114  INFO AnnotationMBeanExporter:895 - Bean with name 'dataSource1' has been autodetected for JMX exposure
+2018-11-09 10:17:16,125  INFO AnnotationMBeanExporter:895 - Bean with name 'rabbitConnectionFactory' has been autodetected for JMX exposure
+2018-11-09 10:17:16,130  INFO AnnotationMBeanExporter:668 - Located MBean 'masterDataSource': registering with JMX server as MBean [com.zaxxer.hikari:name=masterDataSource,type=HikariDataSource]
+2018-11-09 10:17:16,133  INFO AnnotationMBeanExporter:675 - Located managed bean 'rabbitConnectionFactory': registering with JMX server as MBean [org.springframework.amqp.rabbit.connection:name=rabbitConnectionFactory,type=CachingConnectionFactory]
+2018-11-09 10:17:16,155  INFO AnnotationMBeanExporter:668 - Located MBean 'replica1DataSource': registering with JMX server as MBean [com.zaxxer.hikari:name=replica1DataSource,type=HikariDataSource]
+2018-11-09 10:17:16,156  INFO AnnotationMBeanExporter:668 - Located MBean 'dataSource1': registering with JMX server as MBean [com.zaxxer.hikari:name=dataSource1,type=HikariDataSource]
+2018-11-09 10:17:16,163  INFO DefaultLifecycleProcessor:351 - Starting beans in phase 2147483647
+2018-11-09 10:17:16,186  INFO DocumentationPluginsBootstrapper:80 - Context refreshed
+2018-11-09 10:17:16,212  INFO DocumentationPluginsBootstrapper:83 - Found {0} custom documentation plugin(s)
+2018-11-09 10:17:16,227  INFO ApiListingReferenceScanner:53 - Scanning for api listing references
+2018-11-09 10:17:16,235  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method NoAuthority was result-controller
+2018-11-09 10:17:16,239  INFO ApiListingReferenceScanner:72 - Request mapping: NoAuthority belongs to groups: [[ResourceGroup{groupName='result-controller', position=0, controller=datacenter.crudreposity.action.ResultController}]] 
+2018-11-09 10:17:16,240  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method connectSocket was girl-controller
+2018-11-09 10:17:16,241  INFO ApiListingReferenceScanner:72 - Request mapping: connectSocket belongs to groups: [[ResourceGroup{groupName='girl-controller', position=0, controller=datacenter.crudreposity.action.girlController}]] 
+2018-11-09 10:17:16,241  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method ajax was girl-controller
+2018-11-09 10:17:16,241  INFO ApiListingReferenceScanner:72 - Request mapping: ajax belongs to groups: [[ResourceGroup{groupName='girl-controller', position=0, controller=datacenter.crudreposity.action.girlController}]] 
+2018-11-09 10:17:16,242  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method connectionSocket was girl-controller
+2018-11-09 10:17:16,242  INFO ApiListingReferenceScanner:72 - Request mapping: connectionSocket belongs to groups: [[ResourceGroup{groupName='girl-controller', position=0, controller=datacenter.crudreposity.action.girlController}]] 
+2018-11-09 10:17:16,242  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method denglu was girl-controller
+2018-11-09 10:17:16,242  INFO ApiListingReferenceScanner:72 - Request mapping: denglu belongs to groups: [[ResourceGroup{groupName='girl-controller', position=0, controller=datacenter.crudreposity.action.girlController}]] 
+2018-11-09 10:17:16,243  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method distributted was girl-controller
+2018-11-09 10:17:16,243  INFO ApiListingReferenceScanner:72 - Request mapping: distributted belongs to groups: [[ResourceGroup{groupName='girl-controller', position=0, controller=datacenter.crudreposity.action.girlController}]] 
+2018-11-09 10:17:16,243  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method download was girl-controller
+2018-11-09 10:17:16,243  INFO ApiListingReferenceScanner:72 - Request mapping: download belongs to groups: [[ResourceGroup{groupName='girl-controller', position=0, controller=datacenter.crudreposity.action.girlController}]] 
+2018-11-09 10:17:16,243  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method getAccess was girl-controller
+2018-11-09 10:17:16,244  INFO ApiListingReferenceScanner:72 - Request mapping: getAccess belongs to groups: [[ResourceGroup{groupName='girl-controller', position=0, controller=datacenter.crudreposity.action.girlController}]] 
+2018-11-09 10:17:16,244  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method getConectors was girl-controller
+2018-11-09 10:17:16,244  INFO ApiListingReferenceScanner:72 - Request mapping: getConectors belongs to groups: [[ResourceGroup{groupName='girl-controller', position=0, controller=datacenter.crudreposity.action.girlController}]] 
+2018-11-09 10:17:16,244  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method getGirl was girl-controller
+2018-11-09 10:17:16,245  INFO ApiListingReferenceScanner:72 - Request mapping: getGirl belongs to groups: [[ResourceGroup{groupName='girl-controller', position=0, controller=datacenter.crudreposity.action.girlController}]] 
+2018-11-09 10:17:16,245  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method getMongodb was girl-controller
+2018-11-09 10:17:16,245  INFO ApiListingReferenceScanner:72 - Request mapping: getMongodb belongs to groups: [[ResourceGroup{groupName='girl-controller', position=0, controller=datacenter.crudreposity.action.girlController}]] 
+2018-11-09 10:17:16,245  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method getMybatis was girl-controller
+2018-11-09 10:17:16,246  INFO ApiListingReferenceScanner:72 - Request mapping: getMybatis belongs to groups: [[ResourceGroup{groupName='girl-controller', position=0, controller=datacenter.crudreposity.action.girlController}]] 
+2018-11-09 10:17:16,246  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method getRedis was girl-controller
+2018-11-09 10:17:16,246  INFO ApiListingReferenceScanner:72 - Request mapping: getRedis belongs to groups: [[ResourceGroup{groupName='girl-controller', position=0, controller=datacenter.crudreposity.action.girlController}]] 
+2018-11-09 10:17:16,246  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method getNewsList was girl-controller
+2018-11-09 10:17:16,246  INFO ApiListingReferenceScanner:72 - Request mapping: getNewsList belongs to groups: [[ResourceGroup{groupName='girl-controller', position=0, controller=datacenter.crudreposity.action.girlController}]] 
+2018-11-09 10:17:16,247  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method logIn was girl-controller
+2018-11-09 10:17:16,247  INFO ApiListingReferenceScanner:72 - Request mapping: logIn belongs to groups: [[ResourceGroup{groupName='girl-controller', position=0, controller=datacenter.crudreposity.action.girlController}]] 
+2018-11-09 10:17:16,247  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method sendUrl was girl-controller
+2018-11-09 10:17:16,247  INFO ApiListingReferenceScanner:72 - Request mapping: sendUrl belongs to groups: [[ResourceGroup{groupName='girl-controller', position=0, controller=datacenter.crudreposity.action.girlController}]] 
+2018-11-09 10:17:16,248  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method sendWebsocketMsg was girl-controller
+2018-11-09 10:17:16,248  INFO ApiListingReferenceScanner:72 - Request mapping: sendWebsocketMsg belongs to groups: [[ResourceGroup{groupName='girl-controller', position=0, controller=datacenter.crudreposity.action.girlController}]] 
+2018-11-09 10:17:16,248  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method postUser was user-controller
+2018-11-09 10:17:16,248  INFO ApiListingReferenceScanner:72 - Request mapping: postUser belongs to groups: [[ResourceGroup{groupName='user-controller', position=0, controller=datacenter.crudreposity.action.UserController}]] 
+2018-11-09 10:17:16,248  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method getUser was user-controller
+2018-11-09 10:17:16,249  INFO ApiListingReferenceScanner:72 - Request mapping: getUser belongs to groups: [[ResourceGroup{groupName='user-controller', position=0, controller=datacenter.crudreposity.action.UserController}]] 
+2018-11-09 10:17:16,254  INFO ApiListingReferenceScanner:84 - Created resource listing Path: /default/result-controller Description: result-controller Position: 0
+2018-11-09 10:17:16,255  INFO ApiListingReferenceScanner:84 - Created resource listing Path: /default/user-controller Description: user-controller Position: 0
+2018-11-09 10:17:16,255  INFO ApiListingReferenceScanner:84 - Created resource listing Path: /default/girl-controller Description: girl-controller Position: 0
+2018-11-09 10:17:16,287  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.String(true)
+2018-11-09 10:17:16,288  INFO CachingAspect:79 - Caching aspect applied for cache models with key java.lang.String(true)
+2018-11-09 10:17:16,295  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.String(true)
+2018-11-09 10:17:16,296  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key java.lang.String(true)
+2018-11-09 10:17:16,302  INFO OperationsKeyGenerator:51 - Cache key generated: /ajax.datacenter.crudreposity.action.girlController.ajax.DefaultGenericTypeNamingStrategy
+2018-11-09 10:17:16,302  INFO CachingAspect:68 - Caching aspect applied for cache operations with key /ajax.datacenter.crudreposity.action.girlController.ajax.DefaultGenericTypeNamingStrategy
+2018-11-09 10:17:16,316  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method ajax was girl-controller
+2018-11-09 10:17:16,322  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method ajax was girl-controller
+2018-11-09 10:17:16,328  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method ajax was girl-controller
+2018-11-09 10:17:16,329  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method ajax was girl-controller
+2018-11-09 10:17:16,332  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method ajax was girl-controller
+2018-11-09 10:17:16,334  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method ajax was girl-controller
+2018-11-09 10:17:16,335  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method ajax was girl-controller
+2018-11-09 10:17:16,336  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method ajax was girl-controller
+2018-11-09 10:17:16,337  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method ajax was girl-controller
+2018-11-09 10:17:16,338  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method ajax was girl-controller
+2018-11-09 10:17:16,340  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method ajax was girl-controller
+2018-11-09 10:17:16,341  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method ajax was girl-controller
+2018-11-09 10:17:16,342  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method ajax was girl-controller
+2018-11-09 10:17:16,344  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method ajax was girl-controller
+2018-11-09 10:17:16,345  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method ajax was girl-controller
+2018-11-09 10:17:16,346  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method ajax was girl-controller
+2018-11-09 10:17:16,354  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.String(true)
+2018-11-09 10:17:16,354  INFO CachingAspect:79 - Caching aspect applied for cache models with key java.lang.String(true)
+2018-11-09 10:17:16,354  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.String(true)
+2018-11-09 10:17:16,355  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key java.lang.String(true)
+2018-11-09 10:17:16,355  INFO OperationsKeyGenerator:51 - Cache key generated: /.datacenter.crudreposity.action.girlController.connectSocket.DefaultGenericTypeNamingStrategy
+2018-11-09 10:17:16,355  INFO CachingAspect:68 - Caching aspect applied for cache operations with key /.datacenter.crudreposity.action.girlController.connectSocket.DefaultGenericTypeNamingStrategy
+2018-11-09 10:17:16,366  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method connectSocket was girl-controller
+2018-11-09 10:17:16,367  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method connectSocket was girl-controller
+2018-11-09 10:17:16,369  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method connectSocket was girl-controller
+2018-11-09 10:17:16,370  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method connectSocket was girl-controller
+2018-11-09 10:17:16,374  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method connectSocket was girl-controller
+2018-11-09 10:17:16,375  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method connectSocket was girl-controller
+2018-11-09 10:17:16,377  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method connectSocket was girl-controller
+2018-11-09 10:17:16,378  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method connectSocket was girl-controller
+2018-11-09 10:17:16,381  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method connectSocket was girl-controller
+2018-11-09 10:17:16,381  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method connectSocket was girl-controller
+2018-11-09 10:17:16,384  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method connectSocket was girl-controller
+2018-11-09 10:17:16,384  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method connectSocket was girl-controller
+2018-11-09 10:17:16,386  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method connectSocket was girl-controller
+2018-11-09 10:17:16,387  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method connectSocket was girl-controller
+2018-11-09 10:17:16,389  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method connectSocket was girl-controller
+2018-11-09 10:17:16,390  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method connectSocket was girl-controller
+2018-11-09 10:17:16,391  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.String(true)
+2018-11-09 10:17:16,392  INFO CachingAspect:79 - Caching aspect applied for cache models with key java.lang.String(true)
+2018-11-09 10:17:16,392  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.String(true)
+2018-11-09 10:17:16,392  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key java.lang.String(true)
+2018-11-09 10:17:16,392  INFO OperationsKeyGenerator:51 - Cache key generated: /connectionSocket.datacenter.crudreposity.action.girlController.connectionSocket.DefaultGenericTypeNamingStrategy
+2018-11-09 10:17:16,393  INFO CachingAspect:68 - Caching aspect applied for cache operations with key /connectionSocket.datacenter.crudreposity.action.girlController.connectionSocket.DefaultGenericTypeNamingStrategy
+2018-11-09 10:17:16,394  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method connectionSocket was girl-controller
+2018-11-09 10:17:16,395  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method connectionSocket was girl-controller
+2018-11-09 10:17:16,397  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method connectionSocket was girl-controller
+2018-11-09 10:17:16,399  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method connectionSocket was girl-controller
+2018-11-09 10:17:16,401  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method connectionSocket was girl-controller
+2018-11-09 10:17:16,401  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method connectionSocket was girl-controller
+2018-11-09 10:17:16,404  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method connectionSocket was girl-controller
+2018-11-09 10:17:16,405  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method connectionSocket was girl-controller
+2018-11-09 10:17:16,406  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method connectionSocket was girl-controller
+2018-11-09 10:17:16,407  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method connectionSocket was girl-controller
+2018-11-09 10:17:16,409  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method connectionSocket was girl-controller
+2018-11-09 10:17:16,410  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method connectionSocket was girl-controller
+2018-11-09 10:17:16,412  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method connectionSocket was girl-controller
+2018-11-09 10:17:16,414  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method connectionSocket was girl-controller
+2018-11-09 10:17:16,415  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method connectionSocket was girl-controller
+2018-11-09 10:17:16,416  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method connectionSocket was girl-controller
+2018-11-09 10:17:16,418  INFO ModelContextKeyGenerator:46 - Cache Key Generated: datacenter.crudreposity.entity.responseParam.Result<java.lang.String>(true)
+2018-11-09 10:17:16,418  INFO CachingAspect:79 - Caching aspect applied for cache models with key datacenter.crudreposity.entity.responseParam.Result<java.lang.String>(true)
+2018-11-09 10:17:16,420  INFO ModelPropertiesKeyGenerator:48 - Cache key generated: datacenter.crudreposity.entity.responseParam.Result<java.lang.String>(true)
+2018-11-09 10:17:16,421  INFO CachingAspect:68 - Caching aspect applied for cache modelProperties with key datacenter.crudreposity.entity.responseParam.Result<java.lang.String>(true)
+2018-11-09 10:17:16,442  INFO ModelContextKeyGenerator:46 - Cache Key Generated: datacenter.crudreposity.entity.responseParam.Result<java.lang.String>(true)
+2018-11-09 10:17:16,442  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key datacenter.crudreposity.entity.responseParam.Result<java.lang.String>(true)
+2018-11-09 10:17:16,443  INFO ModelPropertiesKeyGenerator:48 - Cache key generated: datacenter.crudreposity.entity.responseParam.Result<java.lang.String>(true)
+2018-11-09 10:17:16,443  INFO CachingAspect:68 - Caching aspect applied for cache modelProperties with key datacenter.crudreposity.entity.responseParam.Result<java.lang.String>(true)
+2018-11-09 10:17:16,445  INFO OperationsKeyGenerator:51 - Cache key generated: /denglu.datacenter.crudreposity.action.girlController.denglu.DefaultGenericTypeNamingStrategy
+2018-11-09 10:17:16,446  INFO CachingAspect:68 - Caching aspect applied for cache operations with key /denglu.datacenter.crudreposity.action.girlController.denglu.DefaultGenericTypeNamingStrategy
+2018-11-09 10:17:16,449  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method denglu was girl-controller
+2018-11-09 10:17:16,450  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method denglu was girl-controller
+2018-11-09 10:17:16,451  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method denglu was girl-controller
+2018-11-09 10:17:16,453  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method denglu was girl-controller
+2018-11-09 10:17:16,455  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method denglu was girl-controller
+2018-11-09 10:17:16,456  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method denglu was girl-controller
+2018-11-09 10:17:16,458  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method denglu was girl-controller
+2018-11-09 10:17:16,459  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method denglu was girl-controller
+2018-11-09 10:17:16,461  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method denglu was girl-controller
+2018-11-09 10:17:16,462  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method denglu was girl-controller
+2018-11-09 10:17:16,464  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method denglu was girl-controller
+2018-11-09 10:17:16,465  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method denglu was girl-controller
+2018-11-09 10:17:16,467  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method denglu was girl-controller
+2018-11-09 10:17:16,468  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method denglu was girl-controller
+2018-11-09 10:17:16,470  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method denglu was girl-controller
+2018-11-09 10:17:16,471  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method denglu was girl-controller
+2018-11-09 10:17:16,472  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.String(true)
+2018-11-09 10:17:16,473  INFO CachingAspect:79 - Caching aspect applied for cache models with key java.lang.String(true)
+2018-11-09 10:17:16,473  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.String(true)
+2018-11-09 10:17:16,473  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key java.lang.String(true)
+2018-11-09 10:17:16,473  INFO OperationsKeyGenerator:51 - Cache key generated: /distributted.datacenter.crudreposity.action.girlController.distributted.DefaultGenericTypeNamingStrategy
+2018-11-09 10:17:16,474  INFO CachingAspect:68 - Caching aspect applied for cache operations with key /distributted.datacenter.crudreposity.action.girlController.distributted.DefaultGenericTypeNamingStrategy
+2018-11-09 10:17:16,474  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method distributted was girl-controller
+2018-11-09 10:17:16,476  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method distributted was girl-controller
+2018-11-09 10:17:16,476  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method distributted was girl-controller
+2018-11-09 10:17:16,477  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method distributted was girl-controller
+2018-11-09 10:17:16,478  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method distributted was girl-controller
+2018-11-09 10:17:16,479  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method distributted was girl-controller
+2018-11-09 10:17:16,480  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method distributted was girl-controller
+2018-11-09 10:17:16,481  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method distributted was girl-controller
+2018-11-09 10:17:16,482  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method distributted was girl-controller
+2018-11-09 10:17:16,483  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method distributted was girl-controller
+2018-11-09 10:17:16,484  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method distributted was girl-controller
+2018-11-09 10:17:16,485  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method distributted was girl-controller
+2018-11-09 10:17:16,486  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method distributted was girl-controller
+2018-11-09 10:17:16,487  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method distributted was girl-controller
+2018-11-09 10:17:16,488  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method distributted was girl-controller
+2018-11-09 10:17:16,488  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method distributted was girl-controller
+2018-11-09 10:17:16,490  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.String(true)
+2018-11-09 10:17:16,491  INFO CachingAspect:79 - Caching aspect applied for cache models with key java.lang.String(true)
+2018-11-09 10:17:16,491  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.String(true)
+2018-11-09 10:17:16,491  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key java.lang.String(true)
+2018-11-09 10:17:16,491  INFO OperationsKeyGenerator:51 - Cache key generated: /file.datacenter.crudreposity.action.girlController.download.DefaultGenericTypeNamingStrategy
+2018-11-09 10:17:16,492  INFO CachingAspect:68 - Caching aspect applied for cache operations with key /file.datacenter.crudreposity.action.girlController.download.DefaultGenericTypeNamingStrategy
+2018-11-09 10:17:16,492  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method download was girl-controller
+2018-11-09 10:17:16,493  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method download was girl-controller
+2018-11-09 10:17:16,494  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.String(false)
+2018-11-09 10:17:16,495  INFO CachingAspect:79 - Caching aspect applied for cache models with key java.lang.String(false)
+2018-11-09 10:17:16,495  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.String(false)
+2018-11-09 10:17:16,495  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key java.lang.String(false)
+2018-11-09 10:17:16,496  INFO ModelContextKeyGenerator:46 - Cache Key Generated: datacenter.crudreposity.entity.responseParam.Result<datacenter.crudreposity.entity.mongodb.User>(true)
+2018-11-09 10:17:16,496  INFO CachingAspect:79 - Caching aspect applied for cache models with key datacenter.crudreposity.entity.responseParam.Result<datacenter.crudreposity.entity.mongodb.User>(true)
+2018-11-09 10:17:16,496  INFO ModelPropertiesKeyGenerator:48 - Cache key generated: datacenter.crudreposity.entity.responseParam.Result<datacenter.crudreposity.entity.mongodb.User>(true)
+2018-11-09 10:17:16,497  INFO CachingAspect:68 - Caching aspect applied for cache modelProperties with key datacenter.crudreposity.entity.responseParam.Result<datacenter.crudreposity.entity.mongodb.User>(true)
+2018-11-09 10:17:16,499  INFO ModelContextKeyGenerator:46 - Cache Key Generated: datacenter.crudreposity.entity.responseParam.Result<datacenter.crudreposity.entity.mongodb.User>(true)
+2018-11-09 10:17:16,499  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key datacenter.crudreposity.entity.responseParam.Result<datacenter.crudreposity.entity.mongodb.User>(true)
+2018-11-09 10:17:16,500  INFO ModelPropertiesKeyGenerator:48 - Cache key generated: datacenter.crudreposity.entity.mongodb.User(true)
+2018-11-09 10:17:16,500  INFO CachingAspect:68 - Caching aspect applied for cache modelProperties with key datacenter.crudreposity.entity.mongodb.User(true)
+2018-11-09 10:17:16,502  INFO ModelPropertiesKeyGenerator:48 - Cache key generated: datacenter.crudreposity.entity.responseParam.Result<datacenter.crudreposity.entity.mongodb.User>(true)
+2018-11-09 10:17:16,503  INFO CachingAspect:68 - Caching aspect applied for cache modelProperties with key datacenter.crudreposity.entity.responseParam.Result<datacenter.crudreposity.entity.mongodb.User>(true)
+2018-11-09 10:17:16,503  INFO ModelPropertiesKeyGenerator:48 - Cache key generated: datacenter.crudreposity.entity.mongodb.User(true)
+2018-11-09 10:17:16,503  INFO CachingAspect:68 - Caching aspect applied for cache modelProperties with key datacenter.crudreposity.entity.mongodb.User(true)
+2018-11-09 10:17:16,504  INFO ModelPropertiesKeyGenerator:48 - Cache key generated: datacenter.crudreposity.entity.mongodb.User(true)
+2018-11-09 10:17:16,505  INFO CachingAspect:68 - Caching aspect applied for cache modelProperties with key datacenter.crudreposity.entity.mongodb.User(true)
+2018-11-09 10:17:16,505  INFO OperationsKeyGenerator:51 - Cache key generated: /getAccess.datacenter.crudreposity.action.girlController.getAccess.DefaultGenericTypeNamingStrategy
+2018-11-09 10:17:16,505  INFO CachingAspect:68 - Caching aspect applied for cache operations with key /getAccess.datacenter.crudreposity.action.girlController.getAccess.DefaultGenericTypeNamingStrategy
+2018-11-09 10:17:16,509  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method getAccess was girl-controller
+2018-11-09 10:17:16,510  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method getAccess was girl-controller
+2018-11-09 10:17:16,511  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.String(true)
+2018-11-09 10:17:16,512  INFO CachingAspect:79 - Caching aspect applied for cache models with key java.lang.String(true)
+2018-11-09 10:17:16,512  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.String(true)
+2018-11-09 10:17:16,512  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key java.lang.String(true)
+2018-11-09 10:17:16,513  INFO OperationsKeyGenerator:51 - Cache key generated: /getConectors.datacenter.crudreposity.action.girlController.getConectors.DefaultGenericTypeNamingStrategy
+2018-11-09 10:17:16,513  INFO CachingAspect:68 - Caching aspect applied for cache operations with key /getConectors.datacenter.crudreposity.action.girlController.getConectors.DefaultGenericTypeNamingStrategy
+2018-11-09 10:17:16,514  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method getConectors was girl-controller
+2018-11-09 10:17:16,515  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method getConectors was girl-controller
+2018-11-09 10:17:16,516  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method getConectors was girl-controller
+2018-11-09 10:17:16,518  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method getConectors was girl-controller
+2018-11-09 10:17:16,520  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method getConectors was girl-controller
+2018-11-09 10:17:16,520  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method getConectors was girl-controller
+2018-11-09 10:17:16,521  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method getConectors was girl-controller
+2018-11-09 10:17:16,522  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method getConectors was girl-controller
+2018-11-09 10:17:16,523  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method getConectors was girl-controller
+2018-11-09 10:17:16,524  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method getConectors was girl-controller
+2018-11-09 10:17:16,524  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method getConectors was girl-controller
+2018-11-09 10:17:16,525  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method getConectors was girl-controller
+2018-11-09 10:17:16,526  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method getConectors was girl-controller
+2018-11-09 10:17:16,527  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method getConectors was girl-controller
+2018-11-09 10:17:16,528  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method getConectors was girl-controller
+2018-11-09 10:17:16,529  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method getConectors was girl-controller
+2018-11-09 10:17:16,532  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.util.List<datacenter.crudreposity.entity.Girlnfo>(true)
+2018-11-09 10:17:16,532  INFO CachingAspect:79 - Caching aspect applied for cache models with key java.util.List<datacenter.crudreposity.entity.Girlnfo>(true)
+2018-11-09 10:17:16,532  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.util.List<datacenter.crudreposity.entity.Girlnfo>(true)
+2018-11-09 10:17:16,532  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key java.util.List<datacenter.crudreposity.entity.Girlnfo>(true)
+2018-11-09 10:17:16,533  INFO ModelPropertiesKeyGenerator:48 - Cache key generated: datacenter.crudreposity.entity.Girlnfo(true)
+2018-11-09 10:17:16,533  INFO CachingAspect:68 - Caching aspect applied for cache modelProperties with key datacenter.crudreposity.entity.Girlnfo(true)
+2018-11-09 10:17:16,535  INFO ModelPropertiesKeyGenerator:48 - Cache key generated: java.util.List<datacenter.crudreposity.entity.Girlnfo>(true)
+2018-11-09 10:17:16,535  INFO CachingAspect:68 - Caching aspect applied for cache modelProperties with key java.util.List<datacenter.crudreposity.entity.Girlnfo>(true)
+2018-11-09 10:17:16,535  INFO ModelPropertiesKeyGenerator:48 - Cache key generated: datacenter.crudreposity.entity.Girlnfo(true)
+2018-11-09 10:17:16,536  INFO CachingAspect:68 - Caching aspect applied for cache modelProperties with key datacenter.crudreposity.entity.Girlnfo(true)
+2018-11-09 10:17:16,536  INFO OperationsKeyGenerator:51 - Cache key generated: /getGirl.datacenter.crudreposity.action.girlController.getGirl.DefaultGenericTypeNamingStrategy
+2018-11-09 10:17:16,536  INFO CachingAspect:68 - Caching aspect applied for cache operations with key /getGirl.datacenter.crudreposity.action.girlController.getGirl.DefaultGenericTypeNamingStrategy
+2018-11-09 10:17:16,537  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method getGirl was girl-controller
+2018-11-09 10:17:16,538  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method getGirl was girl-controller
+2018-11-09 10:17:16,540  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.String(true)
+2018-11-09 10:17:16,540  INFO CachingAspect:79 - Caching aspect applied for cache models with key java.lang.String(true)
+2018-11-09 10:17:16,540  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.String(true)
+2018-11-09 10:17:16,540  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key java.lang.String(true)
+2018-11-09 10:17:16,541  INFO OperationsKeyGenerator:51 - Cache key generated: /getMongodb.datacenter.crudreposity.action.girlController.getMongodb.DefaultGenericTypeNamingStrategy
+2018-11-09 10:17:16,541  INFO CachingAspect:68 - Caching aspect applied for cache operations with key /getMongodb.datacenter.crudreposity.action.girlController.getMongodb.DefaultGenericTypeNamingStrategy
+2018-11-09 10:17:16,542  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method getMongodb was girl-controller
+2018-11-09 10:17:16,542  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method getMongodb was girl-controller
+2018-11-09 10:17:16,544  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.String(true)
+2018-11-09 10:17:16,544  INFO CachingAspect:79 - Caching aspect applied for cache models with key java.lang.String(true)
+2018-11-09 10:17:16,544  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.String(true)
+2018-11-09 10:17:16,544  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key java.lang.String(true)
+2018-11-09 10:17:16,544  INFO OperationsKeyGenerator:51 - Cache key generated: /getMybatis.datacenter.crudreposity.action.girlController.getMybatis.DefaultGenericTypeNamingStrategy
+2018-11-09 10:17:16,545  INFO CachingAspect:68 - Caching aspect applied for cache operations with key /getMybatis.datacenter.crudreposity.action.girlController.getMybatis.DefaultGenericTypeNamingStrategy
+2018-11-09 10:17:16,545  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method getMybatis was girl-controller
+2018-11-09 10:17:16,546  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method getMybatis was girl-controller
+2018-11-09 10:17:16,548  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.util.List<datacenter.crudreposity.entity.mongodb.User>(true)
+2018-11-09 10:17:16,548  INFO CachingAspect:79 - Caching aspect applied for cache models with key java.util.List<datacenter.crudreposity.entity.mongodb.User>(true)
+2018-11-09 10:17:16,549  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.util.List<datacenter.crudreposity.entity.mongodb.User>(true)
+2018-11-09 10:17:16,549  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key java.util.List<datacenter.crudreposity.entity.mongodb.User>(true)
+2018-11-09 10:17:16,549  INFO ModelPropertiesKeyGenerator:48 - Cache key generated: datacenter.crudreposity.entity.mongodb.User(true)
+2018-11-09 10:17:16,549  INFO CachingAspect:68 - Caching aspect applied for cache modelProperties with key datacenter.crudreposity.entity.mongodb.User(true)
+2018-11-09 10:17:16,550  INFO ModelPropertiesKeyGenerator:48 - Cache key generated: java.util.List<datacenter.crudreposity.entity.mongodb.User>(true)
+2018-11-09 10:17:16,550  INFO CachingAspect:68 - Caching aspect applied for cache modelProperties with key java.util.List<datacenter.crudreposity.entity.mongodb.User>(true)
+2018-11-09 10:17:16,550  INFO ModelPropertiesKeyGenerator:48 - Cache key generated: datacenter.crudreposity.entity.mongodb.User(true)
+2018-11-09 10:17:16,550  INFO CachingAspect:68 - Caching aspect applied for cache modelProperties with key datacenter.crudreposity.entity.mongodb.User(true)
+2018-11-09 10:17:16,551  INFO OperationsKeyGenerator:51 - Cache key generated: /getUser.datacenter.crudreposity.action.girlController.getNewsList.DefaultGenericTypeNamingStrategy
+2018-11-09 10:17:16,551  INFO CachingAspect:68 - Caching aspect applied for cache operations with key /getUser.datacenter.crudreposity.action.girlController.getNewsList.DefaultGenericTypeNamingStrategy
+2018-11-09 10:17:16,552  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method getNewsList was girl-controller
+2018-11-09 10:17:16,552  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method getNewsList was girl-controller
+2018-11-09 10:17:16,554  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.String(true)
+2018-11-09 10:17:16,554  INFO CachingAspect:79 - Caching aspect applied for cache models with key java.lang.String(true)
+2018-11-09 10:17:16,554  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.String(true)
+2018-11-09 10:17:16,554  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key java.lang.String(true)
+2018-11-09 10:17:16,554  INFO OperationsKeyGenerator:51 - Cache key generated: /getRedis.datacenter.crudreposity.action.girlController.getRedis.DefaultGenericTypeNamingStrategy
+2018-11-09 10:17:16,555  INFO CachingAspect:68 - Caching aspect applied for cache operations with key /getRedis.datacenter.crudreposity.action.girlController.getRedis.DefaultGenericTypeNamingStrategy
+2018-11-09 10:17:16,555  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method getRedis was girl-controller
+2018-11-09 10:17:16,556  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method getRedis was girl-controller
+2018-11-09 10:17:16,557  INFO ModelContextKeyGenerator:46 - Cache Key Generated: datacenter.crudreposity.entity.requestParam.UserLogin(false)
+2018-11-09 10:17:16,557  INFO CachingAspect:79 - Caching aspect applied for cache models with key datacenter.crudreposity.entity.requestParam.UserLogin(false)
+2018-11-09 10:17:16,558  INFO ModelPropertiesKeyGenerator:48 - Cache key generated: datacenter.crudreposity.entity.requestParam.UserLogin(false)
+2018-11-09 10:17:16,558  INFO CachingAspect:68 - Caching aspect applied for cache modelProperties with key datacenter.crudreposity.entity.requestParam.UserLogin(false)
+2018-11-09 10:17:16,564  INFO ModelContextKeyGenerator:46 - Cache Key Generated: datacenter.crudreposity.entity.requestParam.UserLogin(false)
+2018-11-09 10:17:16,564  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key datacenter.crudreposity.entity.requestParam.UserLogin(false)
+2018-11-09 10:17:16,564  INFO ModelPropertiesKeyGenerator:48 - Cache key generated: datacenter.crudreposity.entity.requestParam.UserLogin(false)
+2018-11-09 10:17:16,565  INFO CachingAspect:68 - Caching aspect applied for cache modelProperties with key datacenter.crudreposity.entity.requestParam.UserLogin(false)
+2018-11-09 10:17:16,565  INFO ModelContextKeyGenerator:46 - Cache Key Generated: datacenter.crudreposity.entity.responseParam.Result<java.lang.String>(true)
+2018-11-09 10:17:16,565  INFO CachingAspect:79 - Caching aspect applied for cache models with key datacenter.crudreposity.entity.responseParam.Result<java.lang.String>(true)
+2018-11-09 10:17:16,565  INFO ModelContextKeyGenerator:46 - Cache Key Generated: datacenter.crudreposity.entity.responseParam.Result<java.lang.String>(true)
+2018-11-09 10:17:16,565  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key datacenter.crudreposity.entity.responseParam.Result<java.lang.String>(true)
+2018-11-09 10:17:16,565  INFO OperationsKeyGenerator:51 - Cache key generated: /logIn.datacenter.crudreposity.action.girlController.logIn.DefaultGenericTypeNamingStrategy
+2018-11-09 10:17:16,566  INFO CachingAspect:68 - Caching aspect applied for cache operations with key /logIn.datacenter.crudreposity.action.girlController.logIn.DefaultGenericTypeNamingStrategy
+2018-11-09 10:17:16,567  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method logIn was girl-controller
+2018-11-09 10:17:16,568  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method logIn was girl-controller
+2018-11-09 10:17:16,570  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method logIn was girl-controller
+2018-11-09 10:17:16,571  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method logIn was girl-controller
+2018-11-09 10:17:16,573  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method logIn was girl-controller
+2018-11-09 10:17:16,574  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method logIn was girl-controller
+2018-11-09 10:17:16,576  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method logIn was girl-controller
+2018-11-09 10:17:16,576  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method logIn was girl-controller
+2018-11-09 10:17:16,578  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method logIn was girl-controller
+2018-11-09 10:17:16,579  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method logIn was girl-controller
+2018-11-09 10:17:16,581  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method logIn was girl-controller
+2018-11-09 10:17:16,582  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method logIn was girl-controller
+2018-11-09 10:17:16,584  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method logIn was girl-controller
+2018-11-09 10:17:16,585  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method logIn was girl-controller
+2018-11-09 10:17:16,586  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method logIn was girl-controller
+2018-11-09 10:17:16,587  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method logIn was girl-controller
+2018-11-09 10:17:16,588  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.String(true)
+2018-11-09 10:17:16,588  INFO CachingAspect:79 - Caching aspect applied for cache models with key java.lang.String(true)
+2018-11-09 10:17:16,589  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.String(true)
+2018-11-09 10:17:16,589  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key java.lang.String(true)
+2018-11-09 10:17:16,589  INFO OperationsKeyGenerator:51 - Cache key generated: /sendUrl.datacenter.crudreposity.action.girlController.sendUrl.DefaultGenericTypeNamingStrategy
+2018-11-09 10:17:16,590  INFO CachingAspect:68 - Caching aspect applied for cache operations with key /sendUrl.datacenter.crudreposity.action.girlController.sendUrl.DefaultGenericTypeNamingStrategy
+2018-11-09 10:17:16,591  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method sendUrl was girl-controller
+2018-11-09 10:17:16,591  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method sendUrl was girl-controller
+2018-11-09 10:17:16,593  INFO ModelContextKeyGenerator:46 - Cache Key Generated: datacenter.crudreposity.entity.responseParam.Result<java.lang.String>(true)
+2018-11-09 10:17:16,593  INFO CachingAspect:79 - Caching aspect applied for cache models with key datacenter.crudreposity.entity.responseParam.Result<java.lang.String>(true)
+2018-11-09 10:17:16,594  INFO ModelContextKeyGenerator:46 - Cache Key Generated: datacenter.crudreposity.entity.responseParam.Result<java.lang.String>(true)
+2018-11-09 10:17:16,594  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key datacenter.crudreposity.entity.responseParam.Result<java.lang.String>(true)
+2018-11-09 10:17:16,595  INFO OperationsKeyGenerator:51 - Cache key generated: /sendWebsocketMsg.datacenter.crudreposity.action.girlController.sendWebsocketMsg.DefaultGenericTypeNamingStrategy
+2018-11-09 10:17:16,595  INFO CachingAspect:68 - Caching aspect applied for cache operations with key /sendWebsocketMsg.datacenter.crudreposity.action.girlController.sendWebsocketMsg.DefaultGenericTypeNamingStrategy
+2018-11-09 10:17:16,596  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method sendWebsocketMsg was girl-controller
+2018-11-09 10:17:16,596  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method sendWebsocketMsg was girl-controller
+2018-11-09 10:17:16,615  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.String(true)
+2018-11-09 10:17:16,616  INFO CachingAspect:79 - Caching aspect applied for cache models with key java.lang.String(true)
+2018-11-09 10:17:16,616  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.String(true)
+2018-11-09 10:17:16,616  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key java.lang.String(true)
+2018-11-09 10:17:16,616  INFO OperationsKeyGenerator:51 - Cache key generated: /NoAuthority.datacenter.crudreposity.action.ResultController.NoAuthority.DefaultGenericTypeNamingStrategy
+2018-11-09 10:17:16,616  INFO CachingAspect:68 - Caching aspect applied for cache operations with key /NoAuthority.datacenter.crudreposity.action.ResultController.NoAuthority.DefaultGenericTypeNamingStrategy
+2018-11-09 10:17:16,617  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method NoAuthority was result-controller
+2018-11-09 10:17:16,617  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method NoAuthority was result-controller
+2018-11-09 10:17:16,618  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method NoAuthority was result-controller
+2018-11-09 10:17:16,618  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method NoAuthority was result-controller
+2018-11-09 10:17:16,619  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method NoAuthority was result-controller
+2018-11-09 10:17:16,620  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method NoAuthority was result-controller
+2018-11-09 10:17:16,620  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method NoAuthority was result-controller
+2018-11-09 10:17:16,621  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method NoAuthority was result-controller
+2018-11-09 10:17:16,621  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method NoAuthority was result-controller
+2018-11-09 10:17:16,622  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method NoAuthority was result-controller
+2018-11-09 10:17:16,622  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method NoAuthority was result-controller
+2018-11-09 10:17:16,623  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method NoAuthority was result-controller
+2018-11-09 10:17:16,623  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method NoAuthority was result-controller
+2018-11-09 10:17:16,624  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method NoAuthority was result-controller
+2018-11-09 10:17:16,624  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method NoAuthority was result-controller
+2018-11-09 10:17:16,625  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method NoAuthority was result-controller
+2018-11-09 10:17:16,626  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.String(true)
+2018-11-09 10:17:16,627  INFO CachingAspect:79 - Caching aspect applied for cache models with key java.lang.String(true)
+2018-11-09 10:17:16,627  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.String(true)
+2018-11-09 10:17:16,627  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key java.lang.String(true)
+2018-11-09 10:17:16,627  INFO OperationsKeyGenerator:51 - Cache key generated: /users/{id}.datacenter.crudreposity.action.UserController.getUser.DefaultGenericTypeNamingStrategy
+2018-11-09 10:17:16,627  INFO CachingAspect:68 - Caching aspect applied for cache operations with key /users/{id}.datacenter.crudreposity.action.UserController.getUser.DefaultGenericTypeNamingStrategy
+2018-11-09 10:17:16,629  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method getUser was user-controller
+2018-11-09 10:17:16,632  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method getUser was user-controller
+2018-11-09 10:17:16,636  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.String(true)
+2018-11-09 10:17:16,637  INFO CachingAspect:79 - Caching aspect applied for cache models with key java.lang.String(true)
+2018-11-09 10:17:16,637  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.String(true)
+2018-11-09 10:17:16,637  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key java.lang.String(true)
+2018-11-09 10:17:16,637  INFO ModelContextKeyGenerator:46 - Cache Key Generated: datacenter.crudreposity.entity.Girlnfo(false)
+2018-11-09 10:17:16,637  INFO CachingAspect:79 - Caching aspect applied for cache models with key datacenter.crudreposity.entity.Girlnfo(false)
+2018-11-09 10:17:16,638  INFO ModelPropertiesKeyGenerator:48 - Cache key generated: datacenter.crudreposity.entity.Girlnfo(false)
+2018-11-09 10:17:16,638  INFO CachingAspect:68 - Caching aspect applied for cache modelProperties with key datacenter.crudreposity.entity.Girlnfo(false)
+2018-11-09 10:17:16,639  INFO ModelContextKeyGenerator:46 - Cache Key Generated: datacenter.crudreposity.entity.Girlnfo(false)
+2018-11-09 10:17:16,639  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key datacenter.crudreposity.entity.Girlnfo(false)
+2018-11-09 10:17:16,639  INFO ModelPropertiesKeyGenerator:48 - Cache key generated: datacenter.crudreposity.entity.Girlnfo(false)
+2018-11-09 10:17:16,640  INFO CachingAspect:68 - Caching aspect applied for cache modelProperties with key datacenter.crudreposity.entity.Girlnfo(false)
+2018-11-09 10:17:16,640  INFO OperationsKeyGenerator:51 - Cache key generated: /users/postUser.datacenter.crudreposity.action.UserController.postUser.DefaultGenericTypeNamingStrategy
+2018-11-09 10:17:16,640  INFO CachingAspect:68 - Caching aspect applied for cache operations with key /users/postUser.datacenter.crudreposity.action.UserController.postUser.DefaultGenericTypeNamingStrategy
+2018-11-09 10:17:16,641  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method postUser was user-controller
+2018-11-09 10:17:16,642  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method postUser was user-controller
+2018-11-09 10:17:16,659  INFO Http11NioProtocol:180 - Starting ProtocolHandler ["http-nio-8086"]
+2018-11-09 10:17:16,661  INFO NioSelectorPool:180 - Using a shared selector for servlet write/read
+2018-11-09 10:17:16,683  INFO TomcatWebServer:206 - Tomcat started on port(s): 8086 (http) with context path ''
+2018-11-09 10:17:16,687  INFO DemoApplication:59 - Started DemoApplication in 13.86 seconds (JVM running for 17.374)
+2018-11-09 10:17:16,725  INFO CacheCommandLineRunner:51 - scan: org.springframework.web.bind.annotation.RestController
+2018-11-09 10:17:16,726  INFO CacheCommandLineRunner:51 - scan: datacenter.crudreposity.action.girlController
+2018-11-09 10:17:16,727  INFO CacheCommandLineRunner:86 - /getAccess
+2018-11-09 10:17:16,727  INFO CacheCommandLineRunner:86 - /getUser
+2018-11-09 10:17:16,727  INFO CacheCommandLineRunner:86 - /getMybatis
+2018-11-09 10:17:16,727  INFO CacheCommandLineRunner:86 - /sendUrl
+2018-11-09 10:17:16,727  INFO CacheCommandLineRunner:86 - /denglu
+2018-11-09 10:17:16,727  INFO CacheCommandLineRunner:86 - /
+2018-11-09 10:17:16,727  INFO CacheCommandLineRunner:86 - /getGirl
+2018-11-09 10:17:16,727  INFO CacheCommandLineRunner:86 - /logIn
+2018-11-09 10:17:16,727  INFO CacheCommandLineRunner:86 - /connectionSocket
+2018-11-09 10:17:16,727  INFO CacheCommandLineRunner:86 - /sendWebsocketMsg
+2018-11-09 10:17:16,727  INFO CacheCommandLineRunner:86 - /getMongodb
+2018-11-09 10:17:16,727  INFO CacheCommandLineRunner:86 - /getRedis
+2018-11-09 10:17:16,728  INFO CacheCommandLineRunner:86 - /distributted
+2018-11-09 10:17:16,728  INFO CacheCommandLineRunner:86 - /file
+2018-11-09 10:17:16,728  INFO CacheCommandLineRunner:86 - /getConectors
+2018-11-09 10:17:16,728  INFO CacheCommandLineRunner:86 - /ajax
+2018-11-09 10:17:16,728  INFO CacheCommandLineRunner:51 - scan: datacenter.crudreposity.action.ResultController
+2018-11-09 10:17:16,728  INFO CacheCommandLineRunner:86 - /NoAuthority
+2018-11-09 10:17:16,728  INFO CacheCommandLineRunner:51 - scan: datacenter.crudreposity.action.UserController
+2018-11-09 10:17:16,728  INFO CacheCommandLineRunner:86 - /{id}
+2018-11-09 10:17:16,728  INFO CacheCommandLineRunner:86 - /postUser
+2018-11-09 10:17:16,731  INFO CacheCommandLineRunner:51 - scan: springfox.documentation.swagger2.web.Swagger2Controller
+2018-11-09 10:17:16,731  INFO CacheCommandLineRunner:86 - /${springfox.documentation.swagger.v2.path:/v2/api-docs}
+2018-11-09 10:17:16,733  INFO CacheCommandLineRunner:51 - scan: springfox.documentation.swagger.web.ApiResourceController
+2018-11-09 10:17:16,733  INFO CacheCommandLineRunner:86 - /configuration/security
+2018-11-09 10:17:16,733  INFO CacheCommandLineRunner:86 - /configuration/ui
+2018-11-09 10:17:16,733  INFO CacheCommandLineRunner:86 - /swagger-resources
+2018-11-09 10:17:16,735  INFO CacheCommandLineRunner:93 - sun.reflect.annotation.TypeNotPresentExceptionProxy
+2018-11-09 10:17:16,735  INFO CacheCommandLineRunner:96 - 共检测出uri个数: 23
+2018-11-09 10:17:16,735  INFO CacheCommandLineRunner:107 - API 版本并存数: 2
+2018-11-09 10:17:26,217  INFO [/]:180 - Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-11-09 10:17:26,218  INFO DispatcherServlet:494 - FrameworkServlet 'dispatcherServlet': initialization started
+2018-11-09 10:17:26,251  INFO DispatcherServlet:509 - FrameworkServlet 'dispatcherServlet': initialization completed in 33 ms
+2018-11-09 10:17:26,295  INFO girlController:363 - log4j 添加成功了！！！
+2018-11-09 10:17:27,447  INFO girlController:363 - log4j 添加成功了！！！
+2018-11-09 10:17:28,336  INFO girlController:363 - log4j 添加成功了！！！

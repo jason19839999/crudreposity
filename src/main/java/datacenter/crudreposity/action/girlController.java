@@ -23,9 +23,9 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.ibatis.session.SqlSession;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.poi.hssf.usermodel.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.alps.Ext;
 import org.springframework.http.HttpStatus;
@@ -74,9 +74,12 @@ public class girlController {
     @Autowired
     private UserServiceMongodbImpl userServiceMongodbImpl;
 
-    private static final Logger logger = LoggerFactory.getLogger(girlController.class);
+//    private static final Logger logger = LoggerFactory.getLogger(girlController.class);
 
-     //模拟登录页面，如下配置即可
+    private static final Logger logger = LogManager.getLogger(girlController.class);
+
+
+    //模拟登录页面，如下配置即可
     @RequestMapping(value = "/")
     public String connectSocket(Model model, HttpServletResponse response) throws Exception {
         model.addAttribute("name", "jason");
@@ -350,6 +353,13 @@ public class girlController {
         for (WebSocketServer item : list) {
             result += "userId: " + item.userId + "  goodsId: " + item.goodsId + "<br>";
         }
+
+//        logger.trace("我是trace");
+//        logger.info("我是info信息");
+//        logger.error("我是error");
+//        logger.fatal("我是fatal");
+//        logger.trace("退出程序.");
+
         logger.info("log4j 添加成功了！！！");
         return result;
     }
