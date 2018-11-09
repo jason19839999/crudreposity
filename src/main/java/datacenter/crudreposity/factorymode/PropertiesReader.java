@@ -20,8 +20,6 @@ public class PropertiesReader {
 		Properties props = new Properties();
 		Map<String, String> map = new ConcurrentHashMap<String, String>(); // HashMap<String, String>();
 		try {
-
-//			InputStream in = getClass().getResourceAsStream("datacenter/crudreposity/factorymode/type.properties");
 //			spring boot getResourceAsStream读取resource properties
 			InputStream in = getClass().getResourceAsStream("/config/type.properties");
 			if(in != null){
