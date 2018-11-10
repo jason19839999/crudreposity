@@ -16,6 +16,7 @@ import datacenter.crudreposity.entity.requestParam.UserLogin;
 import datacenter.crudreposity.entity.responseParam.CodeMsg;
 import datacenter.crudreposity.entity.responseParam.Result;
 import datacenter.crudreposity.exception.GlobalException;
+import datacenter.crudreposity.rabbitmq.MQSender;
 import datacenter.crudreposity.service.girlInfoDealService;
 import datacenter.crudreposity.websocket.WebSocketServer;
 import io.swagger.annotations.ApiImplicitParam;
@@ -70,6 +71,9 @@ public class girlController {
 
     @Autowired
     private UserServiceMongodbImpl userServiceMongodbImpl;
+
+    @Autowired
+    private MQSender mQSender;
 
     //模拟登录页面，如下配置即可
     @RequestMapping(value = "/")
@@ -347,6 +351,14 @@ public class girlController {
     public String ajax() {
 
         return "ajax";
+    }
+
+    @RequestMapping(value = "/sendRabbitMq")
+    @ResponseBody
+    public String sendRabbitMq() throws InterruptedException {
+        String msg = "Hello,Jason !";
+        mQSender.sendMiaoshaMessage(msg);
+        return msg;
     }
 
 
