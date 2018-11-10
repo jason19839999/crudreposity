@@ -17,6 +17,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Service;
 
@@ -50,7 +51,7 @@ public class DemoApplication {
     @Bean
     public FilterRegistrationBean tokenFilter(){
         TokenFilter filter =  tokenFilterobj();  //这样做的目的是为了能在TokenFilter使用@Autowire。要不然注入为null....
-        String [] arras = {"/getMybatis","/getTest"};
+        String [] arras = {"/denglu","/getAccess"};
         return filtersGen(filter, Arrays.asList(arras),null, "tokenFilter", 1);
     }
     @Bean

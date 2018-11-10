@@ -54,9 +54,13 @@ public class HairFactory {
 	public HairInterface getHairByClassKey(String key){
 		
 		try {
+			HairInterface hair  = null;
 			Map<String, String> map = new PropertiesReader().getProperties();
-			
-			HairInterface hair = (HairInterface) Class.forName(map.get(key)).newInstance();
+			if(map.size() > 0) {
+				hair = (HairInterface) Class.forName(map.get(key)).newInstance();
+			}else{
+				hair = (HairInterface) Class.forName("in").newInstance();
+			}
 			return hair;
 		} catch (InstantiationException e) {
 			// TODO Auto-generated catch block

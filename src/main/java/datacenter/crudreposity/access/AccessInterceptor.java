@@ -5,9 +5,12 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import datacenter.crudreposity.entity.mongodb.User;
 import datacenter.crudreposity.entity.responseParam.CodeMsg;
 import datacenter.crudreposity.exception.GlobalException;
+import datacenter.crudreposity.filters.ServingRequestWrapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -15,7 +18,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 @Service
 public class AccessInterceptor  extends HandlerInterceptorAdapter{
 
-
+    //此拦截器建议只用做功能上的拦截，比如限流等操作。
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
@@ -26,13 +29,23 @@ public class AccessInterceptor  extends HandlerInterceptorAdapter{
         //只要WebMvcConfigurer注入此方法了，那么就会走这块
         if(handler instanceof HandlerMethod) {
             //获取接口传过来的token值，
+            // ① Get方式：http://localhost:8086/denglu?token=999
             String token = request.getParameter("token");
+            // ② POST方式：参数type：JSON  不能再这里加这个读取，会报错 java.io.IOException: Stream closed，放到doFilterInternal就可以了。
+//            ServingRequestWrapper requestWrapper = new ServingRequestWrapper(request);
+//            String body = requestWrapper.getBody();
+//            String uri = requestWrapper.getRequestURI();
+//            JSONObject jsonObject = JSON.parseObject(body);
+//            if(jsonObject != null && jsonObject.containsKey("token")){
+//                token = jsonObject.getString("token");
+//            }
+
             //获取用户信息，主要从cookie和redis获取
             //获取cookie值,注意：这个是用户登录的时候保存的cookie值
             // 或者读取redis的session值，由于接口过来的保存不了cookie,所有这里必须用分布式session处理
             String cookie= getCookieValue(request,"token");
             //用户合法性判断
-            if(token == null || cookie == null){
+            if(token == null && cookie == null){
                 //通过以下三种方式处理异常逻辑信息提示
 
                 //①跳转到登录页面或者无权限页面，这里没写，用return false代替了

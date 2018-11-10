@@ -1,5 +1,6 @@
 package datacenter.crudreposity.action;
 
+import com.alibaba.fastjson.JSONObject;
 import datacenter.crudreposity.aspect.Servicelock;
 import datacenter.crudreposity.config.MybatisSessionFactory;
 import datacenter.crudreposity.dao.mongodb.Impl.UserServiceMongodbImpl;
@@ -7,10 +8,7 @@ import datacenter.crudreposity.dao.mybatis.HKBillsDao;
 import datacenter.crudreposity.dao.mysql2.UserMysqlRepository;
 import datacenter.crudreposity.dao.redis.girlInfoRedisDao;
 import datacenter.crudreposity.distributedlock.redis.RedissLockUtil;
-import datacenter.crudreposity.entity.Girlnfo;
-import datacenter.crudreposity.entity.HKBill;
-import datacenter.crudreposity.entity.RedisScoreValue;
-import datacenter.crudreposity.entity.girlInfoListResponse;
+import datacenter.crudreposity.entity.*;
 import datacenter.crudreposity.entity.mongodb.User;
 import datacenter.crudreposity.entity.requestParam.UserLogin;
 import datacenter.crudreposity.entity.responseParam.CodeMsg;
@@ -18,15 +16,16 @@ import datacenter.crudreposity.entity.responseParam.Result;
 import datacenter.crudreposity.exception.GlobalException;
 import datacenter.crudreposity.rabbitmq.MQSender;
 import datacenter.crudreposity.service.girlInfoDealService;
+import datacenter.crudreposity.util.ExportUtil;
 import datacenter.crudreposity.websocket.WebSocketServer;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiOperation;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.ibatis.session.SqlSession;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.alps.Ext;
 import org.springframework.http.HttpStatus;
@@ -38,9 +37,12 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.nio.charset.Charset;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.zip.GZIPOutputStream;
@@ -74,6 +76,9 @@ public class girlController {
 
     @Autowired
     private MQSender mQSender;
+//    private static final Logger logger = LoggerFactory.getLogger(girlController.class);
+
+    private static final Logger logger = LogManager.getLogger(girlController.class);
 
     //模拟登录页面，如下配置即可
     @RequestMapping(value = "/")
@@ -219,10 +224,15 @@ public class girlController {
     public Result<User> getAccess(User user, RedisScoreValue redisScoreValue, @RequestBody String token) throws Exception {
         //业务逻辑处理都可以用GlobalException处理，
         // 直接 throw new GlobalException(CodeMsg.SESSION_ERROR)即可，直接返回给前端或者客户端错误信息
-        //拦截器里面也可以使用此方法
-        if (user != null && redisScoreValue != null) {
-            user.setAge(28);
+       //在此只要处理业务逻辑即可。。。
+        if (user != null) {
+//            user = new User();
+//            user.setId("1");
+//            user.setName("congcong");
+//            user.setAge(28);
         } else {
+            //在这里throw  公共异常处理捕捉不到
+            //记录异常日志
             throw new GlobalException(CodeMsg.SESSION_ERROR);
             //return "登录超时了";
         }
@@ -344,6 +354,14 @@ public class girlController {
         for (WebSocketServer item : list) {
             result += "userId: " + item.userId + "  goodsId: " + item.goodsId + "<br>";
         }
+
+//        logger.trace("我是trace");
+//        logger.info("我是info信息");
+//        logger.error("我是error");
+//        logger.fatal("我是fatal");
+//        logger.trace("退出程序.");
+
+        logger.info("log4j 添加成功了！！！");
         return result;
     }
 
@@ -360,6 +378,60 @@ public class girlController {
         mQSender.sendMiaoshaMessage(msg);
         return msg;
     }
+
+
+
+
+   //导出excel
+   @GetMapping("/file")
+   public String download(HttpServletResponse response) {
+       List<Map<String, Object>> dataList = null;
+
+       List<News> lst = objgirlInfoDealService.getNews();// 查询到要导出的信息
+
+       if (lst.size() == 0) {
+           return "无数据导出";
+       }
+       String sTitle = "website,navigation,junior_channel,news_time,title";
+       String fName = "News_";
+       String mapKey = "website,navigation,junior_channel,news_time,title";
+       dataList = new ArrayList<>();
+       Map<String, Object> map = null;
+       for (News obj : lst) {
+           map = new HashMap<>();
+           if(obj.getOther_info() != null && obj.getOther_info() != ""){
+               JSONObject json = JSONObject.parseObject(obj.getOther_info());
+               if(json.containsKey("website")){
+                   map.put("website", json.getString("website"));
+               }else{
+                   map.put("website", "");
+               }
+               if(json.containsKey("navigation")){
+                   map.put("navigation", json.getString("navigation"));
+               }else{
+                   map.put("navigation", "");
+               }
+           }else{
+               map.put("website", "");
+               map.put("navigation", "");
+           }
+           map.put("junior_channel", obj.getJunior_channel());
+           SimpleDateFormat format0 = new SimpleDateFormat("MM-dd HH:mm");
+           String time = format0.format(obj.getNews_time());
+           map.put("news_time", time);
+           map.put("title", obj.getTitle());
+
+           dataList.add(map);
+       }
+       try (final OutputStream os = response.getOutputStream()) {
+           ExportUtil.responseSetProperties(fName, response);
+           ExportUtil.doExport(dataList, sTitle, mapKey, os);
+           return null;
+       } catch (Exception e) {
+//           log.error("生成csv文件失败", e);
+       }
+       return "数据导出出错";
+   }
 
 
 }
