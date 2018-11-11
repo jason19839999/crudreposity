@@ -1,21 +1,21 @@
-package datacenter.crudreposity.design_mode.factorymode_abstract;
+package datacenter.crudreposity.design_mode.factory_mode_abstract;
 /**
- * 创建圣诞人工厂
+ * 创建新年人工厂
  * @author Administrator
  *
  */
-public class MCFactory implements PersonFactory {
+public class HNFactory implements PersonFactory {
 
 	@Override
 	public Boy getBoy() {
 		// TODO Auto-generated method stub
-		return new MCBoy();
+		return new HNBoy();
 	}
 
 	@Override
 	public Girl getGirl() {
 		// TODO Auto-generated method stub
-		return new MCGirl();
+		return new HNGirl();
 	}
 
 }

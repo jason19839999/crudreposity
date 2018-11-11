@@ -1,8 +1,7 @@
-package datacenter.crudreposity.design_mode.factorymode;
+package datacenter.crudreposity.design_mode.factory_mode;
 
 import java.io.InputStream;
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;

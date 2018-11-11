@@ -1,4 +1,4 @@
-package datacenter.crudreposity.design_mode.factorymode;
+package datacenter.crudreposity.design_mode.factory_mode;
 /**
  * 中分
  * @author Administrator
