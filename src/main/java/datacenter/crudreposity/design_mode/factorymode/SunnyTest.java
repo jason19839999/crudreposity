@@ -1,4 +1,4 @@
-package datacenter.crudreposity.factorymode;
+package datacenter.crudreposity.design_mode.factorymode;
 
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,7 +19,7 @@ public class SunnyTest {
 //		HairInterface right =  factory.getHair("right");
 //		right.draw();
 		
-//		HairInterface left = factory.getHairByClass("datacenter.crudreposity.factorymode.LeftHair");
+//		HairInterface left = factory.getHairByClass("LeftHair");
 //		left.draw();
 		
 		HairInterface hair = factory.getHairByClassKey("right");

@@ -1,4 +1,4 @@
-package datacenter.crudreposity.factorymode;
+package datacenter.crudreposity.design_mode.factorymode;
 /**
  * 创建接口
  * @author Administrator

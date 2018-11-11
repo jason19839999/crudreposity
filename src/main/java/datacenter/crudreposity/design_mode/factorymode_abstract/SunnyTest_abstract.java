@@ -1,4 +1,4 @@
-package datacenter.crudreposity.factorymode_abstract;
+package datacenter.crudreposity.design_mode.factorymode_abstract;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

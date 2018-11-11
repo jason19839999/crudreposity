@@ -102,7 +102,7 @@ public class girlController {
             cal.add(Calendar.HOUR, 8);// 24小时制
             date = cal.getTime();
             user.setCreate_date(date);
-            userServiceMongodbImpl.saveUser(user);
+//            userServiceMongodbImpl.saveUser(user);
             lst = userServiceMongodbImpl.findByName("聪哥",30);
         } catch (Exception ex) {
             ex.printStackTrace();

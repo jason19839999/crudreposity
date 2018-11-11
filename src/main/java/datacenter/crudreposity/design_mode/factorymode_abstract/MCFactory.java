@@ -1,4 +1,4 @@
-package datacenter.crudreposity.factorymode_abstract;
+package datacenter.crudreposity.design_mode.factorymode_abstract;
 /**
  * 创建圣诞人工厂
  * @author Administrator

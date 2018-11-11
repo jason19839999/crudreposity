@@ -1,4 +1,4 @@
-package datacenter.crudreposity.factorymode_abstract;
+package datacenter.crudreposity.design_mode.factorymode_abstract;
 /**
  * 人工厂接口
  * @author Administrator

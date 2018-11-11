@@ -1,4 +1,4 @@
-package datacenter.crudreposity.factorymode;
+package datacenter.crudreposity.design_mode.factorymode;
 
 import java.io.InputStream;
 import java.util.Enumeration;
