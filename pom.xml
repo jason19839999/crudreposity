@@ -337,17 +337,17 @@
             <version>2.2.2</version>
         </dependency>
 
-<<<<<<< HEAD
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-amqp</artifactId>
-=======
+        </dependency>
+
         <!--导出excel-->
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
             <version>3.14</version>
->>>>>>> 80abfb700da7d492a1ee08b2c24e54b5e8c26795
         </dependency>
 
     </dependencies>
