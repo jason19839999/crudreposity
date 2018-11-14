@@ -22,9 +22,12 @@ import java.util.TreeSet;
 public class listsetmapqueue {
 
     public static void main(String[] args) throws Exception {
-        //set的用法:不能存储相同的元素。
-        // TreeSet:会将里面的元素默认排序。
-        //Hashset:它是无顺序的，利用hash算法给赋值
+        //set的用法:不能存储相同的元素。 https://blog.csdn.net/Dzy_water/article/details/79144206
+        //TreeSet         :会将里面的元素默认排序。TreeSet(内部实现二叉树) 主要作用:排序 Comparable，Comparator，compareTo
+        //Hashset         :它是无顺序的，利用hash算法给赋值,使用HashSet 主要用来去重,当Set集合在进行存储的时候,hashCode值相同时,
+        // 会调用equals方法进行对比是同一个对象就不存;当hashCode值不相同时 不用调用equals方法,可以直接存
+        //LinkedHashSet   :有序 怎么存就怎么取出来
+
 //        看到array，就要想到角标。
 //        看到link，就要想到first，last。
 //        看到hash，就要想到hashCode,equals.
@@ -48,7 +51,8 @@ public class listsetmapqueue {
         ((HashSet) sets2).add(a);
         ((HashSet) sets2).add(b);
         ((HashSet) sets2).add(c);
-
+        ((HashSet) sets2).add(90);
+        //*********************************************************************
         TreeSet ts = new TreeSet(new MyComparator());
         ts.add(new Book("think in java", 100));
         ts.add(new Book("java 核心技术", 75));
@@ -57,6 +61,14 @@ public class listsetmapqueue {
         ts.add(new Book("think in java", 100));
         ts.add(new Book("ccc in java", 100));
         System.out.println(ts);
+        //*********************************************************************
+        HashSet<Book> sets3 = new HashSet<>();
+        sets3.add(new Book("think in java", 100));
+        sets3.add(new Book("think in java", 100));
+        sets3.add(new Book("java 核心技术", 75));
+        sets3.add(new Book("现代操作系统", 50));
+        //*********************************************************************
+        int i = 0;
 
     }
 }
@@ -80,7 +92,23 @@ class MyComparator implements Comparator {
 
 class Book {
     private String name;
-    private double price;
+    private int price;
+
+    public int hashCode(){  // 重写hashCode()方法。
+        return name.hashCode()+ price * 55;
+    }
+    //去重   // 重写equals()方法。
+    public boolean equals(Object obj){
+        if(this == obj)
+            return true;
+        if(obj == null)
+            return false;
+        if(obj instanceof Book){
+            Book p = (Book)obj;
+            return name.equals(p.name) && price==p.price;
+        }
+        return false;
+    }
 
     public Book() {
 
@@ -98,11 +126,11 @@ class Book {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
-    public Book(String name, double price) {
+    public Book(String name, int price) {
 
         this.name = name;
         this.price = price;
