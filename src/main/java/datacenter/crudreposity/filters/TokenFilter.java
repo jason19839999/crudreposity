@@ -31,6 +31,7 @@ public class TokenFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
 
+        //girlController 的 denglu接口，这里只是个例子，登录之后会返回token,那么其他接口请求会带着这个token；
         // ① Get方式：http://localhost:8086/denglu?token=999
         String token = httpServletRequest.getParameter("token");
          if(token != null){
