@@ -35,6 +35,7 @@ public class TokenFilter extends OncePerRequestFilter {
         // ① Get方式：http://localhost:8086/denglu?token=999
         String token = httpServletRequest.getParameter("token");
          if(token != null){
+             //这里通过token获取用户信息；这里没写读取redis用户信息的，所以随便创建了一个对象模拟用户登录
              User user = new User();
              user.setId("1");
              user.setName("jason[AccessInterceptor]" + "///" +"666666");
