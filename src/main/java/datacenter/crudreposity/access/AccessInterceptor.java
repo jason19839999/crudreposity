@@ -28,10 +28,11 @@ public class AccessInterceptor  extends HandlerInterceptorAdapter{
 
         //只要WebMvcConfigurer注入此方法了，那么就会走这块
         if(handler instanceof HandlerMethod) {
+            //此拦截器适合web端方式请求，即http://localhost:8086/denglu?token=999这种方式的。。。不适合app客户端请求，app客户端用OncePerRequestFilter 的 TokenFilter。。。
             //获取接口传过来的token值，
             // ① Get方式：http://localhost:8086/denglu?token=999
             String token = request.getParameter("token");
-            // ② POST方式：参数type：JSON  不能再这里加这个读取，会报错 java.io.IOException: Stream closed，放到doFilterInternal就可以了。
+//             ② POST方式：参数type：JSON  不能再这里加这个读取，会报错 java.io.IOException: Stream closed，放到doFilterInternal就可以了。
 //            ServingRequestWrapper requestWrapper = new ServingRequestWrapper(request);
 //            String body = requestWrapper.getBody();
 //            String uri = requestWrapper.getRequestURI();
