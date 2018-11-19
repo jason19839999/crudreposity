@@ -30,8 +30,8 @@ public class listsetmapqueue {
 
 //        看到array，就要想到角标。
 //        看到link，就要想到first，last。
-//        看到hash，就要想到hashCode,equals.
-//        看到tree，就要想到两个接口。Comparable，Comparator
+//        看到hash，就要想到hashCode,equals.                                       去重
+//        看到tree，就要想到两个接口。Comparable，Comparator       排序
         setsPractise();
 
     }

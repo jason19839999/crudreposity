@@ -254,7 +254,8 @@ public class girlController {
     @RequestMapping(value = "/denglu")
     @Servicelock
     @ResponseBody
-    public Result<String> denglu(HttpServletResponse response, @RequestParam("token") String token) throws Exception {
+    public Result<String> denglu(HttpServletResponse response, @RequestParam("token") String token,User user) throws Exception {
+        String name = user.getName();
         addCookie(response, token);
         return Result.success("登录成功");
     }

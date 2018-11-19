@@ -92,7 +92,7 @@ public class LockAspect {
 //		           b) tryLock(), 如果获取了锁立即返回true，如果别的线程正持有锁，立即返回false；
 //
 //		           c) tryLock (long timeout, TimeUnit  unit)，   如果获取了锁定立即返回true，如果别的线程正持有锁，会等待参数给定的时间，在等待的过程中，
-//                        如果获取了锁定，就返回true，如果等待超时，返回false；
+//                        如果获取了锁定，就返回true，如果等待超时，返回false；返回到等待池继续等待。
 //
 //		          d) lockInterruptibly:如果获取了锁定立即返回，如果没有获取锁定，当前线程处于休眠状态，直到或者锁定，或者当前线程被别的线程中断
 //
