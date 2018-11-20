@@ -23,8 +23,11 @@ public class AuthorizeAspect {
     public void doVerify() {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
-
-//        throw new GlobalException(CodeMsg.SESSION_ERROR);
+        //获取token，如果token验证通过，那么就放行，否则throw  new  GlobalException......
+        String token = request.getParameter("token");
+        if(false) {
+            throw new GlobalException(CodeMsg.SESSION_ERROR);
+        }
 
     }
 
