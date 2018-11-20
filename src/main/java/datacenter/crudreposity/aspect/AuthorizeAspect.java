@@ -2,9 +2,11 @@ package datacenter.crudreposity.aspect;
 
 import datacenter.crudreposity.entity.responseParam.CodeMsg;
 import datacenter.crudreposity.exception.GlobalException;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.hibernate.sql.OracleJoinFragment;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -31,7 +33,11 @@ public class AuthorizeAspect {
 
     }
 
+    @AfterReturning(returning = "object", pointcut = "verify()")
+    public  void doAfterReturning(Object object){
+        Object obj = object;
 
+    }
 
 
 }
