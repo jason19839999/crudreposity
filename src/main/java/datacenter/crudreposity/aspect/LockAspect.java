@@ -39,7 +39,7 @@ public class LockAspect {
 //    	lock.tryLock(100,TimeUnit.SECONDS);
     	Object obj = null;
 		try {
-			obj = joinPoint.proceed();
+			obj = joinPoint.proceed();  //执行完这个，再执行AuthorizeAspect，进行用户身份验证，如果通过执行相应的Controller,最后执行 finally  lock.unlock();
 		} catch (Throwable e) {
 			e.printStackTrace();
 		} finally{
