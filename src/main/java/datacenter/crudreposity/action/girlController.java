@@ -28,6 +28,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -79,6 +80,9 @@ public class girlController {
 
     @Autowired
     private HelloWorldConfiguration helloWorldConfiguration;
+
+    @Autowired
+    private ApplicationContext applicationContext;
 
     private static final Logger logger = LogManager.getLogger(girlController.class);
 
@@ -385,7 +389,12 @@ public class girlController {
     @RequestMapping(value = "/testAutoConfig")
     @ResponseBody
     public String testAutoConfig(){
-        return helloWorldConfiguration.helloWorld();
+        String result ="NO";
+//     通过ApplicationContext的调用
+        result = applicationContext.getBean(HelloWorldConfiguration.class).helloWorld();
+//        通过Autowired的调用
+//        result = helloWorldConfiguration.helloWorld();
+        return result +"---" + new Date();
     }
 
 
