@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import datacenter.crudreposity.aspect.Servicelock;
 import datacenter.crudreposity.config.MybatisSessionFactory;
 import datacenter.crudreposity.dao.mongodb.Impl.UserServiceMongodbImpl;
+import datacenter.crudreposity.dao.mongodb.UserServiceMongodb;
 import datacenter.crudreposity.dao.mybatis.HKBillsDao;
 import datacenter.crudreposity.dao.mysql2.UserMysqlRepository;
 import datacenter.crudreposity.dao.redis.girlInfoRedisDao;
@@ -72,7 +73,7 @@ public class girlController {
     private UserMysqlRepository userRepository;
 
     @Autowired
-    private UserServiceMongodbImpl userServiceMongodbImpl;
+    private UserServiceMongodb userServiceMongodb;
 
     @Autowired
     private MQSender mQSender;
@@ -103,7 +104,7 @@ public class girlController {
             date = cal.getTime();
             user.setCreate_date(date);
 //            userServiceMongodbImpl.saveUser(user);
-            lst = userServiceMongodbImpl.findByName("聪哥",30);
+            lst = userServiceMongodb.findByName("聪哥",30);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -208,10 +209,10 @@ public class girlController {
         objUser.setName("jason");
         objUser.setAge(18);
         //插入到数据库
-        userServiceMongodbImpl.saveUser(objUser);
+        userServiceMongodb.saveUser(objUser);
 
         //按照名字查询
-        objUser = userServiceMongodbImpl.findUserByUserName(objUser.getName(), objUser.getAge());
+        objUser = userServiceMongodb.findUserByUserName(objUser.getName(), objUser.getAge());
 
 
         return "调用成功";
