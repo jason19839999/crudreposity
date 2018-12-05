@@ -2,8 +2,8 @@ package datacenter.crudreposity.action;
 
 import com.alibaba.fastjson.JSONObject;
 import datacenter.crudreposity.aspect.Servicelock;
+import datacenter.crudreposity.auto_configure.HelloWorldConfiguration;
 import datacenter.crudreposity.config.MybatisSessionFactory;
-import datacenter.crudreposity.dao.mongodb.Impl.UserServiceMongodbImpl;
 import datacenter.crudreposity.dao.mongodb.UserServiceMongodb;
 import datacenter.crudreposity.dao.mybatis.HKBillsDao;
 import datacenter.crudreposity.dao.mysql2.UserMysqlRepository;
@@ -28,7 +28,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.alps.Ext;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -38,7 +37,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -78,6 +76,9 @@ public class girlController {
     @Autowired
     private MQSender mQSender;
 //    private static final Logger logger = LoggerFactory.getLogger(girlController.class);
+
+    @Autowired
+    private HelloWorldConfiguration helloWorldConfiguration;
 
     private static final Logger logger = LogManager.getLogger(girlController.class);
 
@@ -381,7 +382,11 @@ public class girlController {
         return msg;
     }
 
-
+    @RequestMapping(value = "/testAutoConfig")
+    @ResponseBody
+    public String testAutoConfig(){
+        return helloWorldConfiguration.helloWorld();
+    }
 
 
    //导出excel
