@@ -34,13 +34,65 @@ public class ServicelockAspect {
 	// 可以将Pointcut中的方法看作是一个被Advice引用的助记符，因为表达式不直观，因此我们可以通过方法签名的方式为 此表达式命名。
 	// 因此Pointcut中的方法只需要方法签名，而不需要在方法体内编写实际代码。
 	//原文：https://blog.csdn.net/fz13768884254/article/details/83538709
-	@Pointcut("@annotation(datacenter.crudreposity.aspect.Servicelock)")
-	public void lockAspect() {
+//	@Pointcut("@annotation(datacenter.crudreposity.aspect.Servicelock)")
+//	public void lockAspect() {
+//
+//	}
+//
+//    //①用户给方法添加同步锁控制
+//	@Around("lockAspect()")
+//	public  Object around(ProceedingJoinPoint joinPoint) throws InterruptedException {
+//		lock.lock();
+////		lock.tryLock();
+////		lock.lockInterruptibly();
+////    	lock.tryLock(100,TimeUnit.SECONDS);
+//		Object obj = null;
+//		try {
+//			obj = joinPoint.proceed();  //执行完这个，执行添加该注解的方法，最后执行lock.unLock(),return obj.结束任务。。。
+//		} catch (Throwable e) {
+//			e.printStackTrace();
+//		} finally{
+//			lock.unlock();
+//		}
+//		if(obj instanceof Result){
+//			if(((Result) obj).getCode()!=0){
+//			 	CodeMsg msg = new CodeMsg();
+//				msg.setCode(((Result) obj).getCode());
+//				msg.setMsg(((Result) obj).getMsg());
+//				throw new GlobalException(msg);
+//			}
+//		}
+//		return obj;
+//	}
 
-	}
+	//如果为了让注解Servicelock变为参数，也可以这样写
+//	@Around(value = "@annotation(servicelock)")
+//	public Object proceed(ProceedingJoinPoint proceedingJoinPoint,Servicelock servicelock) throws Throwable {
+//		lock.lock();
+////		lock.tryLock();
+////		lock.lockInterruptibly();
+////    	lock.tryLock(100,TimeUnit.SECONDS);
+//		Object obj = null;
+//		try {
+//			obj = proceedingJoinPoint.proceed();  //执行完这个，执行添加该注解的方法，最后执行lock.unLock(),return obj.结束任务。。。
+//		} catch (Throwable e) {
+//			e.printStackTrace();
+//		} finally{
+//			lock.unlock();
+//		}
+//		if(obj instanceof Result){
+//			if(((Result) obj).getCode()!=0){
+//				CodeMsg msg = new CodeMsg();
+//				msg.setCode(((Result) obj).getCode());
+//				msg.setMsg(((Result) obj).getMsg());
+//				throw new GlobalException(msg);
+//			}
+//		}
+//		return obj;
+//	}
 
-    //①用户给方法添加同步锁控制
-	@Around("lockAspect()")
+//	①用户给方法添加同步锁控制
+	@Around(value = "@annotation(datacenter.crudreposity.aspect.Servicelock)")
 	public  Object around(ProceedingJoinPoint joinPoint) throws InterruptedException {
 		lock.lock();
 //		lock.tryLock();
@@ -56,7 +108,7 @@ public class ServicelockAspect {
 		}
 		if(obj instanceof Result){
 			if(((Result) obj).getCode()!=0){
-			 	CodeMsg msg = new CodeMsg();
+				CodeMsg msg = new CodeMsg();
 				msg.setCode(((Result) obj).getCode());
 				msg.setMsg(((Result) obj).getMsg());
 				throw new GlobalException(msg);
@@ -64,26 +116,6 @@ public class ServicelockAspect {
 		}
 		return obj;
 	}
-
-	//如果为了让注解Servicelock变为参数，也可以这样写
-//	@Around(value = "@annotation(servicelock)")
-//	public Object proceed(ProceedingJoinPoint proceedingJoinPoint,Servicelock servicelock) throws Throwable {
-//		lock.lock();
-////		lock.tryLock();
-////		lock.lockInterruptibly();
-////    	lock.tryLock(100,TimeUnit.SECONDS);
-//		//对注解传入的参数进行处理：例如下面
-//		String desc =servicelock.description();
-//		Object obj = null;
-//		try {
-//			obj = proceedingJoinPoint.proceed();  //执行完这个，执行添加该注解的方法，最后执行lock.unLock(),return obj.结束任务。。。
-//		} catch (Throwable e) {
-//			e.printStackTrace();
-//		} finally{
-//			lock.unlock();
-//		}
-//		return obj;
-//	}
 
 }
 
