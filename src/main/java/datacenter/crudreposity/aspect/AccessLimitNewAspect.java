@@ -14,12 +14,13 @@ import org.springframework.stereotype.Component;
 public class AccessLimitNewAspect {
 
     //② 限流也可以在这里实现，如果在1分钟内访问次数超过了30次，那么就抛出异常，提示”访问太频繁！“
-    @Before(value = "@annotation(datacenter.crudreposity.aspect.AccessLimitNew)")
-    public void before() {
+//    @Before(value = "@annotation(datacenter.crudreposity.aspect.AccessLimitNew)")
+    @Before(value = "@annotation(accessLimitNew)")
+    public void before(AccessLimitNew accessLimitNew) {
 //        public Result<String> before() {
-        int i = 0;
+        int i = accessLimitNew.count();
         //处理访问次数超出限制逻辑
-        if (false) {
+        if (i <=0) {
             throw new GlobalException(CodeMsg.ACCESS_LIMIT_REACHED);
 //            return Result.error(CodeMsg.ACCESS_LIMIT_REACHED);
         }

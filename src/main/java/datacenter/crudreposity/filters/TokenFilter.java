@@ -34,11 +34,11 @@ public class TokenFilter extends OncePerRequestFilter {
         //girlController 的 denglu接口，这里只是个例子，登录之后会返回token,那么其他接口请求会带着这个token；
         // ① Get方式：http://localhost:8086/denglu?token=999
         String token = httpServletRequest.getParameter("token");
-         if(token != null){
+         if(token != null && !token.equals("")){
              //这里通过token获取用户信息；这里没写读取redis用户信息的，所以随便创建了一个对象模拟用户登录
              User user = new User();
              user.setId("1");
-             user.setName("jason[AccessInterceptor]" + "///" +"666666");
+             user.setName("jason[AccessInterceptor]" + "///" +"TokenFilter");
              user.setAge(18);
              UserContext.setUser(user);
          }
@@ -53,7 +53,7 @@ public class TokenFilter extends OncePerRequestFilter {
             //这里通过token获取用户信息；这里没写读取redis用户信息的，所以随便创建了一个对象模拟用户登录
             User user = new User();
             user.setId("1");
-            user.setName("jason[AccessInterceptor]" + "///" +"666666");
+            user.setName("jason[AccessInterceptor]" + "///" +"TokenFilter");
             user.setAge(18);
             UserContext.setUser(user);
         }

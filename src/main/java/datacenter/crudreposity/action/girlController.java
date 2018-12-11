@@ -262,9 +262,9 @@ public class girlController {
 
     @RequestMapping(value = "/denglu")
     @Servicelock(name = "jason zhang",description = "18岁")
-    @AccessLimitNew
+    @AccessLimitNew(count = 10)
     @ResponseBody
-    public Result<String> denglu(HttpServletResponse response, @RequestParam("token") String token,User user) throws Exception {
+    public Result<Object> denglu(HttpServletResponse response, @RequestParam("token") String token,User user) throws Exception {
         String name = user.getName();
         addCookie(response, token);
         if(false){
@@ -274,7 +274,7 @@ public class girlController {
            // throw new GlobalException(CodeMsg.SESSION_ERROR);  //这里的异常一般都是业务处理的异常了。。。
             return Result.error(CodeMsg.MIAO_SHA_OVER);
         }
-        return Result.success("登录成功");
+        return Result.success(user);
     }
 
     //利用@Valid注解，对传入参数进行校验 ，使用的是这个  <artifactId>spring-boot-starter-validation</artifactId>，现在已经成为了标准。
