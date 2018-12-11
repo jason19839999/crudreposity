@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Aspect
 @Component
-@Order(10)
+@Order(1)
 public class AuthorizeAspect {
 
     @Pointcut("execution(public * datacenter.crudreposity.action.*.*(..))"+
