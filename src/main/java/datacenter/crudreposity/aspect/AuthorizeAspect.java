@@ -2,10 +2,7 @@ package datacenter.crudreposity.aspect;
 
 import datacenter.crudreposity.entity.responseParam.CodeMsg;
 import datacenter.crudreposity.exception.GlobalException;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.annotation.*;
 import org.hibernate.sql.OracleJoinFragment;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -38,6 +35,21 @@ public class AuthorizeAspect {
         Object obj = object;
 
     }
+
+//    @Around("")
+//    public void around(){
+//
+//    }
+//
+//    @After("")
+//    public void after(){
+//
+//    }
+//
+//    @AfterThrowing("")
+//    public void afterThrowing(){
+//
+//    }
 
 
 }

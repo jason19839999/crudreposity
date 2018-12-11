@@ -25,24 +25,26 @@ public class LockAspect {
      */
 	private static  Lock lock = new ReentrantLock(true);//互斥锁 参数默认false，不公平锁  
 	
-	//Service层切点     用于记录错误日志
-//	@Pointcut("@annotation(datacenter.crudreposity.aspect.Servicelock)")
-//	public void lockAspect() {
-//
-//	}
+	//Service层切点  用户给方法添加同步锁控制
+	// @Pointcut：Pointcut是植入Advice的触发条件。每个Pointcut的定义包括2部分，一是表达式，二是方法签名。方法签名必须是 public及void型。
+	// 可以将Pointcut中的方法看作是一个被Advice引用的助记符，因为表达式不直观，因此我们可以通过方法签名的方式为 此表达式命名。
+	// 因此Pointcut中的方法只需要方法签名，而不需要在方法体内编写实际代码。
+	//原文：https://blog.csdn.net/fz13768884254/article/details/83538709
+	@Pointcut("@annotation(datacenter.crudreposity.aspect.Servicelock)")
+	public void lockAspect() {
 
-	//如果为了让注解Servicelock变为参数，也可以这样写
-	@Around(value = "@annotation(servicelock)")
-	public Object proceed(ProceedingJoinPoint proceedingJoinPoint,Servicelock servicelock) throws Throwable {
+	}
+
+	@Around("lockAspect()")
+	public  Object around(ProceedingJoinPoint joinPoint) throws InterruptedException {
 		lock.lock();
 //		lock.tryLock();
 //		lock.lockInterruptibly();
 //    	lock.tryLock(100,TimeUnit.SECONDS);
-		//对注解传入的参数进行处理：例如下面
-		String desc =servicelock.description();
 		Object obj = null;
 		try {
-			obj = proceedingJoinPoint.proceed();  //执行完这个，再执行AuthorizeAspect，进行用户身份验证，如果通过执行相应的Controller,最后执行 finally  lock.unlock();
+			obj = joinPoint.proceed();  //执行完这个，执行AuthorizeAspect，进行用户身份验证，如果通过执行相应的Controller,
+			// 再执行AuthorizeAspect。doAfterReturning，最后执行 finally  lock.unlock()，返回obj对象，结束了。。。
 		} catch (Throwable e) {
 			e.printStackTrace();
 		} finally{
@@ -51,23 +53,26 @@ public class LockAspect {
 		return obj;
 	}
 
-
-//	@Around("lockAspect()")
-//    public  Object around(ProceedingJoinPoint joinPoint) throws InterruptedException {
+	//如果为了让注解Servicelock变为参数，也可以这样写
+//	@Around(value = "@annotation(servicelock)")
+//	public Object proceed(ProceedingJoinPoint proceedingJoinPoint,Servicelock servicelock) throws Throwable {
 //		lock.lock();
 ////		lock.tryLock();
 ////		lock.lockInterruptibly();
 ////    	lock.tryLock(100,TimeUnit.SECONDS);
-//    	Object obj = null;
+//		//对注解传入的参数进行处理：例如下面
+//		String desc =servicelock.description();
+//		Object obj = null;
 //		try {
-//			obj = joinPoint.proceed();  //执行完这个，再执行AuthorizeAspect，进行用户身份验证，如果通过执行相应的Controller,最后执行 finally  lock.unlock();
+//			obj = proceedingJoinPoint.proceed();  //执行完这个，再执行AuthorizeAspect，进行用户身份验证，如果通过执行相应的Controller,最后执行 finally  lock.unlock();
 //		} catch (Throwable e) {
 //			e.printStackTrace();
 //		} finally{
 //			lock.unlock();
 //		}
-//    	return obj;
-//    }
+//		return obj;
+//	}
+
 }
 
 
