@@ -1,6 +1,7 @@
 package datacenter.crudreposity.action;
 
 import com.alibaba.fastjson.JSONObject;
+import datacenter.crudreposity.aspect.AccessLimitNew;
 import datacenter.crudreposity.aspect.Servicelock;
 import datacenter.crudreposity.auto_configure.HelloWorldConfiguration;
 import datacenter.crudreposity.config.MybatisSessionFactory;
@@ -224,7 +225,8 @@ public class girlController {
     }
 
     //@AccessLimit(seconds = 30)    //接口下流注入 比如：每分钟只能请求60次。思路：每次请求count放入redis,然后设置redis过期时间为1分钟，判断一分钟内不能超过60次。一分钟后过期重新计算
-    @Servicelock   //实现分布式锁功能，主要采用了Lock,reentrantLock(true) 公平锁
+    @AccessLimitNew
+//    @Servicelock   //实现分布式锁功能，主要采用了Lock,reentrantLock(true) 公平锁
     @RequestMapping(value = "/getAccess", method = RequestMethod.POST)
     @ResponseBody
     public Result<User> getAccess(User user, RedisScoreValue redisScoreValue, @RequestBody String token) throws Exception {
@@ -237,7 +239,8 @@ public class girlController {
 //            user.setName("congcong");
 //            user.setAge(28);
         } else {
-            //在这里throw  公共异常处理捕捉不到
+            //在这里throw  公共异常处理捕捉不到,
+            //  ※※ ※※※※※※※ →现在可以捕捉到了，原因 是之前方法头设置了Servicelock注解。那么程序在Around切面环绕着，所以导致在这里抛出异常ControllerAdvice捕捉不到
             //记录异常日志
             throw new GlobalException(CodeMsg.SESSION_ERROR);
             //return "登录超时了";
@@ -259,10 +262,17 @@ public class girlController {
 
     @RequestMapping(value = "/denglu")
     @Servicelock(name = "jason zhang",description = "18岁")
+    @AccessLimitNew
     @ResponseBody
     public Result<String> denglu(HttpServletResponse response, @RequestParam("token") String token,User user) throws Exception {
         String name = user.getName();
         addCookie(response, token);
+        if(true){
+            //在这里throw  公共异常处理捕捉不到,
+            //  ※※ ※※※※※※※ →现在可以捕捉到了，原因 是之前方法头设置了Servicelock注解。那么程序在Around切面环绕着，所以导致在这里抛出的异常ControllerAdvice捕捉不到
+//            throw new GlobalException(CodeMsg.SESSION_ERROR);  //这里的异常一般都是业务处理的异常了。。。
+            return Result.error(CodeMsg.MIAO_SHA_OVER);
+        }
         return Result.success("登录成功");
     }
 

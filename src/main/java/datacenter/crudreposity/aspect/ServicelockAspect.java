@@ -1,8 +1,12 @@
 package datacenter.crudreposity.aspect;
 
+import datacenter.crudreposity.entity.responseParam.CodeMsg;
+import datacenter.crudreposity.entity.responseParam.Result;
+import datacenter.crudreposity.exception.GlobalException;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.context.annotation.Scope;
 import org.springframework.core.annotation.Order;
@@ -16,9 +20,9 @@ import java.util.concurrent.locks.ReentrantLock;
 @Component
 @Scope
 @Aspect
-@Order(1)
+@Order(3)
 //order越小越是最先执行，但更重要的是最先执行的最后结束。order默认值是2147483647
-public class LockAspect {
+public class ServicelockAspect {
 	/**
      * 思考：为什么不用synchronized
      * service 默认是单例的，并发下lock只有一个实例
@@ -35,6 +39,7 @@ public class LockAspect {
 
 	}
 
+    //①用户给方法添加同步锁控制
 	@Around("lockAspect()")
 	public  Object around(ProceedingJoinPoint joinPoint) throws InterruptedException {
 		lock.lock();
@@ -43,12 +48,19 @@ public class LockAspect {
 //    	lock.tryLock(100,TimeUnit.SECONDS);
 		Object obj = null;
 		try {
-			obj = joinPoint.proceed();  //执行完这个，执行AuthorizeAspect，进行用户身份验证，如果通过执行相应的Controller,
-			// 再执行AuthorizeAspect。doAfterReturning，最后执行 finally  lock.unlock()，返回obj对象，结束了。。。
+			obj = joinPoint.proceed();  //执行完这个，执行添加该注解的方法，最后执行lock.unLock(),return obj.结束任务。。。
 		} catch (Throwable e) {
 			e.printStackTrace();
 		} finally{
 			lock.unlock();
+		}
+		if(obj instanceof Result){
+			if(((Result) obj).getCode()!=0){
+			 	CodeMsg msg = new CodeMsg();
+				msg.setCode(((Result) obj).getCode());
+				msg.setMsg(((Result) obj).getMsg());
+				throw new GlobalException(msg);
+			}
 		}
 		return obj;
 	}
@@ -64,7 +76,7 @@ public class LockAspect {
 //		String desc =servicelock.description();
 //		Object obj = null;
 //		try {
-//			obj = proceedingJoinPoint.proceed();  //执行完这个，再执行AuthorizeAspect，进行用户身份验证，如果通过执行相应的Controller,最后执行 finally  lock.unlock();
+//			obj = proceedingJoinPoint.proceed();  //执行完这个，执行添加该注解的方法，最后执行lock.unLock(),return obj.结束任务。。。
 //		} catch (Throwable e) {
 //			e.printStackTrace();
 //		} finally{
@@ -74,6 +86,10 @@ public class LockAspect {
 //	}
 
 }
+
+
+
+
 
 
 //二.什么ReentrantLock  : 以对象的方式来操作对象锁.相对于sychronized需要在finally中去释放锁
