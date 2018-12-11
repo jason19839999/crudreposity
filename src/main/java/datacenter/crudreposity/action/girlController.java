@@ -258,7 +258,7 @@ public class girlController {
     }
 
     @RequestMapping(value = "/denglu")
-    @Servicelock
+    @Servicelock(name = "jason zhang",description = "18岁")
     @ResponseBody
     public Result<String> denglu(HttpServletResponse response, @RequestParam("token") String token,User user) throws Exception {
         String name = user.getName();

@@ -38,6 +38,8 @@ public class LockAspect {
 //		lock.tryLock();
 //		lock.lockInterruptibly();
 //    	lock.tryLock(100,TimeUnit.SECONDS);
+		//对注解传入的参数进行处理：例如下面
+		String desc =servicelock.description();
 		Object obj = null;
 		try {
 			obj = proceedingJoinPoint.proceed();  //执行完这个，再执行AuthorizeAspect，进行用户身份验证，如果通过执行相应的Controller,最后执行 finally  lock.unlock();
