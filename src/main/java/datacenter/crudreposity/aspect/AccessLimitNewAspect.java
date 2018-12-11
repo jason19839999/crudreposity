@@ -19,7 +19,7 @@ public class AccessLimitNewAspect {
 //        public Result<String> before() {
         int i = 0;
         //处理访问次数超出限制逻辑
-        if (true) {
+        if (false) {
             throw new GlobalException(CodeMsg.ACCESS_LIMIT_REACHED);
 //            return Result.error(CodeMsg.ACCESS_LIMIT_REACHED);
         }

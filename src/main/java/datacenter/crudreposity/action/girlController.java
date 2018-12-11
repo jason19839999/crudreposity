@@ -267,10 +267,11 @@ public class girlController {
     public Result<String> denglu(HttpServletResponse response, @RequestParam("token") String token,User user) throws Exception {
         String name = user.getName();
         addCookie(response, token);
-        if(true){
+        if(false){
             //在这里throw  公共异常处理捕捉不到,
             //  ※※ ※※※※※※※ →现在可以捕捉到了，原因 是之前方法头设置了Servicelock注解。那么程序在Around切面环绕着，所以导致在这里抛出的异常ControllerAdvice捕捉不到
-//            throw new GlobalException(CodeMsg.SESSION_ERROR);  //这里的异常一般都是业务处理的异常了。。。
+            //  现在的做法是在这里返回异常信息给Servicelock.Around ，在Servicelock.Around里面抛出异常。。。
+           // throw new GlobalException(CodeMsg.SESSION_ERROR);  //这里的异常一般都是业务处理的异常了。。。
             return Result.error(CodeMsg.MIAO_SHA_OVER);
         }
         return Result.success("登录成功");
