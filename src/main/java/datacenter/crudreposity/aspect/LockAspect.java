@@ -26,27 +26,46 @@ public class LockAspect {
 	private static  Lock lock = new ReentrantLock(true);//互斥锁 参数默认false，不公平锁  
 	
 	//Service层切点     用于记录错误日志
-	@Pointcut("@annotation(datacenter.crudreposity.aspect.Servicelock)")
-	public void lockAspect() {
-		
-	}
-	
-    @Around("lockAspect()")
-    public  Object around(ProceedingJoinPoint joinPoint) throws InterruptedException {
+//	@Pointcut("@annotation(datacenter.crudreposity.aspect.Servicelock)")
+//	public void lockAspect() {
+//
+//	}
+
+	//如果为了让注解Servicelock变为参数，也可以这样写
+	@Around(value = "@annotation(servicelock)")
+	public Object proceed(ProceedingJoinPoint proceedingJoinPoint,Servicelock servicelock) throws Throwable {
 		lock.lock();
 //		lock.tryLock();
 //		lock.lockInterruptibly();
 //    	lock.tryLock(100,TimeUnit.SECONDS);
-    	Object obj = null;
+		Object obj = null;
 		try {
-			obj = joinPoint.proceed();  //执行完这个，再执行AuthorizeAspect，进行用户身份验证，如果通过执行相应的Controller,最后执行 finally  lock.unlock();
+			obj = proceedingJoinPoint.proceed();  //执行完这个，再执行AuthorizeAspect，进行用户身份验证，如果通过执行相应的Controller,最后执行 finally  lock.unlock();
 		} catch (Throwable e) {
 			e.printStackTrace();
 		} finally{
 			lock.unlock();
 		}
-    	return obj;
-    } 
+		return obj;
+	}
+
+
+//	@Around("lockAspect()")
+//    public  Object around(ProceedingJoinPoint joinPoint) throws InterruptedException {
+//		lock.lock();
+////		lock.tryLock();
+////		lock.lockInterruptibly();
+////    	lock.tryLock(100,TimeUnit.SECONDS);
+//    	Object obj = null;
+//		try {
+//			obj = joinPoint.proceed();  //执行完这个，再执行AuthorizeAspect，进行用户身份验证，如果通过执行相应的Controller,最后执行 finally  lock.unlock();
+//		} catch (Throwable e) {
+//			e.printStackTrace();
+//		} finally{
+//			lock.unlock();
+//		}
+//    	return obj;
+//    }
 }
 
 
