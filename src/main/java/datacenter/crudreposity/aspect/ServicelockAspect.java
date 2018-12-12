@@ -94,17 +94,20 @@ public class ServicelockAspect {
 //	①用户给方法添加同步锁控制
 	@Around(value = "@annotation(datacenter.crudreposity.aspect.Servicelock)")
 	public  Object around(ProceedingJoinPoint joinPoint) throws InterruptedException {
-		lock.lock();
+		Object obj = null;
+		try {
+			lock.lock();
 //		lock.tryLock();
 //		lock.lockInterruptibly();
 //    	lock.tryLock(100,TimeUnit.SECONDS);
-		Object obj = null;
-		try {
 			obj = joinPoint.proceed();  //执行完这个，执行添加该注解的方法，最后执行lock.unLock(),return obj.结束任务。。。
 		} catch (Throwable e) {
 			e.printStackTrace();
 		} finally{
-			lock.unlock();
+			//必须手动解锁，垃圾收集器不会回收。
+			if(lock != null) {
+				lock.unlock();
+			}
 		}
 		if(obj instanceof Result){
 			if(((Result) obj).getCode()!=0){
