@@ -35,12 +35,12 @@ public class AuthorizeAspect {
             //这里不能给UserContext设置用户信息，由于UserContext是线程本地变量，它是和线程绑定一起的，为线程提供一个本地变量副本。
             //由于切面编程和请求业务是分开的，不是同一个线程所以UserContext这个变量不存在。
             //在TokenFilter → OncePerRequestFilter 或者Interceptor过滤器里面就可以，因为他们在同一个线程内，这个已经实现了。。。
-            User user = new User();
-            user.setId("1");
-            user.setName("jason[AccessInterceptor]" + "///" +"AuthorizeAspect");
-            user.setAge(18);
+//            User user = new User();
+//            user.setId("1");
+//            user.setName("jason[AccessInterceptor]" + "///" +"AuthorizeAspect");
+//            user.setAge(18);
             try {
-                UserContext.setUser(user);
+//                UserContext.setUser(user);
             }catch (Exception ex){
                 ex.printStackTrace();
             }

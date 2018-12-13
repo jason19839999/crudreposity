@@ -49,6 +49,7 @@ import java.util.concurrent.*;
 import java.util.zip.GZIPOutputStream;
 
 import org.redisson.api.RLock;
+import org.springframework.web.context.request.async.DeferredResult;
 
 import java.util.concurrent.TimeUnit;
 
@@ -408,8 +409,58 @@ public class girlController {
         return result +"---" + new Date();
     }
 
+    @GetMapping("/hello-world")
+    @ResponseBody
+    public DeferredResult<String> helloWorld() {
+        DeferredResult<String> result = new DeferredResult<>(50L);
+//        result.setResult("Hello,World");
+        println("Hello,World");
+        result.onCompletion(() -> {
+            println("执行结束");
+        });
 
-   //导出excel
+        result.onTimeout(() -> {
+            println("执行超时");
+        });
+
+        return result;
+    }
+
+    @GetMapping("/completion-stage")
+    @ResponseBody
+    public CompletionStage<String> completionStage(){
+        final long startTime = System.currentTimeMillis();
+
+        println("Hello,World");
+
+        return CompletableFuture.supplyAsync(()->{
+            long costTime = System.currentTimeMillis() - startTime;
+            println("执行计算结果，消耗：" + costTime + " ms.");
+            return "Hello,World"; // 异步执行结果
+        });
+    }
+
+    @GetMapping("/callable-hello-world")
+    @ResponseBody
+    public Callable<String> callableHelloWorld() {
+        final long startTime = System.currentTimeMillis();
+
+        println("Hello,World");
+
+        return () -> {
+            long costTime = System.currentTimeMillis() - startTime;
+            println("执行计算结果，消耗：" + costTime + " ms.");
+            return "Hello,World";
+        };
+    }
+
+    private  void println(Object object) {
+        String threadName = Thread.currentThread().getName();
+        System.out.println("HelloWorldAsyncController[" + threadName + "]: " + object);
+    }
+
+
+    //导出excel
    @GetMapping("/file")
    public String download(HttpServletResponse response) {
        List<Map<String, Object>> dataList = null;
