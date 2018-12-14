@@ -1,13 +1,10 @@
-package datacenter.crudreposity.practise;
+package datacenter.crudreposity.practise.arrays;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * @描述
@@ -19,7 +16,7 @@ import java.util.TreeSet;
 @SpringBootApplication
 @EnableAsync
 @Service
-public class listsetmapqueue {
+public class SetPractise {
 
     public static void main(String[] args) throws Exception {
         //set的用法:不能存储相同的元素。 https://blog.csdn.net/Dzy_water/article/details/79144206
@@ -52,7 +49,9 @@ public class listsetmapqueue {
         ((HashSet) sets2).add(b);
         ((HashSet) sets2).add(c);
         ((HashSet) sets2).add(90);
+
         //*********************************************************************
+        //主要作用用于排序
         TreeSet ts = new TreeSet(new MyComparator());
         ts.add(new Book("think in java", 100));
         ts.add(new Book("java 核心技术", 75));
@@ -60,13 +59,30 @@ public class listsetmapqueue {
         ts.add(new Book("java就业教程", 35));
         ts.add(new Book("think in java", 100));
         ts.add(new Book("ccc in java", 100));
+        //遍历treeset
+        Iterator<Book> iteratorTS = ts.iterator();
+        while(iteratorTS.hasNext()){
+            Book obj = iteratorTS.next();
+            //处理业务逻辑
+            //处理完业务逻辑，及时将obj释放掉，这样gc就主动回收了，特别注意
+            obj= null;
+        }
         System.out.println(ts);
         //*********************************************************************
+        //主要作用用于去重
         HashSet<Book> sets3 = new HashSet<>();
         sets3.add(new Book("think in java", 100));
         sets3.add(new Book("think in java", 100));
         sets3.add(new Book("java 核心技术", 75));
         sets3.add(new Book("现代操作系统", 50));
+        //遍历hashset
+        Iterator<Book> iteratorHS = sets3.iterator();
+        while (iteratorHS.hasNext()){
+            Book obj = iteratorHS.next();
+            //处理业务逻辑
+            //处理完业务逻辑，及时将obj释放掉，这样gc就主动回收了。特别注意
+            obj = null;
+        }
         //*********************************************************************
         int i = 0;
 
