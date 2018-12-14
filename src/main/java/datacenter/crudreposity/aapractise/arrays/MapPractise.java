@@ -1,4 +1,4 @@
-package datacenter.crudreposity.practise.arrays;
+package datacenter.crudreposity.aapractise.arrays;
 
 import java.util.*;
 

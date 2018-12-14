@@ -1,4 +1,4 @@
-package datacenter.crudreposity.practise.dynamic_proxy;
+package datacenter.crudreposity.aapractise.dynamic_proxy;
 
 
 
