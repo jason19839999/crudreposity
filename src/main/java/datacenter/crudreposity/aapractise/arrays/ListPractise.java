@@ -44,6 +44,7 @@ public class ListPractise {
             }
         });
        //总结：this.elementData = Arrays.copyOf(this.elementData, var3);
+        // System.arraycopy(var0, 0, var3, 0, Math.min(var0.length, var1));
         // ArrayList每次插入都重新复制一遍数组，这里数据量大的时候会影响性能。
         //    性能顺序：lambda parallelStream().forEach()>
         //                      lambda stream().forEach()≈lambda forEach()>
