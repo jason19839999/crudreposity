@@ -59,6 +59,20 @@ public class ListPractise {
         while(iterator2.hasNext()){
             Integer tmp = iterator2.next();
         }
+
+        //通过Collections.sort进行排序
+        Collections.sort(lstLinkList, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer integer, Integer t1) {
+                if(integer > t1){
+                    return -1;
+                }else if(integer < t1){
+                    return 1;
+                }else{
+                    return 0;
+                }
+            }
+        });
         //总结：lstLinkList  双向链表结构的list
         //    代码采用for循环、迭代器、foreach方式，遍历包含10万个元素的LinkedList，通过输出结果可以看出，
         // foreach语句效率最高，其次是迭代器，效率最差的是for循环
