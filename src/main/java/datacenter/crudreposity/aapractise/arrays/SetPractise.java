@@ -85,6 +85,13 @@ public class SetPractise {
             obj = null;
         }
         //*********************************************************************
+        //有序 怎么存就怎么取出来
+        Set<Integer> set4 = new LinkedHashSet<>();
+        set4.add(100);
+        set4.add(101);
+        set4.add(101);
+        set4.add(101);
+        set4.add(102);
         int i = 0;
 
     }

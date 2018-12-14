@@ -32,6 +32,8 @@ public class HashTablePractise {
              String value = hashtable.get(key);
          }
 
+         //总结：和HashMap的不同点  ①key和value 都不能为null  ,hashMap可以 ② synchronized修饰，也就是说hashTable是同步容器，Vector（它对应List）和Stack也是。
+
        int i =0;
     }
 
