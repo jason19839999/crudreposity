@@ -1,5 +1,6 @@
 package datacenter.crudreposity.access;
 
+import datacenter.crudreposity.entity.mongodb.User;
 import org.springframework.core.MethodParameter;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
@@ -12,8 +13,8 @@ public class ReturnValueHandler implements HandlerMethodReturnValueHandler {
 
     @Override
     public   boolean supportsReturnType(MethodParameter var1){
-
-        return  true;
+        //获取当前参数的返回值类型，和User比较，如果相同则处理
+        return User.class.equals(var1.getMethod().getReturnType());
     }
 
     @Override

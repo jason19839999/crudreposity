@@ -3,7 +3,9 @@ package datacenter.crudreposity.filters;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import datacenter.crudreposity.CacheCommandLineRunner;
+import datacenter.crudreposity.access.UserContext;
 import datacenter.crudreposity.config.ServingSettings;
+import datacenter.crudreposity.entity.mongodb.User;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,9 +31,17 @@ public class TokenFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
 
+        //girlController 的 denglu接口，这里只是个例子，登录之后会返回token,那么其他接口请求会带着这个token；
         // ① Get方式：http://localhost:8086/denglu?token=999
         String token = httpServletRequest.getParameter("token");
-
+         if(token != null && !token.equals("")){
+             //这里通过token获取用户信息；这里没写读取redis用户信息的，所以随便创建了一个对象模拟用户登录
+             User user = new User();
+             user.setId("1");
+             user.setName("jason[AccessInterceptor]" + "///" +"TokenFilter");
+             user.setAge(18);
+             UserContext.setUser(user);
+         }
         // ② POST方式：参数type：JSON
         //获取接口的requestBody消息体，说白了就是实体对象
         ServingRequestWrapper requestWrapper = new ServingRequestWrapper(httpServletRequest);
@@ -40,6 +50,12 @@ public class TokenFilter extends OncePerRequestFilter {
         if(body!=null && !body.equals("")){
             JSONObject jsonObject = JSON.parseObject(body);
             token = jsonObject.getString("token");
+            //这里通过token获取用户信息；这里没写读取redis用户信息的，所以随便创建了一个对象模拟用户登录
+            User user = new User();
+            user.setId("1");
+            user.setName("jason[AccessInterceptor]" + "///" +"TokenFilter");
+            user.setAge(18);
+            UserContext.setUser(user);
         }
         try {
             String imei ="";// jsonObject.getJSONObject("header").getString("imei");

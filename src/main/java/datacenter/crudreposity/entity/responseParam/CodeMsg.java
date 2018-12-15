@@ -32,7 +32,7 @@ public class CodeMsg {
     public static CodeMsg MIAOSHA_FAIL = new CodeMsg(500502, "秒杀失败");
 
 
-    private CodeMsg( ) {
+    public CodeMsg( ) {
     }
 
     private CodeMsg( int code,String msg ) {

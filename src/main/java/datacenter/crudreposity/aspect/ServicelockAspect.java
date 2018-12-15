@@ -1,8 +1,12 @@
 package datacenter.crudreposity.aspect;
 
+import datacenter.crudreposity.entity.responseParam.CodeMsg;
+import datacenter.crudreposity.entity.responseParam.Result;
+import datacenter.crudreposity.exception.GlobalException;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.context.annotation.Scope;
 import org.springframework.core.annotation.Order;
@@ -16,38 +20,111 @@ import java.util.concurrent.locks.ReentrantLock;
 @Component
 @Scope
 @Aspect
-@Order(1)
+@Order(3)
 //order越小越是最先执行，但更重要的是最先执行的最后结束。order默认值是2147483647
-public class LockAspect {
+public class ServicelockAspect {
 	/**
      * 思考：为什么不用synchronized
      * service 默认是单例的，并发下lock只有一个实例
      */
 	private static  Lock lock = new ReentrantLock(true);//互斥锁 参数默认false，不公平锁  
 	
-	//Service层切点     用于记录错误日志
-	@Pointcut("@annotation(datacenter.crudreposity.aspect.Servicelock)")
-	public void lockAspect() {
-		
-	}
-	
-    @Around("lockAspect()")
-    public  Object around(ProceedingJoinPoint joinPoint) throws InterruptedException {
-		lock.lock();
+	//Service层切点  用户给方法添加同步锁控制
+	// @Pointcut：Pointcut是植入Advice的触发条件。每个Pointcut的定义包括2部分，一是表达式，二是方法签名。方法签名必须是 public及void型。
+	// 可以将Pointcut中的方法看作是一个被Advice引用的助记符，因为表达式不直观，因此我们可以通过方法签名的方式为 此表达式命名。
+	// 因此Pointcut中的方法只需要方法签名，而不需要在方法体内编写实际代码。
+	//原文：https://blog.csdn.net/fz13768884254/article/details/83538709
+//	@Pointcut("@annotation(datacenter.crudreposity.aspect.Servicelock)")
+//	public void lockAspect() {
+//
+//	}
+//
+//    //①用户给方法添加同步锁控制
+//	@Around("lockAspect()")
+//	public  Object around(ProceedingJoinPoint joinPoint) throws InterruptedException {
+//		lock.lock();
+////		lock.tryLock();
+////		lock.lockInterruptibly();
+////    	lock.tryLock(100,TimeUnit.SECONDS);
+//		Object obj = null;
+//		try {
+//			obj = joinPoint.proceed();  //执行完这个，执行添加该注解的方法，最后执行lock.unLock(),return obj.结束任务。。。
+//		} catch (Throwable e) {
+//			e.printStackTrace();
+//		} finally{
+//			lock.unlock();
+//		}
+//		if(obj instanceof Result){
+//			if(((Result) obj).getCode()!=0){
+//			 	CodeMsg msg = new CodeMsg();
+//				msg.setCode(((Result) obj).getCode());
+//				msg.setMsg(((Result) obj).getMsg());
+//				throw new GlobalException(msg);
+//			}
+//		}
+//		return obj;
+//	}
+
+	//如果为了让注解Servicelock变为参数，也可以这样写
+//	@Around(value = "@annotation(servicelock)")
+//	public Object proceed(ProceedingJoinPoint proceedingJoinPoint,Servicelock servicelock) throws Throwable {
+//		lock.lock();
+////		lock.tryLock();
+////		lock.lockInterruptibly();
+////    	lock.tryLock(100,TimeUnit.SECONDS);
+//		Object obj = null;
+//		try {
+//			obj = proceedingJoinPoint.proceed();  //执行完这个，执行添加该注解的方法，最后执行lock.unLock(),return obj.结束任务。。。
+//		} catch (Throwable e) {
+//			e.printStackTrace();
+//		} finally{
+//			lock.unlock();
+//		}
+//		if(obj instanceof Result){
+//			if(((Result) obj).getCode()!=0){
+//				CodeMsg msg = new CodeMsg();
+//				msg.setCode(((Result) obj).getCode());
+//				msg.setMsg(((Result) obj).getMsg());
+//				throw new GlobalException(msg);
+//			}
+//		}
+//		return obj;
+//	}
+
+//	①用户给方法添加同步锁控制
+	@Around(value = "@annotation(datacenter.crudreposity.aspect.Servicelock)")
+	public  Object around(ProceedingJoinPoint joinPoint) throws InterruptedException {
+		Object obj = null;
+		try {
+			lock.lock();
 //		lock.tryLock();
 //		lock.lockInterruptibly();
 //    	lock.tryLock(100,TimeUnit.SECONDS);
-    	Object obj = null;
-		try {
-			obj = joinPoint.proceed();
+			obj = joinPoint.proceed();  //执行完这个，执行添加该注解的方法，最后执行lock.unLock(),return obj.结束任务。。。
 		} catch (Throwable e) {
 			e.printStackTrace();
 		} finally{
-			lock.unlock();
+			//必须手动解锁，垃圾收集器不会回收。
+			if(lock != null) {
+				lock.unlock();
+			}
 		}
-    	return obj;
-    } 
+		if(obj instanceof Result){
+			if(((Result) obj).getCode()!=0){
+				CodeMsg msg = new CodeMsg();
+				msg.setCode(((Result) obj).getCode());
+				msg.setMsg(((Result) obj).getMsg());
+				throw new GlobalException(msg);
+			}
+		}
+		return obj;
+	}
+
 }
+
+
+
+
 
 
 //二.什么ReentrantLock  : 以对象的方式来操作对象锁.相对于sychronized需要在finally中去释放锁
@@ -92,7 +169,7 @@ public class LockAspect {
 //		           b) tryLock(), 如果获取了锁立即返回true，如果别的线程正持有锁，立即返回false；
 //
 //		           c) tryLock (long timeout, TimeUnit  unit)，   如果获取了锁定立即返回true，如果别的线程正持有锁，会等待参数给定的时间，在等待的过程中，
-//                        如果获取了锁定，就返回true，如果等待超时，返回false；
+//                        如果获取了锁定，就返回true，如果等待超时，返回false；返回到等待池继续等待。
 //
 //		          d) lockInterruptibly:如果获取了锁定立即返回，如果没有获取锁定，当前线程处于休眠状态，直到或者锁定，或者当前线程被别的线程中断
 //

@@ -1,13 +1,10 @@
-package datacenter.crudreposity.practise;
+package datacenter.crudreposity.aapractise.arrays;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * @描述
@@ -19,7 +16,7 @@ import java.util.TreeSet;
 @SpringBootApplication
 @EnableAsync
 @Service
-public class listsetmapqueue {
+public class SetPractise {
 
     public static void main(String[] args) throws Exception {
         //set的用法:不能存储相同的元素。 https://blog.csdn.net/Dzy_water/article/details/79144206
@@ -30,13 +27,11 @@ public class listsetmapqueue {
 
 //        看到array，就要想到角标。
 //        看到link，就要想到first，last。
-//        看到hash，就要想到hashCode,equals.
-//        看到tree，就要想到两个接口。Comparable，Comparator
+//        看到hash，就要想到hashCode,equals.                                       去重
+//        看到tree，就要想到两个接口。Comparable，Comparator       排序
         setsPractise();
 
     }
-
-
 
     private static void setsPractise(){
         Set<Integer> sets = new TreeSet<>();
@@ -52,22 +47,51 @@ public class listsetmapqueue {
         ((HashSet) sets2).add(b);
         ((HashSet) sets2).add(c);
         ((HashSet) sets2).add(90);
+
         //*********************************************************************
-        TreeSet ts = new TreeSet(new MyComparator());
+        //主要作用用于排序
+        TreeSet<Book> ts = new TreeSet<Book>(new MyComparator());
         ts.add(new Book("think in java", 100));
         ts.add(new Book("java 核心技术", 75));
         ts.add(new Book("现代操作系统", 50));
         ts.add(new Book("java就业教程", 35));
         ts.add(new Book("think in java", 100));
         ts.add(new Book("ccc in java", 100));
+        //遍历treeset
+        Iterator<Book> iteratorTS = ts.iterator();
+        while(iteratorTS.hasNext()){
+            Book obj = iteratorTS.next();
+            //处理业务逻辑
+            //处理完业务逻辑，及时将obj释放掉，这样gc就主动回收了，特别注意
+            obj= null;
+        }
+        Book objFirst = (Book)ts.first();
+        Book objLast = (Book)ts.last();
+
         System.out.println(ts);
         //*********************************************************************
-        HashSet<Book> sets3 = new HashSet<>();
+        //主要作用用于去重
+        HashSet<Book> sets3 = new HashSet<Book>(2000);
         sets3.add(new Book("think in java", 100));
         sets3.add(new Book("think in java", 100));
         sets3.add(new Book("java 核心技术", 75));
         sets3.add(new Book("现代操作系统", 50));
+        //遍历hashset
+        Iterator<Book> iteratorHS = sets3.iterator();
+        while (iteratorHS.hasNext()){
+            Book obj = iteratorHS.next();
+            //处理业务逻辑
+            //处理完业务逻辑，及时将obj释放掉，这样gc就主动回收了。特别注意
+            obj = null;
+        }
         //*********************************************************************
+        //有序 怎么存就怎么取出来
+        Set<Integer> set4 = new LinkedHashSet<>();
+        set4.add(100);
+        set4.add(101);
+        set4.add(101);
+        set4.add(101);
+        set4.add(102);
         int i = 0;
 
     }

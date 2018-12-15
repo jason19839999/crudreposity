@@ -5,6 +5,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import datacenter.crudreposity.entity.responseParam.CodeMsg;
 import datacenter.crudreposity.entity.responseParam.Result;
+import org.springframework.core.annotation.Order;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -17,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(value=Exception.class)
+//    @ExceptionHandler(Throwable.class)
     @ResponseBody
     public Object exceptionHandler(HttpServletRequest request, Exception e){
         e.printStackTrace();
@@ -74,4 +77,12 @@ public class GlobalExceptionHandler {
         return httpServletRequest.getHeader("X-Requested-Width")!= null &&
                 "XMLHttpRequest".equals(httpServletRequest.getHeader("X-Requested-Width").toString());
     }
+
+//    全局拦截还可以这么写
+//    @ExceptionHandler(Throwable.class)
+//    @ResponseBody
+//    private ResponseEntity<String>  onException(Throwable throwable){
+//        return ResponseEntity.ok(throwable.getMessage());
+//    }
+
 }

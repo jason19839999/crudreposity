@@ -1,9 +1,11 @@
 package datacenter.crudreposity.action;
 
 import com.alibaba.fastjson.JSONObject;
+import datacenter.crudreposity.aspect.AccessLimitNew;
 import datacenter.crudreposity.aspect.Servicelock;
+import datacenter.crudreposity.auto_configure.HelloWorldConfiguration;
 import datacenter.crudreposity.config.MybatisSessionFactory;
-import datacenter.crudreposity.dao.mongodb.Impl.UserServiceMongodbImpl;
+import datacenter.crudreposity.dao.mongodb.UserServiceMongodb;
 import datacenter.crudreposity.dao.mybatis.HKBillsDao;
 import datacenter.crudreposity.dao.mysql2.UserMysqlRepository;
 import datacenter.crudreposity.dao.redis.girlInfoRedisDao;
@@ -27,7 +29,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.alps.Ext;
+import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -37,7 +39,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -48,6 +49,7 @@ import java.util.concurrent.*;
 import java.util.zip.GZIPOutputStream;
 
 import org.redisson.api.RLock;
+import org.springframework.web.context.request.async.DeferredResult;
 
 import java.util.concurrent.TimeUnit;
 
@@ -72,11 +74,17 @@ public class girlController {
     private UserMysqlRepository userRepository;
 
     @Autowired
-    private UserServiceMongodbImpl userServiceMongodbImpl;
+    private UserServiceMongodb userServiceMongodb;
 
     @Autowired
     private MQSender mQSender;
 //    private static final Logger logger = LoggerFactory.getLogger(girlController.class);
+
+    @Autowired
+    private HelloWorldConfiguration helloWorldConfiguration;
+
+    @Autowired
+    private ApplicationContext applicationContext;
 
     private static final Logger logger = LogManager.getLogger(girlController.class);
 
@@ -103,7 +111,7 @@ public class girlController {
             date = cal.getTime();
             user.setCreate_date(date);
 //            userServiceMongodbImpl.saveUser(user);
-            lst = userServiceMongodbImpl.findByName("聪哥",30);
+            lst = userServiceMongodb.findByName("聪哥",30);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -208,17 +216,18 @@ public class girlController {
         objUser.setName("jason");
         objUser.setAge(18);
         //插入到数据库
-        userServiceMongodbImpl.saveUser(objUser);
+        userServiceMongodb.saveUser(objUser);
 
         //按照名字查询
-        objUser = userServiceMongodbImpl.findUserByUserName(objUser.getName(), objUser.getAge());
+        objUser = userServiceMongodb.findUserByUserName(objUser.getName(), objUser.getAge());
 
 
         return "调用成功";
     }
 
     //@AccessLimit(seconds = 30)    //接口下流注入 比如：每分钟只能请求60次。思路：每次请求count放入redis,然后设置redis过期时间为1分钟，判断一分钟内不能超过60次。一分钟后过期重新计算
-    @Servicelock   //实现分布式锁功能，主要采用了Lock,reentrantLock(true) 公平锁
+    @AccessLimitNew
+//    @Servicelock   //实现分布式锁功能，主要采用了Lock,reentrantLock(true) 公平锁
     @RequestMapping(value = "/getAccess", method = RequestMethod.POST)
     @ResponseBody
     public Result<User> getAccess(User user, RedisScoreValue redisScoreValue, @RequestBody String token) throws Exception {
@@ -231,7 +240,8 @@ public class girlController {
 //            user.setName("congcong");
 //            user.setAge(28);
         } else {
-            //在这里throw  公共异常处理捕捉不到
+            //在这里throw  公共异常处理捕捉不到,
+            //  ※※ ※※※※※※※ →现在可以捕捉到了，原因 是之前方法头设置了Servicelock注解。那么程序在Around切面环绕着，所以导致在这里抛出异常ControllerAdvice捕捉不到
             //记录异常日志
             throw new GlobalException(CodeMsg.SESSION_ERROR);
             //return "登录超时了";
@@ -252,11 +262,20 @@ public class girlController {
     }
 
     @RequestMapping(value = "/denglu")
-    @Servicelock
+    @Servicelock(name = "jason zhang",description = "18岁")
+    @AccessLimitNew(count = 10)
     @ResponseBody
-    public Result<String> denglu(HttpServletResponse response, @RequestParam("token") String token) throws Exception {
+    public Result<Object> denglu(HttpServletResponse response, @RequestParam("token") String token,User user) throws Exception {
+        String name = user.getName();
         addCookie(response, token);
-        return Result.success("登录成功");
+        if(true){
+            //在这里throw  公共异常处理捕捉不到,
+            //  ※※ ※※※※※※※ →现在可以捕捉到了，原因 是之前方法头设置了Servicelock注解。那么程序在Around切面环绕着，所以导致在这里抛出的异常ControllerAdvice捕捉不到
+            //  现在的做法是在这里返回异常信息给Servicelock.Around ，在Servicelock.Around里面抛出异常。。。
+           // throw new GlobalException(CodeMsg.SESSION_ERROR);  //这里的异常一般都是业务处理的异常了。。。
+            return Result.error(CodeMsg.ORDER_NOT_EXIST);
+        }
+        return Result.success(user);
     }
 
     //利用@Valid注解，对传入参数进行校验 ，使用的是这个  <artifactId>spring-boot-starter-validation</artifactId>，现在已经成为了标准。
@@ -379,10 +398,69 @@ public class girlController {
         return msg;
     }
 
+    @RequestMapping(value = "/testAutoConfig")
+    @ResponseBody
+    public String testAutoConfig(){
+        String result ="NO";
+//     通过ApplicationContext的调用
+        result = applicationContext.getBean(HelloWorldConfiguration.class).helloWorld();
+//        通过Autowired的调用
+//        result = helloWorldConfiguration.helloWorld();
+        return result +"---" + new Date();
+    }
+
+    @GetMapping("/hello-world")
+    @ResponseBody
+    public DeferredResult<String> helloWorld() {
+        DeferredResult<String> result = new DeferredResult<>(50L);
+//        result.setResult("Hello,World");
+        println("Hello,World");
+        result.onCompletion(() -> {
+            println("执行结束");
+        });
+
+        result.onTimeout(() -> {
+            println("执行超时");
+        });
+
+        return result;
+    }
+
+    @GetMapping("/completion-stage")
+    @ResponseBody
+    public CompletionStage<String> completionStage(){
+        final long startTime = System.currentTimeMillis();
+
+        println("Hello,World");
+
+        return CompletableFuture.supplyAsync(()->{
+            long costTime = System.currentTimeMillis() - startTime;
+            println("执行计算结果，消耗：" + costTime + " ms.");
+            return "Hello,World"; // 异步执行结果
+        });
+    }
+
+    @GetMapping("/callable-hello-world")
+    @ResponseBody
+    public Callable<String> callableHelloWorld() {
+        final long startTime = System.currentTimeMillis();
+
+        println("Hello,World");
+
+        return () -> {
+            long costTime = System.currentTimeMillis() - startTime;
+            println("执行计算结果，消耗：" + costTime + " ms.");
+            return "Hello,World";
+        };
+    }
+
+    private  void println(Object object) {
+        String threadName = Thread.currentThread().getName();
+        System.out.println("HelloWorldAsyncController[" + threadName + "]: " + object);
+    }
 
 
-
-   //导出excel
+    //导出excel
    @GetMapping("/file")
    public String download(HttpServletResponse response) {
        List<Map<String, Object>> dataList = null;
