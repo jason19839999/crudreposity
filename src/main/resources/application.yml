@@ -8,16 +8,16 @@ common:
 mysql:
  driver: com.mysql.jdbc.Driver
  master:
-   url: jdbc:mysql://localhost:3306/o2o?useUnicode=true&amp;characterEncoding=utf8"
+   url: jdbc:mysql://192.168.0.111:3306/o2o?useUnicode=true&amp;characterEncoding=utf8"
    username: root
    password: 123456
  replica1:
-   url: jdbc:mysql://localhost:3306/o2o?useUnicode=true&amp;characterEncoding=utf8"
+   url: jdbc:mysql://192.168.0.111:3306/o2o?useUnicode=true&amp;characterEncoding=utf8"
    username: root
    password: 123456
 mysql2:
   driver: com.mysql.jdbc.Driver
-  url: jdbc:mysql://localhost:3306/o2o?autoReconnect=true&useUnicode=true&amp;characterEncoding=utf8"
+  url: jdbc:mysql://192.168.0.111:3306/o2o?autoReconnect=true&useUnicode=true&amp;characterEncoding=utf8"
   username: root
   password: 123456
 redis:
