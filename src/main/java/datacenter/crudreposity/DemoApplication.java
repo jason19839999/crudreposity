@@ -110,11 +110,11 @@ public class DemoApplication {
         double log =  Math.log(3);
         double log10 = Math.log10(10000);
         /* init mybatis session factory */
-        String args2[] = new String[2];
-        args2[0] = "-c";
-        args2[1] = SeekConstants.CONF_DIR + "/creeper_service.properties";
-        State state = new State(args2);
-        MybatisSessionFactory.init(state);
+//        String args2[] = new String[2];
+//        args2[0] = "-c";
+//        args2[1] = SeekConstants.CONF_DIR + "/creeper_service.properties";
+//        State state = new State(args2);
+//        MybatisSessionFactory.init(state);
         SpringApplication.run(DemoApplication.class, args);
     }
 
