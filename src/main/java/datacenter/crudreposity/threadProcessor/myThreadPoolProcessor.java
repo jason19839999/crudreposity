@@ -1,17 +1,32 @@
 package datacenter.crudreposity.threadProcessor;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.concurrent.*;
 
 public class myThreadPoolProcessor {
     //我创建了一个包含2条线程的线程池，但执行3个任务，从结果可以看出第三个任务使用的线程名称与第一个任务相同，即任务3与任务1使用同一条线程。
     // 还可以看出，任务3实在前两个任务完成后再执行的。
     public static void myPool() {
-        ExecutorService service = Executors.newFixedThreadPool(2);
-        service.execute(new PrintStr("A"));// AB同时执行
-        service.execute(new PrintStr("B"));
-        service.execute(new PrintStr("C"));// 在AB完成后执行
+        ExecutorService service = Executors.newFixedThreadPool(3);
+//        service.execute(new PrintStr("A"));// AB同时执行
+//        service.execute(new PrintStr("B"));
+//        service.execute(new PrintStr("C"));// 在AB完成后执行
+//        service.shutdown();
+
+//        也就是说， CompletionService实现了生产者提交任务和消费者获取结果的解耦，生产者和消费者都不用关心任务的完成顺序，由 CompletionService来保证，
+//        消费者一定是按照任务完成的先后顺序来获取执行结果。
+        long startTime = System.currentTimeMillis(); // 开始时间
+        CompletionService completionService = new ExecutorCompletionService(service);
+        completionService.submit(new PrintStr("A"),null);
+        completionService.submit(new PrintStr2("B"),null);
+        completionService.submit(new PrintStr3("C"),null);
+        int count = 0;
+        while (count < 3) { // 等待三个任务完成
+            if (completionService.poll() != null) {
+                count++;
+            }
+        }
+        long costTime = System.currentTimeMillis() - startTime; // 消耗时间
+        System.out.println("myPool() 总耗时：" + costTime + " 毫秒");
         service.shutdown();
     }
 
@@ -32,6 +47,7 @@ public class myThreadPoolProcessor {
         service.execute(new PrintStr("D"));// 会复用空闲的Thread
         service.execute(new PrintStr("E"));// 会复用空闲的Thread
         service.execute(new PrintStr("F"));// 会复用空闲的Thread
+        //调用返回值的callable
         Future<String> future = service.submit(new MyCallableTask());
         String result = future.get();
         service.shutdown();
@@ -49,7 +65,41 @@ class PrintStr implements Runnable {
 
     public void run() {
         try {
-            Thread.sleep(100);
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(str + " : " + Thread.currentThread().getName());
+    }
+}
+
+class PrintStr2 implements Runnable {
+    String str;
+
+    public PrintStr2(String str) {
+        this.str = str;
+    }
+
+    public void run() {
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(str + " : " + Thread.currentThread().getName());
+    }
+}
+
+class PrintStr3 implements Runnable {
+    String str;
+
+    public PrintStr3(String str) {
+        this.str = str;
+    }
+
+    public void run() {
+        try {
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
