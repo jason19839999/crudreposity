@@ -1,5 +1,7 @@
 package datacenter.crudreposity.threadProcessor;
 
+import net.bytebuddy.implementation.bytecode.Throw;
+
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 
@@ -40,5 +42,7 @@ class MyCallableTask implements Callable<String> {
             System.out.println("num=" + num);
         }
         return String.valueOf(num);
+//        return "OK";
+//        return "Failure";
     }
 }

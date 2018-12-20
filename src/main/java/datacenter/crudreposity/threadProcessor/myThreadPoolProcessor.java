@@ -18,7 +18,7 @@ public class myThreadPoolProcessor {
 
     //分析结果，newCachedThreadPool（）创建的线程池，线程数量根据需要创建。即如果池中没有空闲线程，则创建一条新线程（3个任务创建了3个线程）。
     // 若有有空闲线程，则复用（任务D、E复用了线程2和2）。
-    public static void myPool2() {
+    public static void myPool2() throws Exception{
         ExecutorService service = Executors.newCachedThreadPool();
         service.execute(new PrintStr("A"));
         service.execute(new PrintStr("B"));
@@ -31,7 +31,9 @@ public class myThreadPoolProcessor {
         }
         service.execute(new PrintStr("D"));// 会复用空闲的Thread
         service.execute(new PrintStr("E"));// 会复用空闲的Thread
+        service.execute(new PrintStr("F"));// 会复用空闲的Thread
         Future<String> future = service.submit(new MyCallableTask());
+        String result = future.get();
         service.shutdown();
     }
 
