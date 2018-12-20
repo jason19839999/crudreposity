@@ -65,7 +65,7 @@ class PrintStr implements Runnable {
 
     public void run() {
         try {
-            Thread.sleep(3000);
+            Thread.sleep(10);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -82,7 +82,7 @@ class PrintStr2 implements Runnable {
 
     public void run() {
         try {
-            Thread.sleep(3000);
+            Thread.sleep(10);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -99,7 +99,7 @@ class PrintStr3 implements Runnable {
 
     public void run() {
         try {
-            Thread.sleep(3000);
+            Thread.sleep(10);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
