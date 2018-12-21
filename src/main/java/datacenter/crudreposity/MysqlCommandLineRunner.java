@@ -55,6 +55,7 @@ public class MysqlCommandLineRunner implements CommandLineRunner {
 //                fixedChannels.add(c);
 //            }
 //        }
+        System.out.println("CommandLineRunner → MysqlCommandLineRunner");
     }
 
 }

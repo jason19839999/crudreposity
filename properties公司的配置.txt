@@ -18,7 +18,7 @@ spring.rabbitmq.host=192.168.2.232
 spring.rabbitmq.port=5672
 spring.rabbitmq.username=creeper
 spring.rabbitmq.password=creeper
-#virtual-hostÔÚ¿ØÖÆÌ¨¹ÜÀíµÄ¡°Admin¡±  ÓÒ²à²Ëµ¥ÖĞ ¡°Virtual Hosts¡±ÀïÃæÌí¼Ó£¬Õâ¸öĞèÒª¸ù¾İÒµÎñ²ğ·Ö£¬Ò»¸övirtual-hostÀïÃæ²»ÄÜÓĞÖØ¸´µÄexchangeºÍqueue...
+#virtual-hoståœ¨æ§åˆ¶å°ç®¡ç†çš„â€œAdminâ€  å³ä¾§èœå•ä¸­ â€œVirtual Hostsâ€é‡Œé¢æ·»åŠ ï¼Œè¿™ä¸ªéœ€è¦æ ¹æ®ä¸šåŠ¡æ‹†åˆ†ï¼Œä¸€ä¸ªvirtual-hosté‡Œé¢ä¸èƒ½æœ‰é‡å¤çš„exchangeå’Œqueue...
 spring.rabbitmq.virtual-host=/creeper
 #\u6D88\u8D39\u8005\u6570\u91CF
 spring.rabbitmq.listener.simple.concurrency= 10
@@ -30,17 +30,17 @@ spring.rabbitmq.listener.simple.auto-startup=true
 #\u6D88\u8D39\u5931\u8D25\uFF0C\u81EA\u52A8\u91CD\u65B0\u5165\u961F
 spring.rabbitmq.listener.simple.default-requeue-rejected= true
 #\u542F\u7528\u53D1\u9001\u91CD\u8BD5
-spring.rabbitmq.template.retry.enabled=true 
+spring.rabbitmq.template.retry.enabled=true
 spring.rabbitmq.template.retry.initial-interval=1000
 spring.rabbitmq.template.retry.max-attempts=3
 spring.rabbitmq.template.retry.max-interval=10000
 spring.rabbitmq.template.retry.multiplier=1.0
 
-#redisÉÚ±øÄ£Ê½ÅäÖÃ      Èç¹ûÏë¶ÁÈ¡´Ó½Úµã£¬ÓÃNginx×ö¸ºÔØ¾ùºâ,¿ÉÒÔÅäÖÃNginx½ÚµãipºÍ¶Ë¿Ú...
+#rediså“¨å…µæ¨¡å¼é…ç½®      å¦‚æœæƒ³è¯»å–ä»èŠ‚ç‚¹ï¼Œç”¨Nginxåšè´Ÿè½½å‡è¡¡,å¯ä»¥é…ç½®NginxèŠ‚ç‚¹ipå’Œç«¯å£...
 #spring.redis.database=0
 #spring.redis.password=123456
 
-# pool settings ...³ØÅäÖÃ
+# pool settings ...æ± é…ç½®
 #spring.redis.jedis.pool.max-idle=8
 #spring.redis.jedis.pool.min-idle=0
 #spring.redis.jedis.pool.max-active=8

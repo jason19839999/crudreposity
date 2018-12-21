@@ -94,6 +94,7 @@ public class CacheCommandLineRunner implements CommandLineRunner {
         }
         finally {
             logger.info("共检测出uri个数: " + targetUris.size());
+            System.out.println("CommandLineRunner → CacheCommandLineRunner");
         }
         return targetUris;
     }
