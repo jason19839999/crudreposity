@@ -14,20 +14,38 @@ public class myThreadPoolProcessor {
 
 //        也就是说， CompletionService实现了生产者提交任务和消费者获取结果的解耦，生产者和消费者都不用关心任务的完成顺序，由 CompletionService来保证，
 //        消费者一定是按照任务完成的先后顺序来获取执行结果。
+//        应用场景
+//        当向Executor提交多个任务并且希望获得它们在完成之后的结果，如果用FutureTask，可以循环获取task，并调用get方法去获取task执行结果，但是如果task还未完成，
+//       获取结果的线程将阻塞直到task完成，由于不知道哪个task优先执行完毕，使用这种方式效率不会很高。
+//      在jdk5时候提出接口CompletionService，它整合了Executor和BlockingQueue的功能，可以更加方便在多个任务执行时获取到任务执行结果。
+//        ---------------------
+//                作者：miaomiaoLoveCode
+//        来源：CSDN
+//        原文：https://blog.csdn.net/u010185262/article/details/56017175
+//        版权声明：本文为博主原创文章，转载请附上博文链接！
         long startTime = System.currentTimeMillis(); // 开始时间
         CompletionService completionService = new ExecutorCompletionService(service);
-        completionService.submit(new PrintStr("A"),null);
-        completionService.submit(new PrintStr2("B"),null);
-        completionService.submit(new PrintStr3("C"),null);
+        completionService.submit(new PrintStr2("A"));
+        completionService.submit(new PrintStr3("B"));
+        completionService.submit(new PrintStr4("C"));
         int count = 0;
+        String result = "";
         while (count < 3) { // 等待三个任务完成
-            if (completionService.poll() != null) {
-                count++;
+            Future<String> future =  completionService.poll();
+            if ( future != null) {
+                try {
+                    result += String.valueOf(future.get()) + "---";
+                    count++;
+                }catch (Exception ex){
+                    ex.printStackTrace();
+                }
             }
         }
+        System.out.println(result);
         long costTime = System.currentTimeMillis() - startTime; // 消耗时间
         System.out.println("myPool() 总耗时：" + costTime + " 毫秒");
         service.shutdown();
+
     }
 
 
@@ -56,7 +74,7 @@ public class myThreadPoolProcessor {
 
 }
 
-class PrintStr implements Runnable {
+class PrintStr implements Runnable{
     String str;
 
     public PrintStr(String str) {
@@ -65,7 +83,7 @@ class PrintStr implements Runnable {
 
     public void run() {
         try {
-            Thread.sleep(10);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -73,37 +91,57 @@ class PrintStr implements Runnable {
     }
 }
 
-class PrintStr2 implements Runnable {
+class PrintStr2 implements Callable<String> {
     String str;
 
     public PrintStr2(String str) {
         this.str = str;
     }
 
-    public void run() {
+    public String call() {
         try {
-            Thread.sleep(10);
+            Thread.sleep(500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         System.out.println(str + " : " + Thread.currentThread().getName());
+        return "OK2";
     }
 }
 
-class PrintStr3 implements Runnable {
+class PrintStr3 implements Callable<String> {
     String str;
 
     public PrintStr3(String str) {
         this.str = str;
     }
 
-    public void run() {
+    public String call() {
         try {
-            Thread.sleep(10);
+            Thread.sleep(500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         System.out.println(str + " : " + Thread.currentThread().getName());
+        return "OK3";
+    }
+}
+
+class PrintStr4 implements Callable<String> {
+    String str;
+
+    public PrintStr4(String str) {
+        this.str = str;
+    }
+
+    public String call() {
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(str + " : " + Thread.currentThread().getName());
+        return "OK4";
     }
 }
 
