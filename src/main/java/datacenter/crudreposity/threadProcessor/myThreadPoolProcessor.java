@@ -1,9 +1,8 @@
 package datacenter.crudreposity.threadProcessor;
 
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.*;
 
 public class myThreadPoolProcessor {
     //我创建了一个包含2条线程的线程池，但执行3个任务，从结果可以看出第三个任务使用的线程名称与第一个任务相同，即任务3与任务1使用同一条线程。
@@ -26,49 +25,64 @@ public class myThreadPoolProcessor {
 //        来源：CSDN
 //        原文：https://blog.csdn.net/u010185262/article/details/56017175
 //        版权声明：本文为博主原创文章，转载请附上博文链接！
-//        long startTime = System.currentTimeMillis(); // 开始时间
-//        CompletionService completionService = new ExecutorCompletionService(service);
-//        completionService.submit(new PrintStr2("A"));
-//        completionService.submit(new PrintStr3("B"));
-//        completionService.submit(new PrintStr4("C"));
-//        int count = 0;
-//        String result = "";
-//        while (count < 3) { // 等待三个任务完成
-//            Future<String> future =  completionService.poll();
-//            if ( future != null) {
-//                try {
-//                    result += String.valueOf(future.get()) + "---";
-//                    count++;
-//                }catch (Exception ex){
-//                    ex.printStackTrace();
-//                }
-//            }else{
-//                System.out.println("存在尚未执行完的任务");
-//            }
-//        }
-//        System.out.println(result);
-//        long costTime = System.currentTimeMillis() - startTime; // 消耗时间
-//        System.out.println("myPool() 总耗时：" + costTime + " 毫秒");
-//        service.shutdown();
-        try {
-            long startTime = System.currentTimeMillis(); // 开始时间
-            Future<String> future2 = service.submit(new PrintStr2("A"));
-//            String result2 = String.valueOf(future2.get());     在此处加上获取返回值，会导致同步执行了，多线程将失去作用
-            Future<String> future3 = service.submit(new PrintStr3("B"));
-//            String result3 = String.valueOf(future3.get());    在此处加上获取返回值，会导致同步执行了，多线程将失去作用
-            Future<String> future4 = service.submit(new PrintStr4("C"));
-//            String result4 = String.valueOf(future4.get());    在此处加上获取返回值，会导致同步执行了，多线程将失去作用
-
-            String result4 = String.valueOf(future4.get());
-            String result3 = String.valueOf(future3.get());
-            String result2 = String.valueOf(future2.get());
-            long costTime = System.currentTimeMillis() - startTime; // 消耗时间
-            System.out.println("myPool() 总耗时：" + costTime + " 毫秒");
-            result2 = "";
-            service.shutdown();
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        long startTime = System.currentTimeMillis(); // 开始时间
+        CompletionService completionService = new ExecutorCompletionService(service);
+        completionService.submit(new PrintStr2("A"));
+        completionService.submit(new PrintStr3("B"));
+        completionService.submit(new PrintStr4("C"));
+        int count = 0;
+        String result = "";
+        while (count < 3) { // 等待三个任务完成
+            Future<String> future =  completionService.poll();
+            if ( future != null) {
+                try {
+                    result += String.valueOf(future.get()) + "---";
+                    count++;
+                }catch (Exception ex){
+                    ex.printStackTrace();
+                }
+            }else{
+                System.out.println("存在尚未执行完的任务");
+            }
         }
+        System.out.println(result);
+        long costTime = System.currentTimeMillis() - startTime; // 消耗时间
+        System.out.println("myPool() 总耗时：" + costTime + " 毫秒");
+        service.shutdown();
+
+//        在外侧获取返回值
+//        try {
+//            long startTime = System.currentTimeMillis(); // 开始时间
+//            Future<String> future2 = service.submit(new PrintStr2("A"));
+////            String result2 = String.valueOf(future2.get());     在此处加上获取返回值，会导致同步执行了，多线程将失去作用
+//            Future<String> future3 = service.submit(new PrintStr3("B"));
+////            String result3 = String.valueOf(future3.get());    在此处加上获取返回值，会导致同步执行了，多线程将失去作用
+//            Future<String> future4 = service.submit(new PrintStr4("C"));
+////            String result4 = String.valueOf(future4.get());    在此处加上获取返回值，会导致同步执行了，多线程将失去作用
+//
+//            String result4 = String.valueOf(future4.get());
+//            String result3 = String.valueOf(future3.get());
+//            String result2 = String.valueOf(future2.get());
+//            long costTime = System.currentTimeMillis() - startTime; // 消耗时间
+//            System.out.println("myPool() 总耗时：" + costTime + " 毫秒");
+//            result2 = "";
+//            service.shutdown();
+
+//         整体执行任务
+//            两者都会堵塞，必须等待所有的任务执行完成后统一返回，一方面内存持有的时间长；
+//            另一方面响应性也有一定的影响，毕竟大家都喜欢看看刷刷的执行结果输出，而不是苦苦的等待；
+//            long startTime = System.currentTimeMillis(); // 开始时间
+//            List<Callable<String>> callables = new ArrayList<Callable<String>>();
+//            callables.add(new PrintStr2("A"));
+//            callables.add(new PrintStr2("B"));
+//            callables.add(new PrintStr2("C"));
+//            List<Future<String>> futures = service.invokeAll(callables);
+//            long costTime = System.currentTimeMillis() - startTime; // 消耗时间
+//            System.out.println("myPool() 总耗时：" + costTime + " 毫秒");
+//            service.shutdown();
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//        }
 
 
     }
