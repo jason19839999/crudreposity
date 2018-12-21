@@ -53,8 +53,11 @@ public class myThreadPoolProcessor {
         try {
             long startTime = System.currentTimeMillis(); // 开始时间
             Future<String> future2 = service.submit(new PrintStr2("A"));
+//            String result2 = String.valueOf(future2.get());     在此处加上获取返回值，会导致同步执行了，多线程将失去作用
             Future<String> future3 = service.submit(new PrintStr3("B"));
+//            String result3 = String.valueOf(future3.get());    在此处加上获取返回值，会导致同步执行了，多线程将失去作用
             Future<String> future4 = service.submit(new PrintStr4("C"));
+//            String result4 = String.valueOf(future4.get());    在此处加上获取返回值，会导致同步执行了，多线程将失去作用
 
             String result4 = String.valueOf(future4.get());
             String result3 = String.valueOf(future3.get());
