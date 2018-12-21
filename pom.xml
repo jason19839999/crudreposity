@@ -346,12 +346,76 @@
     </dependencies>
 
     <build>
+        <!--<plugins>-->
+            <!--<plugin>-->
+                <!--<groupId>org.springframework.boot</groupId>-->
+                <!--<artifactId>spring-boot-maven-plugin</artifactId>-->
+                <!--<configuration>-->
+                    <!--<mainClass>datacenter.crudreposity.DemoApplication</mainClass>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
+        <!--</plugins>-->
         <plugins>
+            <!-- <plugin>
+
+             比较常用的打包命令
+             mvn clean package spring-boot:repackage
+             只有使用下面的maven命令在cmd窗口启动，
+             热加载才能生效，如果直接Run运行的Application是
+             不支持热加载的
+             mvn clean spring-boot:run
+             -->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-maven-plugin</artifactId>-->
+            <!--<dependencies>-->
+            <!--&lt;!&ndash;引入springloaded来实现动态加载&ndash;&gt;-->
+            <!--<dependency>-->
+            <!--<groupId>org.springframework</groupId>-->
+            <!--<artifactId>springloaded</artifactId>-->
+            <!--<version>1.2.1.RELEASE</version>-->
+            <!--</dependency>-->
+            <!--</dependencies>-->
+            <!--<executions>-->
+            <!--<execution>-->
+            <!--<goals>-->
+            <!--<goal>repackage</goal>-->
+            <!--</goals>-->
+            <!--<configuration>-->
+            <!--<classifier>exec</classifier>-->
+            <!--</configuration>-->
+            <!--</execution>-->
+            <!--</executions>-->
+            <!--</plugin>-->
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
+                <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
-                    <mainClass>datacenter.crudreposity.DemoApplication</mainClass>
+                    <descriptors>
+                        <descriptor>src/main/assembly/descriptor.xml</descriptor>
+                    </descriptors>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id> <!-- this is used for inheritance merges -->
+                        <phase>package</phase> <!-- bind to the packaging phase -->
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- 编译插件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                    <!--<compilerArguments>-->
+                    <!--<verbose />-->
+                    <!--<bootclasspath>${java.home}/jre/lib/rt.jar:${java.home}/jre/lib/jce.jar</bootclasspath>-->
+                    <!--</compilerArguments>-->
                 </configuration>
             </plugin>
         </plugins>
