@@ -9,7 +9,7 @@ import datacenter.crudreposity.dao.mongodb.UserServiceMongodb;
 import datacenter.crudreposity.dao.mybatis.HKBillsDao;
 import datacenter.crudreposity.dao.mysql2.UserMysqlRepository;
 import datacenter.crudreposity.dao.redis.girlInfoRedisDao;
-import datacenter.crudreposity.distributedlock.redis.RedissLockUtil;
+import datacenter.crudreposity.aapractise.redis.RedissLockUtil;
 import datacenter.crudreposity.entity.*;
 import datacenter.crudreposity.entity.mongodb.User;
 import datacenter.crudreposity.entity.requestParam.UserLogin;
