@@ -39,6 +39,8 @@ public class myThreadPoolProcessor {
                 }catch (Exception ex){
                     ex.printStackTrace();
                 }
+            }else{
+                System.out.println("存在尚未执行完的任务");
             }
         }
         System.out.println(result);
