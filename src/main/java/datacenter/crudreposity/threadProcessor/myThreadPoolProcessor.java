@@ -1,6 +1,9 @@
 package datacenter.crudreposity.threadProcessor;
 
-import java.util.concurrent.*;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class myThreadPoolProcessor {
     //我创建了一个包含2条线程的线程池，但执行3个任务，从结果可以看出第三个任务使用的线程名称与第一个任务相同，即任务3与任务1使用同一条线程。
@@ -23,37 +26,54 @@ public class myThreadPoolProcessor {
 //        来源：CSDN
 //        原文：https://blog.csdn.net/u010185262/article/details/56017175
 //        版权声明：本文为博主原创文章，转载请附上博文链接！
-        long startTime = System.currentTimeMillis(); // 开始时间
-        CompletionService completionService = new ExecutorCompletionService(service);
-        completionService.submit(new PrintStr2("A"));
-        completionService.submit(new PrintStr3("B"));
-        completionService.submit(new PrintStr4("C"));
-        int count = 0;
-        String result = "";
-        while (count < 3) { // 等待三个任务完成
-            Future<String> future =  completionService.poll();
-            if ( future != null) {
-                try {
-                    result += String.valueOf(future.get()) + "---";
-                    count++;
-                }catch (Exception ex){
-                    ex.printStackTrace();
-                }
-            }else{
-                System.out.println("存在尚未执行完的任务");
-            }
+//        long startTime = System.currentTimeMillis(); // 开始时间
+//        CompletionService completionService = new ExecutorCompletionService(service);
+//        completionService.submit(new PrintStr2("A"));
+//        completionService.submit(new PrintStr3("B"));
+//        completionService.submit(new PrintStr4("C"));
+//        int count = 0;
+//        String result = "";
+//        while (count < 3) { // 等待三个任务完成
+//            Future<String> future =  completionService.poll();
+//            if ( future != null) {
+//                try {
+//                    result += String.valueOf(future.get()) + "---";
+//                    count++;
+//                }catch (Exception ex){
+//                    ex.printStackTrace();
+//                }
+//            }else{
+//                System.out.println("存在尚未执行完的任务");
+//            }
+//        }
+//        System.out.println(result);
+//        long costTime = System.currentTimeMillis() - startTime; // 消耗时间
+//        System.out.println("myPool() 总耗时：" + costTime + " 毫秒");
+//        service.shutdown();
+        try {
+            long startTime = System.currentTimeMillis(); // 开始时间
+            Future<String> future2 = service.submit(new PrintStr2("A"));
+            Future<String> future3 = service.submit(new PrintStr3("B"));
+            Future<String> future4 = service.submit(new PrintStr4("C"));
+
+            String result4 = String.valueOf(future4.get());
+            String result3 = String.valueOf(future3.get());
+            String result2 = String.valueOf(future2.get());
+            long costTime = System.currentTimeMillis() - startTime; // 消耗时间
+            System.out.println("myPool() 总耗时：" + costTime + " 毫秒");
+            result2 = "";
+            service.shutdown();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
-        System.out.println(result);
-        long costTime = System.currentTimeMillis() - startTime; // 消耗时间
-        System.out.println("myPool() 总耗时：" + costTime + " 毫秒");
-        service.shutdown();
+
 
     }
 
 
     //分析结果，newCachedThreadPool（）创建的线程池，线程数量根据需要创建。即如果池中没有空闲线程，则创建一条新线程（3个任务创建了3个线程）。
     // 若有有空闲线程，则复用（任务D、E复用了线程2和2）。
-    public static void myPool2() throws Exception{
+    public static void myPool2() throws Exception {
         ExecutorService service = Executors.newCachedThreadPool();
         service.execute(new PrintStr("A"));
         service.execute(new PrintStr("B"));
@@ -76,7 +96,7 @@ public class myThreadPoolProcessor {
 
 }
 
-class PrintStr implements Runnable{
+class PrintStr implements Runnable {
     String str;
 
     public PrintStr(String str) {
