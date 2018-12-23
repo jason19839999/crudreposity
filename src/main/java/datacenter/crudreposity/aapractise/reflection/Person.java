@@ -8,12 +8,12 @@ package datacenter.crudreposity.aapractise.reflection;
  */
 public class Person {
     private String name;
-    private String age;
+    private Integer age;
 
     public Person() {
     }
 
-    public Person(String name, String age) {
+    public Person(String name, Integer age) {
         this.name = name;
         this.age = age;
     }
@@ -31,11 +31,13 @@ public class Person {
         this.name = name;
     }
 
-    public String getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(String age) {
+    @AgeValidator(min=18,max=35)
+    public void setAge(Integer age) {
+        System.out.println("设置年龄： " + age);
         this.age = age;
     }
 
