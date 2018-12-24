@@ -1,4 +1,4 @@
-package datacenter.crudreposity.algorithm;
+package datacenter.crudreposity.aapractise.algorithm;
 /**
  * 冒泡排序
  */

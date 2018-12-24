@@ -66,6 +66,7 @@ public class ReflectionBootstrap {
             objects[1] = 19;
             invoke(object, "test", objects);
 //            2.把全类名和方法名作为参数，执行方法
+            objects[1] = 22;
             invoke2("datacenter.crudreposity.aapractise.reflection.Person",
                     "test",
                      objects);
@@ -74,16 +75,22 @@ public class ReflectionBootstrap {
             Method method2 = cz.getDeclaredMethod("setAge", Integer.class);
             int val = 30;
             //获取指定名称的注解
-            Annotation annotation = method2.getAnnotation(AgeValidator.class);
-            if(annotation != null){
-                if(annotation instanceof AgeValidator){
-                    AgeValidator ageValidator = (AgeValidator) annotation;
-                    if(val < ageValidator.min() || val > ageValidator.max()){
+//            Annotation annotation = method2.getAnnotation(AgeValidator.class);
+//            if(annotation != null){
+//                if(annotation instanceof AgeValidator){
+//                    AgeValidator ageValidator = (AgeValidator) annotation;
+//                    if(val < ageValidator.min() || val > ageValidator.max()){
+//                        throw new RuntimeException("年龄非法");
+//                    }
+//                }
+//            }
+            AgeValidator ageValidator = method2.getAnnotation(AgeValidator.class);
+            if(ageValidator != null){
+                if(val < ageValidator.min() || val > ageValidator.max()){
                         throw new RuntimeException("年龄非法");
                     }
-                }
             }
-            method2.invoke(obj, 20);
+            method2.invoke(obj, 26);
 
         } catch (Exception ex) {
             ex.printStackTrace();

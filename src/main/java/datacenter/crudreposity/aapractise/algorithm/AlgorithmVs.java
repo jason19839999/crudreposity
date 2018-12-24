@@ -1,4 +1,4 @@
-package datacenter.crudreposity.algorithm;
+package datacenter.crudreposity.aapractise.algorithm;
 /**
  * 排序 VS
  * 参考 ：http://www.cnblogs.com/mengdd/archive/2012/11/24/2786346.html
