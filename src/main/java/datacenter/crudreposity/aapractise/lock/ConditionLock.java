@@ -33,7 +33,10 @@ public class ConditionLock {
                     }
                     //输出到3时要signal，告诉B线程可以开始了
                     reachThreeCondition.signal();
-                } finally {
+                }catch (Exception ex){
+                    ex.printStackTrace();
+                }
+                finally {
                     lock.unlock();
                 }
                 lock.lock();
@@ -47,7 +50,7 @@ public class ConditionLock {
                         num.value++;
                     }
 
-                } catch (InterruptedException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 } finally {
                     lock.unlock();
@@ -56,18 +59,18 @@ public class ConditionLock {
 
         });
 
+        //原则就是在每个线程里面交叉出现 即：在线程A里面是signal ,在B线程里面是await.成对出现并控制
 
         Thread threadB = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
                     lock.lock();
-
                     while (num.value <= 3) {
                         //等待3输出完毕的信号
                         reachThreeCondition.await();
                     }
-                } catch (InterruptedException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 } finally {
                     lock.unlock();
@@ -92,6 +95,8 @@ public class ConditionLock {
         //启动两个线程
         threadB.start();
         threadA.start();
+
+
 
     }
 
