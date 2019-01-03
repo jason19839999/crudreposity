@@ -31,18 +31,18 @@ public class ReflectionBootstrap {
             System.out.println("getSystemClassLoader: ---" + classLoader);
             //2. 获取系统类加载器的父类加载器（扩展类加载器，可以获取）.
             classLoader = classLoader.getParent();
-            System.out.println("getParent: ---" + classLoader);
-            //3. 获取扩展类加载器的父类加载器（引导类加载器，不可获取）.
+            System.out.println("SystemClassLoader 的父类: ---" + classLoader);
+            //3. 获取扩展类加载器的父类加载器（bootstrapClassLoader 他获取其他语言原生库的   引导类加载器，不可获取）.
             classLoader = classLoader.getParent();
-            System.out.println(classLoader);
+            System.out.println("ExtClassLoader 的父类:" + classLoader);
             //4. 测试当前类由哪个类加载器进行加载（系统类加载器）:
             classLoader = Class.forName("datacenter.crudreposity.aapractise.reflection.ReflectionBootstrap")
                     .getClassLoader();
-            System.out.println("ReflectionBootstrap: ---" + classLoader);
+            System.out.println("ReflectionBootstrap ClassLoader的父类: ---" + classLoader);
             //5. 测试 JDK 提供的 Object 类由哪个类加载器负责加载（引导类）
             classLoader = Class.forName("java.lang.Object")
                     .getClassLoader();
-            System.out.println("java.lang.Object: ---" + classLoader);
+            System.out.println("java.lang.Object的加载类: ---" + classLoader);
 
             //调用某个类的方法
             Object obj = cz.newInstance();
