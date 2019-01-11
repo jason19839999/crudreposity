@@ -11,8 +11,8 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArraySet;
 
-@ServerEndpoint("/websocket/{userId}/{goodsId}")
-@Component
+//@ServerEndpoint("/websocket/{userId}/{goodsId}")
+//@Component
 public class WebSocketServer {  
 	private final static Logger log = LoggerFactory.getLogger(WebSocketServer.class);
     //静态变量，用来记录当前在线连接数。应该把它设计成线程安全的。
