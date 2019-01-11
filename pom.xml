@@ -346,16 +346,8 @@
     </dependencies>
 
     <build>
-        <!--<plugins>-->
-            <!--<plugin>-->
-                <!--<groupId>org.springframework.boot</groupId>-->
-                <!--<artifactId>spring-boot-maven-plugin</artifactId>-->
-                <!--<configuration>-->
-                    <!--<mainClass>datacenter.crudreposity.DemoApplication</mainClass>-->
-                <!--</configuration>-->
-            <!--</plugin>-->
-        <!--</plugins>-->
         <plugins>
+
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
@@ -375,15 +367,24 @@
             </plugin>
             <!-- 编译插件 -->
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
                 <configuration>
-                    <fork>true</fork>
-                    <mainClass>datacenter.crudreposity.DemoApplication</mainClass>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                    <!--<compilerArguments>-->
+                    <!--<verbose />-->
+                    <!--<bootclasspath>${java.home}/jre/lib/rt.jar:${java.home}/jre/lib/jce.jar</bootclasspath>-->
+                    <!--</compilerArguments>-->
                 </configuration>
             </plugin>
+
         </plugins>
+
     </build>
+
 
 
 </project>
