@@ -8,20 +8,20 @@ common:
 mysql:
  driver: com.mysql.jdbc.Driver
  master:
-   url: jdbc:mysql://192.168.0.111:3306/o2o?useUnicode=true&amp;characterEncoding=utf8"
+   url: jdbc:mysql://192.168.0.113:3306/o2o?useUnicode=true&amp;characterEncoding=utf8"
    username: root
    password: 123456
  replica1:
-   url: jdbc:mysql://192.168.0.111:3306/o2o?useUnicode=true&amp;characterEncoding=utf8"
+   url: jdbc:mysql://192.168.0.113:3306/o2o?useUnicode=true&amp;characterEncoding=utf8"
    username: root
    password: 123456
 mysql2:
   driver: com.mysql.jdbc.Driver
-  url: jdbc:mysql://192.168.0.111:3306/o2o?autoReconnect=true&useUnicode=true&amp;characterEncoding=utf8"
+  url: jdbc:mysql://192.168.0.113:3306/o2o?autoReconnect=true&useUnicode=true&amp;characterEncoding=utf8"
   username: root
   password: 123456
 redis:
-  ip: 192.168.0.113
+  ip: 192.168.0.126
   port: 6379
   database: 12
   pool_max_active: 1024
@@ -31,5 +31,5 @@ redis:
 spring:
   data:
     mongodb:
-      uri: mongodb://192.168.0.113:27017
+      uri: mongodb://192.168.0.126:27017
       database: test

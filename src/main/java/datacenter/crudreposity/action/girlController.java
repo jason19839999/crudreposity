@@ -76,8 +76,8 @@ public class girlController {
     @Autowired
     private UserServiceMongodb userServiceMongodb;
 
-    @Autowired
-    private MQSender mQSender;
+//    @Autowired
+//    private MQSender mQSender;
 //    private static final Logger logger = LoggerFactory.getLogger(girlController.class);
 
     @Autowired
@@ -302,7 +302,7 @@ public class girlController {
         //如果不指定userId就全部用户都发送
         //这里的message和string相互转化.参照:    /datacenter/crudreposity/dao/redis/Impl/girlInfoRedisDaoImpl.java的beanToString，stringToBean
         //或者list<>和string相互转化也可以参照：/datacenter/crudreposity/util/JsonUtils.java
-        WebSocketServer.sendInfo("hello,jason", 0, 0);//推送给前台
+//        WebSocketServer.sendInfo("hello,jason", 0, 0);//推送给前台
         return Result.success("发送成功");
 
     }
@@ -394,7 +394,7 @@ public class girlController {
     @ResponseBody
     public String sendRabbitMq() throws InterruptedException {
         String msg = "Hello,Jason !";
-        mQSender.sendMiaoshaMessage(msg);
+//        mQSender.sendMiaoshaMessage(msg);
         return msg;
     }
 
