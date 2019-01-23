@@ -3,7 +3,7 @@ package datacenter.crudreposity.aapractise.arrays;
 import java.util.*;
 
 public class MapPractise {
-    //尽量指定结合的大小
+    //尽量指定集合的大小
     //HashMap的使用
     public static Map<String, String> map = new HashMap<>(1000);
 
