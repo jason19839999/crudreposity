@@ -10,14 +10,14 @@ public class ArrayListHashMap {
     public static void main(String[] args) {
         int [] arrays = {1,2,3,4,5};
         int [] result = new int[2];
-        result = twoIndex(arrays,7);
+        result = twoIndex(arrays,8);
         result = null;
     }
 
     private static int [] twoIndex(int [] arrays,int target){
         int [] result = new int [2];
         HashMap<Integer,Integer> hashMap = new HashMap<>();
-        for(int i=0;i<arrays.length-1;i++){
+        for(int i=0;i<arrays.length;i++){
             int temp = 0;
             temp = target - arrays[i];
             if(hashMap.containsValue(temp)){
