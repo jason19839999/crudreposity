@@ -248,7 +248,7 @@
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
 
-        <!-- webSocket 秒杀通知-2.0才有的->
+        <!-- webSocket 秒杀通知-2.0才有的-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-websocket</artifactId>

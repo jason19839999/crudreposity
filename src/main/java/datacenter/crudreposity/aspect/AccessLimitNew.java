@@ -7,5 +7,5 @@ import java.lang.annotation.*;
 @Documented
 public @interface AccessLimitNew {
       String value() default "";
-      int count() default 0;
+      int count() default 20;
 }
