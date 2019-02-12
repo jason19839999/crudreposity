@@ -72,7 +72,15 @@ public class ReflectionBootstrap {
                      objects);
 
 //            调用注解
+            //判断类是否存在注解
+            if(cz.isAnnotationPresent(AgeValidator.class)){
+
+            }
             Method method2 = cz.getDeclaredMethod("setAge", Integer.class);
+            //判断类的方法是否存在注解
+            if(method2.isAnnotationPresent(AgeValidator.class)){
+
+            }
             int val = 30;
             //获取指定名称的注解
 //            Annotation annotation = method2.getAnnotation(AgeValidator.class);
