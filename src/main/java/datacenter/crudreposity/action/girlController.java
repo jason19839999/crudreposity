@@ -228,9 +228,9 @@ public class girlController {
     //@AccessLimit(seconds = 30)    //接口下流注入 比如：每分钟只能请求60次。思路：每次请求count放入redis,然后设置redis过期时间为1分钟，判断一分钟内不能超过60次。一分钟后过期重新计算
     @AccessLimitNew
 //    @Servicelock   //实现分布式锁功能，主要采用了Lock,reentrantLock(true) 公平锁
-    @RequestMapping(value = "/getAccess", method = RequestMethod.POST)
+    @RequestMapping(value = "/getAccess")
     @ResponseBody
-    public Result<User> getAccess(User user, RedisScoreValue redisScoreValue, @RequestBody String token) throws Exception {
+    public Result<User> getAccess(User user) throws Exception {
         //业务逻辑处理都可以用GlobalException处理，
         // 直接 throw new GlobalException(CodeMsg.SESSION_ERROR)即可，直接返回给前端或者客户端错误信息
        //在此只要处理业务逻辑即可。。。
@@ -263,7 +263,7 @@ public class girlController {
 
     @RequestMapping(value = "/denglu")
     @Servicelock(name = "jason zhang",description = "18岁")
-    @AccessLimitNew(count = 10)
+    @AccessLimitNew(count = 5)
     @ResponseBody
     public Result<Object> denglu(HttpServletResponse response, @RequestParam("token") String token,User user) throws Exception {
         String name = user.getName();

@@ -45,6 +45,7 @@ public class GlobalExceptionHandler {
                 mv.addObject("exception","服务端异常");
                 mv.addObject("url",request.getRequestURI());
                 mv.setViewName("error");
+                e.printStackTrace();
                 return mv;
             }
         }
