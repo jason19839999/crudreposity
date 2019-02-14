@@ -88,33 +88,22 @@ public class DemoApplication {
         //SpringApplication springApplication = new SpringApplication(DemoApplication.class);
         //springApplication.addListeners(new ApplicationStartup());// Register listener of hbase Connection initialized.
         //springApplication.run(args);
+        if (args.length == 4) {
+            //在linux环境设置配置文件地址
+            SeekConstants.CONF_DIR = args[1];
+//            cmd="java $MAVEN_OPTS
+//                    -cp $bin_dir$binary
+//                    $main
+//                     -c $conf_dir 1 1
+//                    >> $log_dir$logfile 2>&1 &
 
-        Girlnfo obj = new Girlnfo();
-        obj.setAge(18);
-        obj.setId(1);
-        obj.setCup_size("D");
-        Girlnfo obj2 = new Girlnfo();
-        obj2.setAge(19);
-        obj2.setId(2);
-        obj2.setCup_size("F");
-        List<Girlnfo> lst = new ArrayList<Girlnfo>();
-        lst.add(obj);
-        lst.add(obj2);
-        String girlString = JsonUtils.objectToJson(obj);
-        Girlnfo obj3 = JsonUtils.jsonToPojo(girlString,Girlnfo.class);
-
-        String girlString2 = JsonUtils.objectToJson(lst);
-        List<Girlnfo> lst2 = JsonUtils.jsonToList(girlString2,Girlnfo.class);
-
-        double log1p =  Math.log1p(1);
-        double log =  Math.log(3);
-        double log10 = Math.log10(10000);
+        }
         /* init mybatis session factory */
-//        String args2[] = new String[2];
-//        args2[0] = "-c";
-//        args2[1] = SeekConstants.CONF_DIR + "/creeper_service.properties";
-//        State state = new State(args2);
-//        MybatisSessionFactory.init(state);
+        String args2[] = new String[2];
+        args2[0] = "-c";
+        args2[1] = SeekConstants.CONF_DIR + "/creeper_service.properties";
+        State state = new State(args2);
+        MybatisSessionFactory.init(state);
         SpringApplication.run(DemoApplication.class, args);
     }
 
