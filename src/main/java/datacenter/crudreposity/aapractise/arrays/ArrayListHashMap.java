@@ -14,18 +14,20 @@ public class ArrayListHashMap {
         result = null;
     }
 
-    private static int [] twoIndex(int [] arrays,int target){
+    private synchronized static   int [] twoIndex(int [] arrays,int target){
         int [] result = new int [2];
         HashMap<Integer,Integer> hashMap = new HashMap<>();
-        for(int i=0;i<arrays.length;i++){
-            int temp = 0;
-            temp = target - arrays[i];
-            if(hashMap.containsValue(temp)){
-                result[0] = getKey(temp,hashMap);
-                result[1] =i;
-                return  result;
-            }else{
-                hashMap.put(i,arrays[i]);
+        synchronized (ArrayListHashMap.class) {
+            for (int i = 0; i < arrays.length; i++) {
+                int temp = 0;
+                temp = target - arrays[i];
+                if (hashMap.containsValue(temp)) {
+                    result[0] = getKey(temp, hashMap);
+                    result[1] = i;
+                    return result;
+                } else {
+                    hashMap.put(i, arrays[i]);
+                }
             }
         }
         return result;
