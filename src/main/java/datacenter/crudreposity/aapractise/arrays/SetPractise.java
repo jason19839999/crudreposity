@@ -39,14 +39,14 @@ public class SetPractise {
         int a =90;
         int b = 10;
         int c = 50;
-        ((TreeSet) sets).add(a);
-        ((TreeSet) sets).add(b);
-        ((TreeSet) sets).add(c);
+        sets.add(a);
+        sets.add(b);
+        sets.add(c);
 
-        ((HashSet) sets2).add(a);
-        ((HashSet) sets2).add(b);
-        ((HashSet) sets2).add(c);
-        ((HashSet) sets2).add(90);
+        sets2.add(a);
+        sets2.add(b);
+        sets2.add(c);
+        sets2.add(90);
 
         //*********************************************************************
         //主要作用用于排序
