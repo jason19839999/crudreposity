@@ -19,6 +19,7 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.Filter;
@@ -31,6 +32,7 @@ import java.util.Map;
 @SpringBootApplication
 @EnableAsync
 @Service
+@EnableScheduling
 public class DemoApplication {
 
     //注意：除了Controller和Service层，其他地方如果通过@Autowire引用其他类的实例的时候
