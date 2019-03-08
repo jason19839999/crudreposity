@@ -90,6 +90,7 @@ public class girlController {
 
     //模拟登录页面，如下配置即可
     @RequestMapping(value = "/")
+//    @RequestBusinessLog(name="产品对比搜索API",code = "productVsSearchAPI")
     public String connectSocket(Model model, HttpServletResponse response) throws Exception {
         model.addAttribute("name", "jason");
         addCookie(response, "123456789");
